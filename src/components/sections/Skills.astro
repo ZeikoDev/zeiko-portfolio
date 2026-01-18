@@ -75,28 +75,16 @@ const otherSkills = [
       {
         royalFlushSkills.map((card, idx) => (
           <div
-            class='relative bg-slate-900/80 border-2 border-blue-700 rounded-xl w-40 h-64 flex flex-col justify-between px-3 pt-[0.6rem] pb-[0.75rem] shadow-lg poker-card flop-card-animate'
+            class='relative bg-slate-900/80 border-2 border-blue-700 rounded-xl w-40 h-64 flex flex-col justify-center px-3 py-6 shadow-lg poker-card flop-card-animate'
             style={`animation-delay: ${idx * 0.25}s;`}
           >
-            <div class='flex justify-between items-start'>
-              <span class='text-xl font-bold text-electric-blue'>
-                {card.value}
-              </span>
-              <span class='text-xl text-electric-blue'>♦</span>
-            </div>
-            <div class='text-center'>
+            <div class='text-center flex-1 flex flex-col justify-center'>
               <h3 class='text-xl font-bold text-off-white mb-2 text-center'>
                 {card.skill}
               </h3>
               <p class='text-sm text-light-gray text-center'>
                 {t(card.description)}
               </p>
-            </div>
-            <div class='flex justify-between items-end rotate-180'>
-              <span class='text-xl font-bold text-electric-blue'>
-                {card.value}
-              </span>
-              <span class='text-xl text-electric-blue'>♦</span>
             </div>
           </div>
         ))

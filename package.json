@@ -1,8 +1,8 @@
 {
-  "name": "zeiko-pokerfolio",
+  "name": "zeiko-portfolio",
   "type": "module",
   "version": "1.0.0",
-  "description": "A modern, poker-themed full-stack developer portfolio",
+  "description": "A modern, BJJ-themed full-stack developer portfolio",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
