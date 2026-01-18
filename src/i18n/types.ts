@@ -64,6 +64,7 @@ export type TranslationKey =
     | 'common.moreDetails'
     | 'common.emailModalTitle'
     | 'common.emailModalDescription'
+    | 'common.switchLanguage'
     | 'testPage.title'
     | 'testPage.description'
     | 'testPage.controlPanelTitle'

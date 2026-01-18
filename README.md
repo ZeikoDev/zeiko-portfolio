@@ -1,20 +1,20 @@
 <img width="1800" alt="Screenshot 2025-06-16 at 01 38 18" src="https://github.com/user-attachments/assets/0c733ac7-a4b3-448b-9cb8-486e26fead7d" />
 
-# Zeiko Pokerfolio
+# Zeiko Portfolio
 
-A modern, poker-themed full-stack developer portfolio built with Astro.js. This portfolio showcases development skills through an engaging poker-inspired design, featuring smooth animations, interactive elements, and a responsive layout.
+A modern, BJJ-themed full-stack developer portfolio built with Astro.js. This portfolio showcases development skills through an engaging Brazilian Jiu-Jitsu inspired design, featuring smooth animations, interactive elements, and a responsive layout.
 
 ## Features
 
 - 🌐 **Multilanguage support (i18n)**: English and Spanish, with easy extensibility for more languages
 - 🗂️ **Dynamic routing per language**: All main pages and project details are available under `/en/` and `/es/` paths
-- 🎮 Poker-themed design elements and animations
+- 🎮 BJJ-themed design elements and animations
 - 📱 Fully responsive layout
 - ⚡ Built with Astro.js for optimal performance
 - 🎯 Smooth scroll navigation
-- 🎴 Interactive poker card components
-- 📊 Skills visualization with poker hands
-- 📝 Contact form with poker-themed elements
+- 🎴 Interactive skill card components
+- 📊 Skills visualization with belt levels
+- 📝 Contact form with BJJ-themed elements
 
 ## Tech Stack
 
@@ -35,8 +35,8 @@ A modern, poker-themed full-stack developer portfolio built with Astro.js. This 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/zeiko-pokerfolio.git
-   cd zeiko-pokerfolio
+   git clone https://github.com/yourusername/zeiko-portfolio.git
+   cd zeiko-portfolio
    ```
 
 2. Install dependencies:
@@ -70,7 +70,7 @@ The built files will be in the `dist` directory.
 ## Project Structure
 
 ```
-zeiko-pokerfolio/
+zeiko-portfolio/
 ├── public/                      # Static assets (images, SVGs, etc.)
 │   └── assets/projects/         # Project screenshots and images
 ├── src/

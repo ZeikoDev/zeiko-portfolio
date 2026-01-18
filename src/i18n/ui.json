@@ -1,87 +1,89 @@
 {
     "en": {
         "nav": {
-            "home": "Home",
-            "about": "About",
-            "skills": "Skills",
-            "projects": "Projects",
-            "personal": "Personal Projects"
+            "home": "Dojo",
+            "about": "My Journey",
+            "skills": "Arsenal",
+            "projects": "Sparring",
+            "personal": "Side Projects"
         },
         "hero": {
-            "subtitle": "Full-Stack Developer",
-            "description": "Always raising the stakes in web development."
+            "subtitle": "Junior Software Engineer",
+            "description": "Technique beats force. Building scalable software with precision."
         },
         "about": {
-            "title": "About Me",
-            "description": "I'm a passionate full-stack developer who enjoys creating innovative software solutions in challenging environments, using technology as a tool to achieve goals and streamline processes.\nWhen I'm not coding, you can find me on the mats training Brazilian Jiu-Jitsu, where I've learned valuable lessons about strategy, problem-solving, and perseverance that I apply to my development work.",
+            "title": "My Journey",
+            "description": "Software Engineering is my Gym. Just like in BJJ, I believe in 'Leverage'—applying the right amount of force in the right place. I don't just write code; I solve problems using efficiency, strategy, and continuous refinement.\nWhen I'm not coding, I'm analyzing systems to make them stronger, faster, and harder to break.",
             "stats": {
-                "years": "Years",
-                "users": "Users\nImpacted",
-                "passion": "Passion"
+                "years": "Years of experience",
+                "users": "15K+ Users",
+                "passion": "Discipline"
             }
         },
         "skills": {
-            "title": "Royal Flush Tech Stack",
+            "title": "Technical Arsenal",
             "royalFlush": {
-                "react": "Building interactive and responsive user interfaces with React",
-                "node": "Creating scalable backend services with Node.js",
-                "typescript": "Writing type-safe and maintainable code with TypeScript",
-                "postgres": "Designing efficient and reliable database systems with PostgreSQL",
-                "reactNative": "Building cross-platform mobile applications with React Native"
+                "react": "Frontend Mastery: Crafting reactive interfaces",
+                "node": "Backend Control: Scalable logic & APIs",
+                "typescript": "Type Safety: Defense against bugs",
+                "postgres": "Data Locking: Secure & efficient storage",
+                "reactNative": "Mobile Mobility: Cross-platform deployment"
             },
             "categories": {
-                "frontend": "Frontend Development",
-                "backend": "Backend Development",
-                "database": "Database Management",
-                "cloud": "Cloud & DevOps",
-                "tools": "Development Tools",
-                "design": "Design & UX"
+                "frontend": "Guard Game (Frontend)",
+                "backend": "Submission Game (Backend)",
+                "database": "Positioning (Data)",
+                "cloud": "Atmosphere (Cloud)",
+                "tools": "Gear (Tools)",
+                "design": "Style (UI/UX)"
             },
             "other": {
-                "frontend": "Frontend Development",
-                "backend": "Backend Development",
-                "database": "Database Management"
+                "frontend": "Frontend",
+                "backend": "Backend",
+                "database": "Database"
             }
         },
+        "pokerHands": {
+            "royalFlush": "Black Belt Stack",
+            "straightFlush": "Brown Belt Skills",
+            "fullHouse": "Foundations"
+        },
         "projects": {
-            "title": "Featured Projects",
-            "description": "A selection of my most impactful work",
-            "techStack": "Tech Stack",
-            "impact": "Impact",
-            "complexity": "Complexity"
+            "title": "Sparring (Projects)",
+            "description": "Real-world combat tested solutions",
+            "techStack": "Techniques Used",
+            "impact": "Result",
+            "complexity": "Difficulty Level"
         },
         "personal": {
-            "title": "Personal Projects",
+            "title": "Drills & Labs",
+            "description": "Experimental projects and personal training exercises",
             "modal": {
-                "highlights": "Key Features",
-                "screenshots": "Screenshots",
-                "screenshotAlt": "Project Screenshot"
+                "highlights": "Key Moves",
+                "screenshots": "Replay",
+                "screenshotAlt": "System View"
             }
         },
         "common": {
-            "loading": "Loading...",
-            "error": "An error occurred",
-            "success": "Success!",
-            "viewProject": "View Project",
-            "viewCode": "View Code",
-            "close": "Close",
-            "contact": "Contact",
-            "moreDetails": "More Details",
-            "emailModalTitle": "Client email not available",
-            "emailModalDescription": "Copy the following email to contact me:"
-        },
-        "pokerHands": {
-            "royalFlush": "Royal Flush",
-            "straightFlush": "Straight Flush",
-            "fullHouse": "Full House"
+            "loading": "Warming up...",
+            "error": "Tap out (Error)",
+            "success": "Submission!",
+            "viewProject": "Analyze Fight",
+            "viewCode": "View Technique",
+            "close": "Bow out",
+            "contact": "Challenge Me",
+            "moreDetails": "Deep Dive",
+            "emailModalTitle": "Contact Info",
+            "emailModalDescription": "Let's roll (Copy email):",
+            "switchLanguage": "Switch language"
         },
         "impact": {
-            "users": "users"
+            "users": "Users Impacted"
         },
         "complexity": {
-            "high": "High",
-            "medium": "Medium",
-            "low": "Low"
+            "high": "Heavyweight",
+            "medium": "Middleweight",
+            "low": "Lightweight"
         },
         "numbers": {
             "2plus": "2+",
@@ -90,77 +92,94 @@
             "100plus": "100+"
         },
         "chip": {
-            "15kplus": "15k+"
+            "15kplus": "Total Reps"
         }
     },
     "es": {
         "nav": {
-            "home": "Inicio",
-            "about": "Sobre Mí",
-            "skills": "Habilidades",
-            "projects": "Proyectos",
+            "home": "Dojo",
+            "about": "Mi Camino",
+            "skills": "Arsenal",
+            "projects": "Combate",
             "personal": "Proyectos Personales"
         },
         "hero": {
-            "description": "Siempre elevando las apuestas en el desarrollo web"
+            "subtitle": "Ingeniero de Software Junior",
+            "description": "La técnica vence a la fuerza. Construyendo software escalable con precisión."
         },
         "about": {
-            "title": "Sobre Mí",
-            "description": "Soy un desarrollador full-stack apasionado que disfruta creando soluciones de software innovadoras en entornos desafiantes, usando la tecnología como herramienta para alcanzar objetivos y optimizar procesos.\nCuando no estoy programando, me puedes encontrar en el tatami entrenando Jiu-Jitsu Brasileño,  donde he aprendido valiosas lecciones sobre estrategia, resolución de problemas y perseverancia que aplico en mi trabajo como desarrollador.",
+            "title": "Mi Camino",
+            "description": "La Ingeniería de Software es mi dojo. Al igual que en el BJJ, creo en la técnica para aplicar la fuerza justa en el lugar correcto. No solo escribo código; resuelvo problemas usando eficiencia, estrategia y refinamiento continuo.\nCuando no estoy programando, estoy analizando sistemas para hacerlos más fuertes, rápidos y difíciles de romper.",
             "stats": {
-                "years": "Años",
-                "users": "Usuarios\nFelices",
-                "passion": "Pasión"
+                "years": "Años de experiencia",
+                "users": "+15K usuarios",
+                "passion": "Disciplina"
             }
         },
         "skills": {
-            "title": "Lo mejor de mi stack",
+            "title": "Arsenal Técnico",
             "royalFlush": {
-                "react": "Construyendo interfaces de usuario interactivas y responsivas con React",
-                "node": "Creando servicios backend escalables con Node.js",
-                "typescript": "Escribiendo código seguro y robusto con TypeScript",
-                "postgres": "Diseñando sistemas de base de datos eficientes y confiables con PostgreSQL",
-                "reactNative": "Construyendo aplicaciones móviles multiplataforma con React Native"
+                "react": "Maestría Frontend: Interfaces reactivas",
+                "node": "Control Backend: Lógica escalable",
+                "typescript": "Seguridad de Tipos: Defensa contra bugs",
+                "postgres": "Seguridad de Datos: Almacenamiento seguro",
+                "reactNative": "Movilidad: Despliegue multiplataforma"
             },
             "categories": {
-                "frontend": "Desarrollo Frontend",
-                "backend": "Desarrollo Backend",
-                "database": "Gestión de Bases de Datos",
-                "cloud": "Cloud & DevOps",
-                "tools": "Herramientas de Desarrollo",
-                "design": "Diseño & UX"
+                "frontend": "Juego de Guardia (Frontend)",
+                "backend": "Juego de Sumisión (Backend)",
+                "database": "Posicionamiento (Data)",
+                "cloud": "Atmósfera (Cloud)",
+                "tools": "Equipo (Tools)",
+                "design": "Estilo (UI/UX)"
             },
             "other": {
-                "frontend": "Desarrollo Frontend",
-                "backend": "Desarrollo Backend",
-                "database": "Gestión de Bases de Datos"
-            }
-        },
-        "projects": {
-            "title": "Proyectos Destacados",
-            "techStack": "Stack",
-            "impact": "Impacto",
-            "complexity": "Complejidad"
-        },
-        "personal": {
-            "title": "Proyectos Personales",
-            "modal": {
-                "highlights": "Características Principales",
-                "screenshots": "Capturas de Pantalla"
+                "frontend": "Frontend",
+                "backend": "Backend",
+                "database": "Base de Datos"
             }
         },
         "pokerHands": {
-            "royalFlush": "Escalera Real",
-            "straightFlush": "Escalera de Color",
-            "fullHouse": "Full House"
+            "royalFlush": "Cinturón Negro (Stack Principal)",
+            "straightFlush": "Habilidades Avanzadas",
+            "fullHouse": "Fundamentos Sólidos"
+        },
+        "projects": {
+            "title": "Sparring (Proyectos)",
+            "description": "Soluciones probadas en combate real",
+            "techStack": "Técnicas Usadas",
+            "impact": "Resultado",
+            "complexity": "Nivel de Dificultad"
+        },
+        "personal": {
+            "title": "Drills y Laboratorio",
+            "description": "Proyectos experimentales y ejercicios de entrenamiento personal",
+            "modal": {
+                "highlights": "Movimientos Clave",
+                "screenshots": "Repetición",
+                "screenshotAlt": "Vista del Sistema"
+            }
+        },
+        "common": {
+            "loading": "Calentando...",
+            "error": "Tap out (Error)",
+            "success": "¡Sumisión!",
+            "viewProject": "Analizar Combate",
+            "viewCode": "Ver Técnica",
+            "close": "Saludo",
+            "contact": "Retar / Contactar",
+            "moreDetails": "Más detalles",
+            "emailModalTitle": "Información de Contacto",
+            "emailModalDescription": "Vamos (Copia el email):",
+            "switchLanguage": "Cambiar idioma"
         },
         "impact": {
-            "users": "usuarios"
+            "users": "Usuarios impactados"
         },
         "complexity": {
-            "high": "Alta",
-            "medium": "Media",
-            "low": "Baja"
+            "high": "Peso Pesado",
+            "medium": "Peso Medio",
+            "low": "Peso Ligero"
         },
         "numbers": {
             "2plus": "+2",
@@ -169,19 +188,7 @@
             "100plus": "+100"
         },
         "chip": {
-            "15kplus": "+15k"
-        },
-        "common": {
-            "loading": "Cargando...",
-            "error": "Ocurrió un error",
-            "success": "¡Éxito!",
-            "viewProject": "Ver Proyecto",
-            "viewCode": "Ver Código",
-            "close": "Cerrar",
-            "contact": "Contacto",
-            "moreDetails": "Más Detalles",
-            "emailModalTitle": "Cliente de correo no disponible",
-            "emailModalDescription": "Copia el siguiente email para contactarme:"
+            "15kplus": "Reps Totales"
         }
     }
 }
