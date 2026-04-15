@@ -13,49 +13,42 @@ const { email, title, description, closeText } = Astro.props;
 
 <div
     id='email-modal'
-    class='fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4'
+    class='fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4'
 >
     <div
-        class='bg-slate-950 border-2 border-slate-800 rounded-2xl shadow-2xl max-w-md w-full mx-4 transform transition-all backdrop-blur-sm'
+        class='bg-navy-900 border border-navy-700/50 rounded-2xl shadow-2xl max-w-md w-full mx-4 transform transition-all'
     >
         <div class='p-8'>
-            <!-- Header -->
             <div class='mb-6'>
-                <h3
-                    class='text-2xl font-bold text-electric-blue font-space-grotesk text-left'
-                >
+                <h3 class='text-2xl font-bold text-accent font-heading text-left'>
                     {title}
                 </h3>
             </div>
 
-            <!-- Description -->
-            <p class='text-slate-300 mb-6 text-lg leading-relaxed text-left'>
+            <p class='text-text-secondary mb-6 text-lg leading-relaxed text-left'>
                 {description}
             </p>
 
-            <!-- Email Input Section -->
-            <div
-                class='bg-slate-900 border border-slate-700 rounded-xl p-3 mb-6'
-            >
+            <div class='bg-navy-800 border border-navy-700/30 rounded-xl p-3 mb-6'>
                 <div class='flex items-center space-x-3'>
                     <input
                         type='text'
                         value={email}
                         readonly
                         id='email-input'
-                        class='flex-1 bg-transparent border-none outline-none text-electric-blue font-mono text-lg font-bold'
+                        class='flex-1 bg-transparent border-none outline-none text-accent font-mono text-lg font-bold'
                     />
                     <JesseButton
                         variant='text'
                         size='small'
                         showText={false}
                         class:list={[
-                            "!min-w-0 !w-12 !h-12 !p-0 flex items-center justify-center",
+                            "!min-w-0 !w-10 !h-10 !p-0 flex items-center justify-center",
                         ]}
                     >
                         <span slot='icon'>
                             <svg
-                                class='w-6 h-6'
+                                class='w-5 h-5'
                                 fill='none'
                                 stroke='currentColor'
                                 viewBox='0 0 24 24'
@@ -72,11 +65,10 @@ const { email, title, description, closeText } = Astro.props;
                 </div>
             </div>
 
-            <!-- Action Buttons -->
-            <div class='flex justify-end space-x-4'>
+            <div class='flex justify-end'>
                 <button
                     id='close-email-modal-btn'
-                    class='px-6 py-3 text-slate-400 hover:text-electric-blue transition-colors font-medium'
+                    class='px-5 py-2 text-text-muted hover:text-accent transition-colors font-medium text-sm'
                 >
                     {closeText}
                 </button>
@@ -86,54 +78,11 @@ const { email, title, description, closeText } = Astro.props;
 </div>
 
 <style>
-    .font-space-grotesk {
-        font-family: "Space Grotesk", sans-serif;
-    }
-
-    .text-electric-blue {
-        color: #3b82f6;
-    }
-
-    .bg-slate-950 {
-        background-color: #020617;
-    }
-
-    .bg-slate-900 {
-        background-color: #0f172a;
-    }
-
-    .border-slate-800 {
-        border-color: #1e293b;
-    }
-
-    .border-slate-700 {
-        border-color: #334155;
-    }
-
-    .text-slate-300 {
-        color: #cbd5e1;
-    }
-
-    .text-slate-400 {
-        color: #94a3b8;
-    }
-
-    .hover\:bg-slate-800:hover {
-        background-color: #1e293b;
-    }
-
-    .hover\:text-electric-blue:hover {
-        color: #3b82f6;
-    }
-
     .jesse-btn.is-copied,
     .jesse-btn.is-copied:hover {
-        background: #3b82f6;
-        color: white;
-        transform: translateY(-2px);
-        box-shadow:
-            0 4px 0 0 #1e293b,
-            0 1px 8px 0 #0f172a;
+        background: #2E8BFF;
+        color: #060d18;
+        border-color: #2E8BFF;
     }
 </style>
 
@@ -148,8 +97,6 @@ const { email, title, description, closeText } = Astro.props;
             emailInput.value = email;
             modal.classList.remove("hidden");
             modal.classList.add("flex");
-
-            // Focus on input for better UX
             setTimeout(() => emailInput.focus(), 100);
         }
     }
@@ -177,7 +124,6 @@ const { email, title, description, closeText } = Astro.props;
 
         const showConfirmation = () => {
             copyBtn.classList.add("is-copied");
-
             setTimeout(() => {
                 copyBtn.classList.remove("is-copied");
             }, 1500);
@@ -196,7 +142,6 @@ const { email, title, description, closeText } = Astro.props;
         }
     }
 
-    // Event listeners
     document.addEventListener("DOMContentLoaded", () => {
         const closeButtons = document.querySelectorAll(
             "#close-email-modal-btn",
@@ -212,7 +157,6 @@ const { email, title, description, closeText } = Astro.props;
             copyButton.addEventListener("click", copyEmailToClipboard);
         }
 
-        // Close modal when clicking outside
         if (modal) {
             modal.addEventListener("click", (e) => {
                 if (e.target === modal) {
@@ -221,7 +165,6 @@ const { email, title, description, closeText } = Astro.props;
             });
         }
 
-        // Close modal with Escape key
         document.addEventListener("keydown", (e) => {
             if (e.key === "Escape") {
                 hideEmailModal();
@@ -229,7 +172,6 @@ const { email, title, description, closeText } = Astro.props;
         });
     });
 
-    // Make functions globally available
     (window as any).showEmailModal = showEmailModal;
     (window as any).hideEmailModal = hideEmailModal;
 </script>

@@ -1,5 +1,4 @@
 ---
-import { Card } from "@heroui/react";
 import { useTranslations } from "@/i18n/utils";
 import type { TranslationKey } from "@/i18n/types";
 
@@ -8,81 +7,70 @@ const currentLang = (lang as "en" | "es") || "en";
 const t = useTranslations(currentLang);
 
 interface SkillCard {
-  value: string;
   skill: string;
+  icon: string;
   description: TranslationKey;
 }
 
-const royalFlushSkills: SkillCard[] = [
-  {
-    value: "A",
-    skill: "React",
-    description: "skills.royalFlush.react",
-  },
-  {
-    value: "K",
-    skill: "Node.js",
-    description: "skills.royalFlush.node",
-  },
-  {
-    value: "Q",
-    skill: "TypeScript",
-    description: "skills.royalFlush.typescript",
-  },
-  {
-    value: "J",
-    skill: "PostgreSQL",
-    description: "skills.royalFlush.postgres",
-  },
-  {
-    value: "T",
-    skill: "React Native",
-    description: "skills.royalFlush.reactNative",
-  },
+const coreSkills: SkillCard[] = [
+  { skill: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", description: "skills.royalFlush.react" },
+  { skill: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", description: "skills.royalFlush.node" },
+  { skill: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", description: "skills.royalFlush.typescript" },
+  { skill: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg", description: "skills.royalFlush.postgres" },
+  { skill: "React Native", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", description: "skills.royalFlush.reactNative" },
 ];
 
-const otherSkills = [
-  // Frontend
-  { name: "JavaScript/TypeScript", category: t("skills.categories.frontend") },
-  { name: "HTML & CSS", category: t("skills.categories.frontend") },
-  { name: "TailwindCSS", category: t("skills.categories.frontend") },
-  // Backend
-  { name: "Python", category: t("skills.categories.backend") },
-  { name: "Django", category: t("skills.categories.backend") },
-  { name: "REST API", category: t("skills.categories.backend") },
-  // Database
-  { name: "MongoDB", category: t("skills.categories.database") },
-  // Cloud/DevOps
-  { name: "AWS (EC2, S3)", category: t("skills.categories.cloud") },
-  { name: "Firebase/Firestore", category: t("skills.categories.cloud") },
-  // Tools
-  { name: "Git/GitHub", category: t("skills.categories.tools") },
-  { name: "Testing (Jest)", category: t("skills.categories.tools") },
-  // Design
-  { name: "UX/UI", category: t("skills.categories.design") },
+const skillCategories = [
+  {
+    label: t("skills.categories.frontend"),
+    skills: ["JavaScript/TypeScript", "HTML & CSS", "TailwindCSS"],
+  },
+  {
+    label: t("skills.categories.backend"),
+    skills: ["Python", "Django", "REST API"],
+  },
+  {
+    label: t("skills.categories.database"),
+    skills: ["MongoDB"],
+  },
+  {
+    label: t("skills.categories.cloud"),
+    skills: ["AWS (EC2, S3)", "Firebase/Firestore"],
+  },
+  {
+    label: t("skills.categories.tools"),
+    skills: ["Git/GitHub", "Testing (Jest)"],
+  },
+  {
+    label: t("skills.categories.design"),
+    skills: ["UX/UI"],
+  },
 ];
 ---
 
 <section
   id='skills'
-  class='py-section mt-24 bg-gradient-to-b from-slate-950 to-blue-900 exclusive-section'
+  class='py-section min-h-screen relative'
 >
-  <div class='max-w-content mx-auto px-4'>
-    <h2 class='text-4xl font-bold text-electric-blue text-center mb-16'>
-      {t("skills.title")}
+  <div class='max-w-content mx-auto px-6 md:px-12'>
+    <h2 class='font-heading text-4xl md:text-5xl font-bold text-text-primary text-center mb-16 skill-reveal'>
+      {t("skills.title")}<span class='text-accent'>.</span>
     </h2>
-    <div class='flex justify-center gap-6 flex-wrap mb-16 royal-flush-row'>
+
+    <!-- Core Skills Cards -->
+    <div class='flex justify-center gap-4 md:gap-6 flex-wrap mb-20 royal-flush-row'>
       {
-        royalFlushSkills.map((card, idx) => (
+        coreSkills.map((card, idx) => (
           <div
-            class='relative bg-slate-900/80 border-2 border-blue-700 rounded-xl w-40 h-64 flex flex-col justify-center px-3 py-6 shadow-lg poker-card flop-card-animate'
-            style={`animation-delay: ${idx * 0.25}s;`}
+            class='poker-card flop-card'
+            style={`--delay: ${idx * 0.15}s`}
           >
-            <div class='text-center flex-1 flex flex-col justify-center'>
-              <h3 class='text-xl font-bold text-off-white mb-2 text-center'>
+            <img src={card.icon} alt={card.skill} class='w-10 h-10 mb-4 opacity-80' loading='lazy' />
+            <div class='relative z-10'>
+              <h3 class='text-lg font-bold text-text-primary font-heading mb-2'>
                 {card.skill}
               </h3>
-              <p class='text-sm text-light-gray text-center'>
+              <p class='text-sm text-text-secondary leading-relaxed'>
                 {t(card.description)}
               </p>
             </div>
@@ -90,17 +78,21 @@ const otherSkills = [
         ))
       }
     </div>
-    <!-- Other Skills Grid -->
-    <div class='grid md:grid-cols-3 gap-8'>
+
+    <!-- Other Skills -->
+    <div class='grid sm:grid-cols-2 lg:grid-cols-3 gap-6'>
       {
-        otherSkills.map((skill) => (
-          <Card
-            client:visible
-            className='flex flex-col items-start p-6 bg-slate-900/80 border border-blue-700/20 rounded-xl shadow'
-          >
-            <h3 class='text-xl font-bold text-off-white mb-1'>{skill.name}</h3>
-            <p class='text-electric-blue text-xs mb-2'>{skill.category}</p>
-          </Card>
+        skillCategories.map((cat) => (
+          <div class='skill-category skill-reveal'>
+            <h4 class='text-accent font-mono text-xs uppercase tracking-widest mb-3'>
+              {cat.label}
+            </h4>
+            <div class='flex flex-wrap gap-2'>
+              {cat.skills.map((skill) => (
+                <span class='skill-tag'>{skill}</span>
+              ))}
+            </div>
+          </div>
         ))
       }
     </div>
@@ -109,70 +101,109 @@ const otherSkills = [
 
 <style>
   .poker-card {
-    background: linear-gradient(135deg, #1e293b 60%, #334155 100%);
-    transition:
-      transform 0.2s,
-      box-shadow 0.2s;
-    pointer-events: none;
+    position: relative;
+    width: 10rem;
+    min-height: 15rem;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(10, 22, 40, 0.7);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(46, 139, 255, 0.12);
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
   }
-  .flop-animate .poker-card {
-    pointer-events: auto;
-  }
+
   .poker-card:hover {
-    /* Only magnify if .flopped is present */
+    border-color: rgba(46, 139, 255, 0.35);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(46, 139, 255, 0.12);
   }
-  .flopped.poker-card:hover {
-    transform: translateY(-8px) scale(1.04) !important;
-    box-shadow: 0 8px 32px 0 rgba(59, 130, 246, 0.25) !important;
-  }
-  .flop-card-animate {
+
+  .flop-card {
     opacity: 0;
-    transform: translateX(-80px) rotateY(90deg);
+    transform: translateX(-40px) rotateY(60deg);
   }
-  .flop-animate .flop-card-animate {
-    animation: flop-slide-flip 1.2s cubic-bezier(0.7, 0.2, 0.2, 1) forwards;
+
+  .flop-animate .flop-card {
+    animation: flop-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--delay);
   }
-  @keyframes flop-slide-flip {
+
+  @keyframes flop-in {
     0% {
       opacity: 0;
-      transform: translateX(-80px) rotateY(90deg);
-    }
-    60% {
-      opacity: 1;
-      transform: translateX(0) rotateY(90deg);
+      transform: translateX(-40px) rotateY(60deg);
     }
     100% {
       opacity: 1;
       transform: translateX(0) rotateY(0deg);
     }
   }
-  .royal-flush-title {
-    font-size: 1.35rem;
-    font-weight: 700;
-    line-height: 1.1;
-    word-break: normal;
-    white-space: normal;
+
+  .flopped {
+    opacity: 1 !important;
+    transform: translateX(0) rotateY(0deg) !important;
+  }
+
+  .skill-category {
+    padding: 1.25rem;
+    background: rgba(10, 22, 40, 0.4);
+    border: 1px solid rgba(46, 139, 255, 0.06);
+    border-radius: 0.75rem;
+    transition: border-color 0.3s ease;
+  }
+
+  .skill-category:hover {
+    border-color: rgba(46, 139, 255, 0.15);
+  }
+
+  .skill-tag {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.8rem;
+    font-family: "JetBrains Mono", monospace;
+    color: #8B9AB8;
+    background: rgba(15, 31, 54, 0.6);
+    border: 1px solid rgba(46, 139, 255, 0.08);
+    border-radius: 2rem;
+    transition: all 0.2s ease;
+  }
+
+  .skill-tag:hover {
+    color: #2E8BFF;
+    border-color: rgba(46, 139, 255, 0.25);
+  }
+
+  .skill-reveal {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+    filter: blur(4px);
   }
 </style>
 
 <script>
-  // Intersection Observer for flop animation
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
   if (typeof window !== "undefined") {
     const section = document.querySelector("#skills .royal-flush-row");
     if (section) {
-      const observer = new window.IntersectionObserver(
+      const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               section.classList.add("flop-animate");
-              // Add .flopped to each card after its animation ends and remove the animation class
               const cards = section.querySelectorAll(".poker-card");
               cards.forEach((card) => {
                 card.addEventListener(
                   "animationend",
                   () => {
                     card.classList.add("flopped");
-                    card.classList.remove("flop-card-animate");
+                    card.classList.remove("flop-card");
                   },
                   { once: true },
                 );
@@ -185,5 +216,19 @@ const otherSkills = [
       );
       observer.observe(section);
     }
+
+    gsap.to(".skill-reveal", {
+      scrollTrigger: {
+        trigger: "#skills",
+        start: "top 65%",
+      },
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      filter: "blur(0px)",
+      duration: 0.8,
+      stagger: 0.1,
+      ease: "power3.out",
+    });
   }
 </script>

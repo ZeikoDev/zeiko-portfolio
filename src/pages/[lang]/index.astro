@@ -13,23 +13,17 @@ export async function getStaticPaths() {
 
 const { lang } = Astro.params;
 const t = useTranslations(lang as "en" | "es");
-
-const title = t("hero.title") as string;
-const description = t("hero.description") as string;
 ---
 
 <Layout title={t("hero.subtitle")} description={t("hero.description")}>
-    <section id='hero' class='min-h-screen'><Hero /></section>
-    <section id='about' class='min-h-screen'><About /></section>
-    <section id='skills' class='min-h-screen'><Skills /></section>
-    <section id='projects' class='min-h-screen'><Projects /></section>
-    <section id='personal-projects' class='min-h-screen'>
-        <PersonalProjects />
-    </section>
+    <Hero />
+    <About />
+    <Skills />
+    <Projects />
+    <PersonalProjects />
 </Layout>
 
 <script>
-    // Smooth scroll behavior for navigation
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         (anchor as HTMLAnchorElement).addEventListener(
             "click",
@@ -49,81 +43,4 @@ const description = t("hero.description") as string;
             },
         );
     });
-
-    // Intersection Observer for animations
-    const observerOptions = {
-        root: null,
-        rootMargin: "0px",
-        threshold: 0.1,
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("animate-fade-in");
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    // Observe all sections
-    document.querySelectorAll("section").forEach((section) => {
-        observer.observe(section);
-    });
-
-    // Only one main section visible at a time
-    const mainSections = ["about", "skills", "projects", "personal-projects"];
-    function updateSectionVisibility() {
-        let found = false;
-        mainSections.forEach((id) => {
-            const el = document.getElementById(id);
-            if (!el) return;
-            const rect = el.getBoundingClientRect();
-            const inView =
-                rect.top < window.innerHeight / 2 &&
-                rect.bottom > window.innerHeight / 2;
-            if (inView && !found) {
-                el.classList.add("visible-section");
-                el.classList.remove("exclusive-section");
-                found = true;
-            } else {
-                el.classList.remove("visible-section");
-                el.classList.add("exclusive-section");
-            }
-        });
-    }
-    window.addEventListener("scroll", updateSectionVisibility);
-    window.addEventListener("resize", updateSectionVisibility);
-    window.addEventListener("DOMContentLoaded", updateSectionVisibility);
 </script>
-
-<style is:global>
-    @keyframes fade-in {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .animate-fade-in {
-        animation: fade-in 0.6s ease-out forwards;
-    }
-
-    section {
-        opacity: 0;
-    }
-
-    .exclusive-section {
-        opacity: 0;
-        transition: opacity 0.5s;
-    }
-    .exclusive-section.visible-section {
-        opacity: 1;
-        pointer-events: auto;
-        z-index: 10;
-    }
-</style>

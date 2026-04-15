@@ -16,6 +16,9 @@ const project = projects.find((p) => p.slug === "itm");
     <head>
         <meta charset='UTF-8' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <link rel='preconnect' href='https://fonts.googleapis.com' />
+        <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+        <link href='https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap' rel='stylesheet' />
         <title>
             {
                 project
@@ -34,13 +37,13 @@ const project = projects.find((p) => p.slug === "itm");
                   : "Project not found"}
         />
     </head>
-    <body class='bg-slate-950 text-off-white min-h-screen'>
+    <body class='bg-navy-950 text-text-primary min-h-screen font-sans'>
         <section class='max-w-3xl mx-auto py-16 px-4'>
             <a
                 href={currentLang === "es"
                     ? "/es?section=projects#projects"
                     : "/en?section=projects#projects"}
-                class='text-electric-blue hover:underline mb-8 inline-block'
+                class='text-accent hover:underline mb-8 inline-block'
                 >&larr; {
                     currentLang === "es"
                         ? "Volver a Proyectos"
@@ -50,37 +53,37 @@ const project = projects.find((p) => p.slug === "itm");
             {
                 project ? (
                     <>
-                        <h1 class='text-4xl font-bold text-electric-blue mb-6'>
+                        <h1 class='text-4xl font-bold text-accent font-heading mb-6'>
                             {currentLang === "es"
                                 ? "Aprendizaje de Español - Un Proyecto de Educación Inclusiva"
                                 : "Learning Spanish - An Inclusive Education Project"}
                         </h1>
-                        <p class='mb-6 text-lg text-light-gray'>
+                        <p class='mb-6 text-lg text-text-secondary'>
                             {currentLang === "es"
                                 ? "Durante mi primer año como estudiante de Ciencias de la Computación, tuve la oportunidad de participar en un proyecto freelance dirigido por el grupo de investigación universitario Sidevsoft de la Institución Universitaria ITM. El objetivo era ambicioso: construir una plataforma educativa que ayudara a personas con discapacidad auditiva a aprender español de manera interactiva y accesible."
                                 : "During my first year as a Computer Science student, I had the opportunity to take part in a freelance project led by the university research group Sidevsoft from Institucion Universitaria ITM. The goal was ambitious: to build an educational platform that would help people with hearing impairments learn Spanish in an interactive and accessible way."}
                         </p>
-                        <h2 class='text-2xl font-semibold mt-8 mb-2 text-off-white'>
+                        <h2 class='text-2xl font-semibold mt-8 mb-2 text-text-primary font-heading'>
                             {currentLang === "es"
                                 ? "El contexto"
                                 : "The context"}
                         </h2>
-                        <p class='mb-6 text-light-gray'>
+                        <p class='mb-6 text-text-secondary'>
                             {currentLang === "es"
                                 ? "Este proyecto nació de una necesidad real y urgente. Muchas personas con discapacidad auditiva o con problemas de audición enfrentan serios desafíos al intentar aprender español como segunda lengua, especialmente en entornos digitales que no están construidos pensando en la accesibilidad. ITM, como parte de su compromiso con la educación inclusiva, propuso la creación de una plataforma adaptada a estos estudiantes, guiada por educadores profesionales."
                                 : "This project was born from a real and urgent need. Many deaf or hard-of-hearing individuals face serious challenges when trying to learn Spanish as a second language, especially in digital environments that aren't built with accessibility in mind. ITM, as part of its commitment to inclusive education, proposed the creation of a platform tailored to these learners, guided by professional educators."}
                         </p>
-                        <h2 class='text-2xl font-semibold mt-8 mb-2 text-off-white'>
+                        <h2 class='text-2xl font-semibold mt-8 mb-2 text-text-primary font-heading'>
                             {currentLang === "es"
                                 ? "Mi contribución"
                                 : "My contribution"}
                         </h2>
-                        <p class='mb-2 text-light-gray'>
+                        <p class='mb-2 text-text-secondary'>
                             {currentLang === "es"
                                 ? "Mi rol se enfocó en el desarrollo frontend de la plataforma. Específicamente, fui responsable de:"
                                 : "My role focused on the frontend development of the platform. Specifically, I was responsible for:"}
                         </p>
-                        <ul class='list-disc pl-6 mb-6 text-light-gray'>
+                        <ul class='list-disc pl-6 mb-6 text-text-secondary'>
                             <li>
                                 {currentLang === "es"
                                     ? "Diseñar y codificar la interfaz de usuario donde los estudiantes accedían a sus materiales de aprendizaje."
@@ -92,46 +95,46 @@ const project = projects.find((p) => p.slug === "itm");
                                     : "Developing interactive mini-games to reinforce vocabulary, grammar, and visual comprehension in an engaging way."}
                             </li>
                         </ul>
-                        <p class='mb-6 text-light-gray'>
+                        <p class='mb-6 text-text-secondary'>
                             {currentLang === "es"
                                 ? "Aunque no usamos frameworks modernos como React o Vue, construimos todo usando HTML, CSS y JavaScript puros. Esto significó crear tanto el diseño como la lógica desde cero—una experiencia que fortaleció profundamente mis fundamentos de frontend."
                                 : "Even though we didn't use any modern frameworks like React or Vue, we built everything using pure HTML, CSS, and JavaScript. This meant crafting both layout and logic from scratch—an experience that deeply strengthened my frontend fundamentals."}
                         </p>
-                        <h2 class='text-2xl font-semibold mt-8 mb-2 text-off-white'>
+                        <h2 class='text-2xl font-semibold mt-8 mb-2 text-text-primary font-heading'>
                             {currentLang === "es"
                                 ? "Impacto en el mundo real"
                                 : "Real-world impact"}
                         </h2>
-                        <p class='mb-6 text-light-gray'>
+                        <p class='mb-6 text-text-secondary'>
                             {currentLang === "es"
                                 ? "Después de nuestra fase inicial de desarrollo, el proyecto pasó a una prueba piloto con al menos 100 usuarios, lo que validó tanto su valor educativo como su base técnica. Aunque no fui parte de las etapas posteriores, me enorgullece haber contribuido a algo con un impacto social tan significativo."
                                 : "After our initial development phase, the project moved into a pilot test with at least 100 users, which validated both its educational value and technical foundation. Although I wasn't part of the later stages, I'm proud to have contributed to something with such meaningful social impact."}
                         </p>
-                        <h2 class='text-2xl font-semibold mt-8 mb-2 text-off-white'>
+                        <h2 class='text-2xl font-semibold mt-8 mb-2 text-text-primary font-heading'>
                             {currentLang === "es"
                                 ? "Reflexiones finales"
                                 : "Final thoughts"}
                         </h2>
-                        <p class='mb-8 text-light-gray'>
+                        <p class='mb-8 text-text-secondary'>
                             {currentLang === "es"
                                 ? "Más allá del desafío técnico, este proyecto me enseñó la importancia de construir experiencias digitales centradas en las personas y accesibles. Me recordó que como desarrolladores, no solo estamos resolviendo problemas de código—estamos resolviendo problemas de personas."
                                 : "Beyond the technical challenge, this project taught me the importance of building human-centered and accessible digital experiences. It reminded me that as developers, we're not just solving code problems—we're solving people problems."}
                         </p>
 
-                        <h2 class='text-2xl font-semibold mt-8 mb-2 text-off-white'>
+                        <h2 class='text-2xl font-semibold mt-8 mb-2 text-text-primary font-heading'>
                             {currentLang === "es"
                                 ? "Stack Tecnológico"
                                 : "Tech Stack"}
                         </h2>
                         <div class='flex flex-wrap gap-2 mb-8'>
                             {project.technologies.map((tech) => (
-                                <span class='px-3 py-1 bg-slate-800 rounded-full text-xs text-off-white border border-blue-700/20'>
+                                <span class='px-3 py-1 bg-navy-800 rounded-full text-xs text-text-secondary font-mono border border-accent/10'>
                                     {tech}
                                 </span>
                             ))}
                         </div>
 
-                        <h2 class='text-2xl font-semibold mt-8 mb-2 text-off-white'>
+                        <h2 class='text-2xl font-semibold mt-8 mb-2 text-text-primary font-heading'>
                             {currentLang === "es"
                                 ? "Capturas de Pantalla"
                                 : "Screenshots"}
@@ -144,7 +147,7 @@ const project = projects.find((p) => p.slug === "itm");
                                         ? "Captura del proyecto ITM 1"
                                         : "ITM project screenshot 1"
                                 }
-                                class='rounded-lg border border-blue-700/20 shadow-lg object-cover'
+                                class='rounded-lg border border-accent/15 shadow-lg object-cover'
                                 loading='lazy'
                             />
                             <img
@@ -154,7 +157,7 @@ const project = projects.find((p) => p.slug === "itm");
                                         ? "Captura del proyecto ITM 2"
                                         : "ITM project screenshot 2"
                                 }
-                                class='rounded-lg border border-blue-700/20 shadow-lg object-cover'
+                                class='rounded-lg border border-accent/15 shadow-lg object-cover'
                                 loading='lazy'
                             />
                             <img
@@ -164,13 +167,13 @@ const project = projects.find((p) => p.slug === "itm");
                                         ? "Captura del proyecto ITM 3"
                                         : "ITM project screenshot 3"
                                 }
-                                class='rounded-lg border border-blue-700/20 shadow-lg object-cover sm:col-span-2'
+                                class='rounded-lg border border-accent/15 shadow-lg object-cover sm:col-span-2'
                                 loading='lazy'
                             />
                         </div>
                     </>
                 ) : (
-                    <h1 class='text-3xl font-bold text-red-500'>
+                    <h1 class='text-3xl font-bold text-red-400 font-heading'>
                         {currentLang === "es"
                             ? "Proyecto no encontrado"
                             : "Project not found"}
