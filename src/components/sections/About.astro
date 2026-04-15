@@ -7,174 +7,97 @@ import { SITE } from "@/data/site";
 const { lang } = Astro.params;
 const currentLang = (lang as "en" | "es") || "en";
 const t = useTranslations(currentLang);
-
-const skills = [
-    { name: "React", level: "Expert" },
-    { name: "TypeScript", level: "Expert" },
-    { name: "Node.js", level: "Advanced" },
-    { name: "Python", level: "Advanced" },
-    { name: "PostgreSQL", level: "Intermediate" },
-    { name: "Docker", level: "Intermediate" },
-    { name: "AWS", level: "Intermediate" },
-    { name: "GraphQL", level: "Advanced" },
-];
-
-const email = "me@zeiko.dev";
 ---
 
 <section
     id='about'
-    class='py-section min-h-screen relative exclusive-section flex items-center justify-center'
+    class='py-section min-h-screen relative flex items-center'
 >
-    <div class='max-w-content mx-auto px-4 w-full'>
-        <div class='flex flex-col items-center gap-12 w-full'>
-            <!-- Right Column: Content (now centered) -->
-            <div class='space-y-8 w-full max-w-2xl'>
+    <div class='max-w-content mx-auto px-6 md:px-12 w-full'>
+        <div class='grid lg:grid-cols-5 gap-16 items-start'>
+            <!-- Left: Title + Stats -->
+            <div class='lg:col-span-2 lg:sticky lg:top-32'>
                 <h2
-                    class='text-4xl font-bold text-electric-blue text-center about-animate'
+                    class='font-heading text-4xl md:text-5xl font-bold text-text-primary mb-8 about-reveal'
                 >
-                    {t("about.title")}
+                    {t("about.title")}<span class='text-accent'>.</span>
                 </h2>
+
+                <!-- BJJ Belt Stats -->
+                <div class='flex flex-col gap-4 about-reveal'>
+                    <div class='stat-pill'>
+                        <img src='/bjj-belt.svg' alt='' class='w-8 h-8' aria-hidden='true' />
+                        <div>
+                            <span class='text-xl font-bold text-text-primary font-heading'>{t("numbers.2plus")}</span>
+                            <span class='text-text-muted text-sm ml-2'>{t("about.stats.years")}</span>
+                        </div>
+                    </div>
+                    <div class='stat-pill'>
+                        <img src='/bjj-belt.svg' alt='' class='w-8 h-8' aria-hidden='true' />
+                        <div>
+                            <span class='text-xl font-bold text-text-primary font-heading'>{t("chip.15kplus")}</span>
+                            <span class='text-text-muted text-sm ml-2'>{t("about.stats.users")}</span>
+                        </div>
+                    </div>
+                    <div class='stat-pill'>
+                        <img src='/bjj-belt.svg' alt='' class='w-8 h-8' aria-hidden='true' />
+                        <div>
+                            <span class='text-xl font-bold text-text-primary font-heading'>&infin;</span>
+                            <span class='text-text-muted text-sm ml-2'>{t("about.stats.passion")}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Description + CTAs -->
+            <div class='lg:col-span-3 space-y-6'>
                 {
                     t("about.description")
                         .split("\n")
                         .map((line) => (
-                            <p class='text-lg text-light-gray text-center about-animate'>
+                            <p class='text-lg text-text-secondary leading-relaxed about-reveal'>
                                 {line}
                             </p>
                         ))
                 }
 
-                <!-- Stat BJJ Belts -->
-                <div class='flex gap-12 justify-center mt-8'>
-                    <!-- Years -->
-                    <div
-                        class='relative w-32 h-32 flex flex-col items-center poker-chip-animated'
-                    >
-                        <img
-                            src='/bjj-belt.svg'
-                            alt={t("about.stats.years")}
-                            class='w-full h-full'
-                        />
-                        <span class='chip-text chip-years'>
-                            <span class='main'>{t("numbers.2plus")}</span>
-                            <span class='sub'>{t("about.stats.years")}</span>
-                        </span>
-                    </div>
-                    <!-- Impact -->
-                    <div
-                        class='relative w-32 h-32 flex flex-col items-center poker-chip-animated'
-                    >
-                        <img
-                            src='/bjj-belt.svg'
-                            alt={t("about.stats.users")}
-                            class='w-full h-full'
-                        />
-                        <span class='chip-text chip-impact'>
-                            <span class='main'>{t("chip.15kplus")}</span>
-                            {
-                                t("about.stats.users")
-                                    .split("\n")
-                                    .map((line) => (
-                                        <span class='sub'>
-                                            {line}
-                                            <br />
-                                        </span>
-                                    ))
-                            }
-                        </span>
-                    </div>
-                    <!-- Passion -->
-                    <div
-                        class='relative w-32 h-32 flex flex-col items-center poker-chip-animated'
-                    >
-                        <img
-                            src='/bjj-belt.svg'
-                            alt={t("about.stats.passion")}
-                            class='w-full h-full'
-                        />
-                        <span class='chip-text chip-passion'>
-                            <span class='main'>&#8734;</span>
-                            <span class='sub'>{t("about.stats.passion")}</span>
-                        </span>
-                    </div>
-                </div>
-                <!-- CTA JesseButton Row -->
-                <div class='flex flex-wrap justify-center gap-6 mt-6'>
+                <!-- CTAs -->
+                <div class='flex flex-wrap gap-4 pt-4 about-reveal'>
                     <a
                         href='https://github.com/zeikodev'
                         target='_blank'
                         rel='noopener noreferrer'
+                        class='cta-link group'
                     >
-                        <JesseButton>
-                            <span slot='icon'>
-                                <svg
-                                    xmlns='http://www.w3.org/2000/svg'
-                                    fill='none'
-                                    viewBox='0 0 24 24'
-                                    stroke='currentColor'
-                                    class='w-7 h-7'
-                                >
-                                    <path
-                                        stroke-linecap='round'
-                                        stroke-linejoin='round'
-                                        stroke-width='2'
-                                        d='M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.184 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.091-.647.35-1.088.636-1.339-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.987 1.029-2.686-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.295 2.748-1.025 2.748-1.025.546 1.378.202 2.397.1 2.65.64.699 1.028 1.593 1.028 2.686 0 3.847-2.338 4.695-4.566 4.944.359.309.678.919.678 1.852 0 1.336-.012 2.417-.012 2.747 0 .268.18.579.688.481C19.138 20.203 22 16.447 22 12.021 22 6.484 17.523 2 12 2z'
-                                    ></path>
-                                </svg>
-                            </span>
-                            {t("common.viewCode")}
-                        </JesseButton>
+                        <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' class='w-5 h-5'>
+                            <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.184 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.091-.647.35-1.088.636-1.339-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.987 1.029-2.686-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.295 2.748-1.025 2.748-1.025.546 1.378.202 2.397.1 2.65.64.699 1.028 1.593 1.028 2.686 0 3.847-2.338 4.695-4.566 4.944.359.309.678.919.678 1.852 0 1.336-.012 2.417-.012 2.747 0 .268.18.579.688.481C19.138 20.203 22 16.447 22 12.021 22 6.484 17.523 2 12 2z' />
+                        </svg>
+                        <span>{t("common.viewCode")}</span>
+                        <span class='cta-underline'></span>
                     </a>
                     <a
                         href='https://linkedin.com/in/juan-camilo-gonzalez-hoyos'
                         target='_blank'
                         rel='noopener noreferrer'
+                        class='cta-link group'
                     >
-                        <JesseButton>
-                            <span slot='icon'>
-                                <svg
-                                    xmlns='http://www.w3.org/2000/svg'
-                                    fill='none'
-                                    viewBox='0 0 24 24'
-                                    stroke='currentColor'
-                                    class='w-7 h-7'
-                                >
-                                    <path
-                                        stroke-linecap='round'
-                                        stroke-linejoin='round'
-                                        stroke-width='2'
-                                        d='M16 8a6 6 0 016 6v5a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4a2 2 0 00-4 0v4a1 1 0 01-1 1H7a1 1 0 01-1-1v-9a1 1 0 011-1h4a1 1 0 011 1v1.25M6 19a2 2 0 100-4 2 2 0 000 4z'
-                                    ></path>
-                                </svg>
-                            </span>
-                            {t("common.viewProject")}
-                        </JesseButton>
+                        <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' class='w-5 h-5'>
+                            <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M16 8a6 6 0 016 6v5a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4a2 2 0 00-4 0v4a1 1 0 01-1 1H7a1 1 0 01-1-1v-9a1 1 0 011-1h4a1 1 0 011 1v1.25M6 19a2 2 0 100-4 2 2 0 000 4z' />
+                        </svg>
+                        <span>LinkedIn</span>
+                        <span class='cta-underline'></span>
                     </a>
                     <a
                         href={`mailto:${SITE.email}`}
                         id='email-link'
                         data-email={SITE.email}
+                        class='cta-link group'
                     >
-                        <JesseButton>
-                            <span slot='icon'>
-                                <svg
-                                    xmlns='http://www.w3.org/2000/svg'
-                                    fill='none'
-                                    viewBox='0 0 24 24'
-                                    stroke='currentColor'
-                                    class='w-7 h-7'
-                                >
-                                    <path
-                                        stroke-linecap='round'
-                                        stroke-linejoin='round'
-                                        stroke-width='2'
-                                        d='M21 8.25V17a2 2 0 01-2 2H5a2 2 0 01-2-2V8.25m18 0A2 2 0 0019 6H5a2 2 0 00-2 2.25m18 0v.1a2 2 0 01-.553 1.39l-7.197 7.197a2 2 0 01-2.828 0L3.553 9.74A2 2 0 013 8.35v-.1'
-                                    ></path>
-                                </svg>
-                            </span>
-                            {t("common.contact")}
-                        </JesseButton>
+                        <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' class='w-5 h-5'>
+                            <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 8.25V17a2 2 0 01-2 2H5a2 2 0 01-2-2V8.25m18 0A2 2 0 0019 6H5a2 2 0 00-2 2.25m18 0v.1a2 2 0 01-.553 1.39l-7.197 7.197a2 2 0 01-2.828 0L3.553 9.74A2 2 0 013 8.35v-.1' />
+                        </svg>
+                        <span>{t("common.contact")}</span>
+                        <span class='cta-underline'></span>
                     </a>
                 </div>
             </div>
@@ -190,106 +113,82 @@ const email = "me@zeiko.dev";
 />
 
 <style>
-    .py-section {
-        padding-top: 120px;
-        padding-bottom: 40px;
-    }
-    .poker-chip-animated {
-        /* Remove animation by default, will be added dynamically */
-        transition:
-            transform 0.2s,
-            box-shadow 0.2s;
-    }
-    .poker-chip-animated.bounce {
-        animation: chip-bounce-in 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-    }
-    @keyframes chip-bounce-in {
-        0% {
-            opacity: 0;
-            transform: scale(0.7) translateY(60px);
-        }
-        60% {
-            opacity: 1;
-            transform: scale(1.1) translateY(-12px);
-        }
-        80% {
-            transform: scale(0.96) translateY(4px);
-        }
-        100% {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-        }
-    }
-    .about-animate {
-        opacity: 0;
-        transform: translateY(40px);
-        transition:
-            opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1),
-            transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .about-animate.visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    .text-light-gray {
-        color: #e2e8f0;
-        line-height: 1.8;
-    }
-    .chip-text {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100%;
-        text-align: center;
-        color: #fff;
-        font-weight: 900;
-        text-shadow:
-            0 2px 8px rgba(0, 0, 0, 0.25),
-            0 1px 0 #222;
-        pointer-events: none;
+    .stat-pill {
         display: flex;
-        flex-direction: column;
         align-items: center;
-        justify-content: center;
+        gap: 0.75rem;
+        padding: 0.75rem 1rem;
+        background: rgba(15, 31, 54, 0.6);
+        border: 1px solid rgba(46, 139, 255, 0.1);
+        border-radius: 0.75rem;
+        transition: all 0.3s ease;
     }
-    .chip-years .main {
-        font-size: 1.4rem;
-        font-weight: 900;
-        line-height: 1.1;
+
+    .stat-pill:hover {
+        border-color: rgba(46, 139, 255, 0.25);
+        background: rgba(15, 31, 54, 0.8);
     }
-    .chip-years .sub {
-        font-size: 0.7rem;
+
+    .cta-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #8B9AB8;
+        font-size: 0.95rem;
         font-weight: 500;
-        margin-top: 0.1em;
-        line-height: 1.1;
+        position: relative;
+        padding-bottom: 2px;
+        transition: color 0.3s ease;
     }
-    .chip-impact .main {
-        font-size: 1.05rem;
-        font-weight: 900;
-        line-height: 1.1;
+
+    .cta-link:hover {
+        color: #2E8BFF;
     }
-    .chip-impact .sub {
-        font-size: 0.6rem;
-        font-weight: 500;
-        margin-top: 0.1em;
-        line-height: 1.1;
+
+    .cta-underline {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: #2E8BFF;
+        transition: width 0.3s ease;
     }
-    .chip-passion .main {
-        font-size: 1.5rem;
-        font-weight: 900;
-        line-height: 1.1;
+
+    .cta-link:hover .cta-underline {
+        width: 100%;
     }
-    .chip-passion .sub {
-        font-size: 0.7rem;
-        font-weight: 500;
-        margin-top: 0.1em;
-        line-height: 1.1;
+
+    .about-reveal {
+        opacity: 0;
+        transform: translateY(50px) scale(0.97);
+        filter: blur(4px);
     }
 </style>
 
 <script>
-    // Declarar tipos globales para evitar errores
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        gsap.to(".about-reveal", {
+            scrollTrigger: {
+                trigger: "#about",
+                start: "top 75%",
+            },
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            filter: "blur(0px)",
+            duration: 0.9,
+            stagger: 0.12,
+            ease: "power3.out",
+        });
+    });
+
+    // Email button logic
     declare global {
         interface Window {
             showEmailModal: (email: string) => void;
@@ -297,132 +196,64 @@ const email = "me@zeiko.dev";
     }
 
     if (typeof window !== "undefined") {
-        window.addEventListener("DOMContentLoaded", () => {
-            const aboutSection =
-                document.getElementById("about") ||
-                document.querySelector(".exclusive-section");
-            const chips = aboutSection
-                ? aboutSection.querySelectorAll(".poker-chip-animated")
-                : [];
-            const aboutText = aboutSection
-                ? aboutSection.querySelectorAll(".about-animate")
-                : [];
-            let animated = false;
-            if (aboutSection && (chips.length || aboutText.length)) {
-                const observer = new window.IntersectionObserver(
-                    (entries) => {
-                        entries.forEach((entry) => {
-                            if (entry.isIntersecting && !animated) {
-                                aboutText.forEach((el, idx) => {
-                                    setTimeout(
-                                        () => el.classList.add("visible"),
-                                        idx * 180,
-                                    );
-                                });
-                                chips.forEach((chip, idx) => {
-                                    setTimeout(
-                                        () => chip.classList.add("bounce"),
-                                        400 + idx * 120,
-                                    );
-                                });
-                                animated = true;
-                            }
-                        });
-                    },
-                    { threshold: 0.4 },
-                );
-                observer.observe(aboutSection);
-            }
-        });
-    }
+        document.addEventListener("DOMContentLoaded", () => {
+            const emailButton = document.querySelector(
+                "#email-link",
+            ) as HTMLAnchorElement;
 
-    document.addEventListener("DOMContentLoaded", () => {
-        const emailButton = document.querySelector(
-            "#email-link",
-        ) as HTMLAnchorElement;
+            if (emailButton) {
+                emailButton.addEventListener("click", (e) => {
+                    const email =
+                        emailButton.getAttribute("data-email") || "me@zeiko.dev";
 
-        if (emailButton) {
-            emailButton.addEventListener("click", (e) => {
-                const email =
-                    emailButton.getAttribute("data-email") || "me@zeiko.dev";
+                    const isInRestrictedContext = () => {
+                        return (
+                            window.self !== window.top ||
+                            navigator.userAgent.includes("Instagram") ||
+                            navigator.userAgent.includes("Facebook") ||
+                            navigator.userAgent.includes("Twitter") ||
+                            navigator.userAgent.includes("LinkedIn") ||
+                            navigator.userAgent.includes("WhatsApp") ||
+                            navigator.userAgent.includes("Telegram")
+                        );
+                    };
 
-                // Check if we're in a mobile app or iframe that might block mailto
-                const isInRestrictedContext = () => {
-                    return (
-                        window.self !== window.top || // In iframe
-                        navigator.userAgent.includes("Instagram") ||
-                        navigator.userAgent.includes("Facebook") ||
-                        navigator.userAgent.includes("Twitter") ||
-                        navigator.userAgent.includes("LinkedIn") ||
-                        navigator.userAgent.includes("WhatsApp") ||
-                        navigator.userAgent.includes("Telegram")
-                    );
-                };
-
-                // If we're in a restricted context, show modal immediately
-                if (isInRestrictedContext()) {
-                    e.preventDefault();
-                    if (window.showEmailModal) {
-                        window.showEmailModal(email);
-                    }
-                    return;
-                }
-
-                // For regular browsers, try mailto first
-                let mailtoTimeout: number | undefined;
-                let modalShown = false;
-
-                // Track if the page loses focus (indicates mailto worked)
-                let pageLostFocus = false;
-                const onBlur = () => {
-                    pageLostFocus = true;
-                    if (mailtoTimeout) {
-                        clearTimeout(mailtoTimeout);
-                    }
-                };
-
-                const onFocus = () => {
-                    // If page regained focus and we had a timeout, mailto probably worked
-                    if (pageLostFocus && mailtoTimeout) {
-                        clearTimeout(mailtoTimeout);
-                    }
-                };
-
-                // Add event listeners
-                window.addEventListener("blur", onBlur);
-                window.addEventListener("focus", onFocus);
-
-                // Try to open mailto
-                const mailtoLink = `mailto:${email}`;
-                window.location.href = mailtoLink;
-
-                // Set a timeout as fallback
-                mailtoTimeout = window.setTimeout(() => {
-                    // Only show modal if page didn't lose focus (mailto didn't work)
-                    if (!pageLostFocus && !modalShown) {
-                        modalShown = true;
+                    if (isInRestrictedContext()) {
+                        e.preventDefault();
                         if (window.showEmailModal) {
                             window.showEmailModal(email);
                         }
+                        return;
                     }
 
-                    // Clean up event listeners
-                    window.removeEventListener("blur", onBlur);
-                    window.removeEventListener("focus", onFocus);
-                }, 2000);
+                    let mailtoTimeout: number | undefined;
+                    let modalShown = false;
+                    let pageLostFocus = false;
 
-                // Clean up button styles
-                setTimeout(() => {
-                    emailButton.blur();
-                    const btnElement = emailButton.querySelector(
-                        ".jesse-btn",
-                    ) as HTMLElement;
-                    if (btnElement) {
-                        btnElement.style.transform = "";
-                        btnElement.style.boxShadow = "";
-                    }
-                }, 100);
-            });
-        }
-    });
+                    const onBlur = () => {
+                        pageLostFocus = true;
+                        if (mailtoTimeout) clearTimeout(mailtoTimeout);
+                    };
+
+                    const onFocus = () => {
+                        if (pageLostFocus && mailtoTimeout) clearTimeout(mailtoTimeout);
+                    };
+
+                    window.addEventListener("blur", onBlur);
+                    window.addEventListener("focus", onFocus);
+
+                    window.location.href = `mailto:${email}`;
+
+                    mailtoTimeout = window.setTimeout(() => {
+                        if (!pageLostFocus && !modalShown) {
+                            modalShown = true;
+                            if (window.showEmailModal) window.showEmailModal(email);
+                        }
+                        window.removeEventListener("blur", onBlur);
+                        window.removeEventListener("focus", onFocus);
+                    }, 2000);
+                });
+            }
+        });
+    }
 </script>

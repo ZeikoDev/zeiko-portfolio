@@ -22,111 +22,38 @@ const t = useTranslations(lang as "en" | "es");
 		<link rel='preconnect' href='https://fonts.googleapis.com' />
 		<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
 		<link
-			href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'
-			rel='stylesheet'
-		/>
-		<link
-			href='https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap'
+			href='https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap'
 			rel='stylesheet'
 		/>
 		<title>{title}</title>
 	</head>
-	<body class='bg-slate-950 text-off-white min-h-screen'>
+	<body class='bg-navy-950 text-text-primary min-h-screen font-sans'>
 		<div class='relative'>
-			<!-- Navigation Dots -->
+			<!-- Side Navigation -->
 			<nav
-				class='fixed right-8 top-1/2 -translate-y-1/2 z-50 hidden lg:block'
+				class='fixed right-8 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col items-center'
 			>
-				<ul class='space-y-6'>
-					<li>
+				<div class='relative flex flex-col items-center gap-8'>
+					<div class='absolute top-0 bottom-0 w-px bg-navy-700'></div>
+					{[
+						{ href: "#hero", label: t("nav.home"), icon: "home" },
+						{ href: "#about", label: t("nav.about"), icon: "user" },
+						{ href: "#skills", label: t("nav.skills"), icon: "code" },
+						{ href: "#projects", label: t("nav.projects"), icon: "folder" },
+					].map((item) => (
 						<a
-							href='#hero'
-							class='text-2xl hover:text-electric-blue transition-colors'
-							aria-label={t("nav.home")}
+							href={item.href}
+							class='nav-dot group relative z-10 flex items-center'
+							aria-label={item.label}
 						>
-							<svg
-								xmlns='http://www.w3.org/2000/svg'
-								fill='none'
-								viewBox='0 0 24 24'
-								stroke='currentColor'
-								class='w-6 h-6'
-							>
-								<path
-									stroke-linecap='round'
-									stroke-linejoin='round'
-									stroke-width='2'
-									d='M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6'
-								></path>
-							</svg>
+							<span class='nav-label opacity-0 group-hover:opacity-100 absolute right-8 whitespace-nowrap text-sm font-medium text-text-secondary transition-all duration-300 translate-x-2 group-hover:translate-x-0'>
+								{item.label}
+							</span>
+							<span class='w-3 h-3 rounded-full border-2 border-navy-600 bg-navy-950 transition-all duration-300 group-hover:border-accent group-hover:bg-accent/20'>
+							</span>
 						</a>
-					</li>
-					<li>
-						<a
-							href='#about'
-							class='text-2xl hover:text-electric-blue transition-colors'
-							aria-label={t("nav.about")}
-						>
-							<svg
-								xmlns='http://www.w3.org/2000/svg'
-								fill='none'
-								viewBox='0 0 24 24'
-								stroke='currentColor'
-								class='w-6 h-6'
-							>
-								<path
-									stroke-linecap='round'
-									stroke-linejoin='round'
-									stroke-width='2'
-									d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'
-								></path>
-							</svg>
-						</a>
-					</li>
-					<li>
-						<a
-							href='#skills'
-							class='text-2xl hover:text-electric-blue transition-colors'
-							aria-label={t("nav.skills")}
-						>
-							<svg
-								xmlns='http://www.w3.org/2000/svg'
-								fill='none'
-								viewBox='0 0 24 24'
-								stroke='currentColor'
-								class='w-6 h-6'
-							>
-								<path
-									stroke-linecap='round'
-									stroke-linejoin='round'
-									stroke-width='2'
-									d='M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'
-								></path>
-							</svg>
-						</a>
-					</li>
-					<li>
-						<a
-							href='#projects'
-							class='text-2xl hover:text-electric-blue transition-colors'
-							aria-label={t("nav.projects")}
-						>
-							<svg
-								xmlns='http://www.w3.org/2000/svg'
-								fill='none'
-								viewBox='0 0 24 24'
-								stroke='currentColor'
-								class='w-6 h-6'
-							>
-								<path
-									stroke-linecap='round'
-									stroke-linejoin='round'
-									stroke-width='2'
-									d='M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10'
-								></path>
-							</svg>
-						</a>
-					</li>
-				</ul>
+					))}
+				</div>
 			</nav>
 
 			<!-- Main Content -->
@@ -135,10 +62,10 @@ const t = useTranslations(lang as "en" | "es");
 			</main>
 
 			<!-- Footer -->
-			<footer class='bg-darker-blue py-8 mt-section'>
+			<footer class='border-t border-navy-700/50 py-8 mt-section'>
 				<div class='max-w-content mx-auto px-4 text-center'>
-					<p class='text-muted'>
-						© {new Date().getFullYear()} ZeikoDev. All rights reserved.
+					<p class='text-text-muted text-sm'>
+						&copy; {new Date().getFullYear()} ZeikoDev
 					</p>
 				</div>
 			</footer>
@@ -151,51 +78,59 @@ const t = useTranslations(lang as "en" | "es");
 		scroll-behavior: smooth;
 	}
 
-	/* Disable overscroll/bounce effect */
 	html,
 	body {
 		overscroll-behavior: none;
 		-webkit-overflow-scrolling: touch;
 	}
 
-	/* Prevent horizontal overscroll */
 	html {
 		overflow-x: hidden;
 	}
 
-	/* Custom Scrollbar */
+	/* Scrollbar */
 	::-webkit-scrollbar {
-		width: 10px;
+		width: 6px;
 	}
 
 	::-webkit-scrollbar-track {
-		background: #020617;
+		background: #060d18;
 	}
 
 	::-webkit-scrollbar-thumb {
-		background: #3b82f6;
-		border-radius: 5px;
+		background: #1c3254;
+		border-radius: 3px;
 	}
 
 	::-webkit-scrollbar-thumb:hover {
-		background: #2563eb;
+		background: #2E8BFF;
 	}
 
-	/* Selection */
 	::selection {
-		background: #3b82f6;
-		color: #f8fafc;
+		background: rgba(46, 139, 255, 0.3);
+		color: #E8EDF5;
 	}
 
-	/* Sidebar active state */
-	.sidebar-active,
-	a.active {
-		color: #3b82f6 !important;
-		filter: drop-shadow(0 0 6px #3b82f6);
+	/* Nav active state */
+	.nav-dot.active span:last-child {
+		border-color: #2E8BFF;
+		background: rgba(46, 139, 255, 0.3);
+		box-shadow: 0 0 12px rgba(46, 139, 255, 0.4);
+	}
+
+	.nav-dot.active .nav-label {
+		opacity: 1;
+		color: #2E8BFF;
 	}
 </style>
 
 <script is:inline>
+	// Force scroll to top on page load
+	if ("scrollRestoration" in history) {
+		history.scrollRestoration = "manual";
+	}
+	window.scrollTo(0, 0);
+
 	document.addEventListener("DOMContentLoaded", () => {
 		const sections = [
 			"hero",
@@ -204,9 +139,7 @@ const t = useTranslations(lang as "en" | "es");
 			"projects",
 			"personal-projects",
 		];
-		const navLinks = sections.map((id) =>
-			document.querySelector(`a[href='#${id}']`),
-		);
+		const navDots = document.querySelectorAll(".nav-dot");
 
 		function onScroll() {
 			let current = "";
@@ -220,13 +153,12 @@ const t = useTranslations(lang as "en" | "es");
 					}
 				}
 			}
-			navLinks.forEach((link, i) => {
-				if (link) {
-					if (sections[i] === current) {
-						link.classList.add("active");
-					} else {
-						link.classList.remove("active");
-					}
+			navDots.forEach((dot) => {
+				const href = dot.getAttribute("href");
+				if (href === `#${current}`) {
+					dot.classList.add("active");
+				} else {
+					dot.classList.remove("active");
 				}
 			});
 		}

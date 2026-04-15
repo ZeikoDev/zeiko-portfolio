@@ -5,30 +5,31 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Primary Background
-        "deep-navy": "#0a0e17",
-        "midnight-blue": "#0b1120",
-        // Secondary Background
-        "blue-gray": "#2D3748",
-        "darker-blue": "#1C2938",
-        // Card Backgrounds
-        "rich-blue": "#1E293B",
-        // Accent Colors
-        "electric-blue": "#3B82F6",
-        cyan: "#06B6D4",
-        gold: "#F59E0B",
-        emerald: "#10B981",
-        // Text Colors
-        "off-white": "#F8FAFC",
-        "light-gray": "#CBD5E1",
-        muted: "#64748B",
-        // Poker Elements
-        "card-red": "#EF4444",
-        "card-black": "#000000",
-        "felt-green": "#064E3B",
+        navy: {
+          950: "#060d18",
+          900: "#0a1628",
+          800: "#0f1f36",
+          700: "#152642",
+          600: "#1c3254",
+          500: "#243d66",
+        },
+        accent: {
+          DEFAULT: "#2E8BFF",
+          light: "#5BA8FF",
+          dark: "#1E6FD9",
+          glow: "rgba(46, 139, 255, 0.15)",
+          muted: "rgba(46, 139, 255, 0.08)",
+        },
+        text: {
+          primary: "#E8EDF5",
+          secondary: "#8B9AB8",
+          muted: "#4A5E80",
+        },
       },
       fontFamily: {
-        sans: ["Inter", "Geist", "SF Pro", "system-ui", "sans-serif"],
+        sans: ["Plus Jakarta Sans", "system-ui", "sans-serif"],
+        heading: ["Sora", "system-ui", "sans-serif"],
+        mono: ["JetBrains Mono", "monospace"],
       },
       spacing: {
         section: "120px",
@@ -40,6 +41,8 @@ export default {
         "card-flip": "flip 0.6s ease-in-out",
         "chip-spin": "spin 1s linear infinite",
         deal: "deal 0.5s ease-out",
+        "float": "float 6s ease-in-out infinite",
+        "glow-pulse": "glow-pulse 3s ease-in-out infinite",
       },
       keyframes: {
         flip: {
@@ -49,6 +52,14 @@ export default {
         deal: {
           "0%": { transform: "translateY(-100%) rotate(-10deg)", opacity: "0" },
           "100%": { transform: "translateY(0) rotate(0)", opacity: "1" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0) rotate(0deg)" },
+          "50%": { transform: "translateY(-20px) rotate(3deg)" },
+        },
+        "glow-pulse": {
+          "0%, 100%": { opacity: "0.4" },
+          "50%": { opacity: "1" },
         },
       },
     },
