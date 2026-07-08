@@ -13,12 +13,14 @@ const bentoSizes = ["lg:col-span-2", "lg:col-span-1", "lg:col-span-1", "lg:col-s
 <section id='personal-projects' class='py-section'>
     <div class='max-w-content mx-auto px-6 md:px-12'>
         <h2
-            class='font-heading text-3xl md:text-4xl font-bold text-text-primary text-center mb-4 pp-reveal'
+            class='section-title font-heading font-bold text-text-primary text-center mb-4'
+            data-reveal
         >
             {t("personal.title")}<span class='text-accent'>.</span>
         </h2>
         <p
-            class='text-text-muted text-center mb-16 max-w-xl mx-auto pp-reveal'
+            class='text-text-secondary text-center mb-16 max-w-xl mx-auto'
+            data-reveal
         >
             {t("personal.description")}
         </p>
@@ -27,7 +29,9 @@ const bentoSizes = ["lg:col-span-2", "lg:col-span-1", "lg:col-span-1", "lg:col-s
             {
                 personalProjects.map((project, idx) => (
                     <div
-                        class={`bento-card group pp-reveal ${bentoSizes[idx] || 'lg:col-span-1'}`}
+                        class={`bento-card glow-card group ${bentoSizes[idx] || 'lg:col-span-1'}`}
+                        data-reveal
+                        style={`--reveal-delay: ${idx * 0.08}s`}
                     >
                         <div class='bento-image-wrap'>
                             <img
@@ -56,40 +60,19 @@ const bentoSizes = ["lg:col-span-2", "lg:col-span-1", "lg:col-span-1", "lg:col-s
                                     </span>
                                 )}
                             </div>
-                            {project.slug ? (
-                                <JesseButton
-                                    href={
-                                        currentLang === "es"
-                                            ? `/es/proyectos/${project.slug}`
-                                            : `/en/proyectos/${project.slug}`
-                                    }
-                                    variant='text'
-                                    showText={true}
-                                    size='small'
-                                >
-                                    <span slot='icon'>
-                                        <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' class='w-4 h-4'>
-                                            <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M13 7l5 5m0 0l-5 5m5-5H6' />
-                                        </svg>
-                                    </span>
-                                    {t("common.moreDetails")}
-                                </JesseButton>
-                            ) : (
-                                <JesseButton
-                                    variant='text'
-                                    showText={true}
-                                    size='small'
-                                    data-idx={idx}
-                                    class='open-modal-btn'
-                                >
-                                    <span slot='icon'>
-                                        <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' class='w-4 h-4'>
-                                            <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M13 7l5 5m0 0l-5 5m5-5H6' />
-                                        </svg>
-                                    </span>
-                                    {t("common.moreDetails")}
-                                </JesseButton>
-                            )}
+                            <JesseButton
+                                href={`/${currentLang}/proyectos/${project.slug}`}
+                                variant='text'
+                                showText={true}
+                                size='small'
+                            >
+                                <span slot='icon'>
+                                    <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' class='w-4 h-4' aria-hidden='true'>
+                                        <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M13 7l5 5m0 0l-5 5m5-5H6' />
+                                    </svg>
+                                </span>
+                                {t("common.moreDetails")}
+                            </JesseButton>
                         </div>
                     </div>
                 ))
@@ -132,32 +115,4 @@ const bentoSizes = ["lg:col-span-2", "lg:col-span-1", "lg:col-span-1", "lg:col-s
         border-radius: 2rem;
     }
 
-    .pp-reveal {
-        opacity: 0;
-        transform: translateY(50px) scale(0.93);
-        filter: blur(5px);
-    }
 </style>
-
-<script>
-    import { gsap } from "gsap";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    if (typeof window !== "undefined") {
-        gsap.to(".pp-reveal", {
-            scrollTrigger: {
-                trigger: "#personal-projects",
-                start: "top 75%",
-            },
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            filter: "blur(0px)",
-            duration: 0.9,
-            stagger: 0.15,
-            ease: "power3.out",
-        });
-    }
-</script>

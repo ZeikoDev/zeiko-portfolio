@@ -11,47 +11,64 @@ const t = useTranslations(currentLang);
 <section id="projects" class="py-section relative">
   <div class="max-w-content mx-auto px-6 md:px-12">
     <h2
-      class="font-heading text-4xl md:text-5xl font-bold text-text-primary text-center mb-4 project-reveal"
+      class="section-title font-heading font-bold text-text-primary text-center mb-4"
+      data-reveal
     >
       {t('projects.title')}<span class="text-accent">.</span>
     </h2>
-    <p class="text-text-muted text-center mb-20 project-reveal">
+    <p class="text-text-secondary text-center mb-20 max-w-xl mx-auto" data-reveal>
       {t('projects.description')}
     </p>
 
-    <div class="space-y-32">
+    <div class="space-y-28">
       {projects.map((project, index) => (
-        <div
-          class="project-item project-reveal"
-        >
-          <div class={`grid lg:grid-cols-12 gap-8 items-center ${index % 2 !== 0 ? 'direction-reverse' : ''}`}>
+        <article class="project-item" data-reveal>
+          <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             <!-- Image -->
-            <div class={`lg:col-span-7 ${index % 2 !== 0 ? 'lg:order-2' : ''}`}>
+            <div class={`lg:col-span-6 ${index % 2 !== 0 ? 'lg:order-2' : ''}`}>
               <div class="project-image-wrap relative group">
                 <div class="aspect-[16/10] rounded-xl overflow-hidden border border-navy-700/50">
                   <img
                     src={project.image}
-                    alt={project.name[currentLang]}
+                    alt={`${project.name[currentLang]} — ${project.tag[currentLang]}`}
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"
                   />
                 </div>
-                <!-- Belt Level Badge -->
                 <div class="absolute -top-3 left-6 bg-navy-800 border border-accent/20 rounded-lg px-3 py-1.5">
-                  <span class="text-accent font-mono text-xs">{t(`pokerHands.${project.hand}`)}</span>
+                  <span class="text-accent font-mono text-xs">{project.tag[currentLang]}</span>
                 </div>
               </div>
             </div>
 
             <!-- Details -->
-            <div class={`lg:col-span-5 ${index % 2 !== 0 ? 'lg:order-1' : ''}`}>
-              <div class="space-y-5">
+            <div class={`lg:col-span-6 ${index % 2 !== 0 ? 'lg:order-1' : ''}`}>
+              <div class="space-y-6">
                 <h3 class="font-heading text-2xl md:text-3xl font-bold text-text-primary">
                   {project.name[currentLang]}
                 </h3>
-                <p class="text-text-secondary leading-relaxed">
-                  {project.description[currentLang]}
-                </p>
+
+                <!-- Problema → Qué hice → Resultado -->
+                <div class="space-y-5">
+                  <div class="story-block">
+                    <span class="story-label">{t('projects.problem')}</span>
+                    <p class="text-text-secondary text-[0.95rem] leading-relaxed">
+                      {project.problem[currentLang]}
+                    </p>
+                  </div>
+                  <div class="story-block">
+                    <span class="story-label">{t('projects.solution')}</span>
+                    <p class="text-text-secondary text-[0.95rem] leading-relaxed">
+                      {project.solution[currentLang]}
+                    </p>
+                  </div>
+                  <div class="story-block story-block--result">
+                    <span class="story-label story-label--result">{t('projects.result')}</span>
+                    <p class="text-text-primary text-[0.95rem] leading-relaxed">
+                      {project.result[currentLang]}
+                    </p>
+                  </div>
+                </div>
 
                 <!-- Tech Tags -->
                 <div class="flex flex-wrap gap-2">
@@ -62,82 +79,77 @@ const t = useTranslations(currentLang);
                   ))}
                 </div>
 
-                <!-- Stats -->
-                <div class="grid grid-cols-2 gap-4">
-                  <div class="p-3 rounded-lg bg-navy-800/50 border border-navy-700/30">
-                    <span class="text-text-muted text-xs block mb-1">{t('projects.impact')}</span>
-                    <span class="text-accent font-heading font-bold">
-                      {t(`numbers.${project.impactCount}`)} {t(`impact.${project.impactType}`)}
-                    </span>
-                  </div>
-                  <div class="p-3 rounded-lg bg-navy-800/50 border border-navy-700/30">
-                    <span class="text-text-muted text-xs block mb-1">{t('projects.complexity')}</span>
-                    <span class="text-accent font-heading font-bold">
-                      {t(`complexity.${project.complexity}`)}
-                    </span>
-                  </div>
-                </div>
-
                 <!-- CTA -->
-                {project.externalLink && project.externalLink !== 'null' ? (
-                  <JesseButton
-                    href={project.externalLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    variant="text"
-                    size="default"
-                    showText={true}
-                  >
-                    <span slot="icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                    </span>
-                    {t('common.viewProject')}
-                  </JesseButton>
-                ) : (
-                  <JesseButton
-                    href={
-                      currentLang === "es"
-                        ? `/es/proyectos/${project.slug}`
-                        : `/en/proyectos/${project.slug}`
-                    }
-                    variant="text"
-                    size="default"
-                    showText={true}
-                  >
-                    <span slot="icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m6 0a6 6 0 11-12 0 6 6 0 0112 0z" />
-                      </svg>
-                    </span>
-                    {t('common.viewProject')}
-                  </JesseButton>
-                )}
+                <div class="flex flex-wrap items-center gap-4">
+                  {project.externalLink && (
+                    <JesseButton
+                      href={project.externalLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      variant="text"
+                      size="default"
+                      showText={true}
+                    >
+                      <span slot="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4" aria-hidden="true">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </span>
+                      {t('common.viewProject')}
+                    </JesseButton>
+                  )}
+                  {(!project.externalLink || project.hasDetailPage) && (
+                    <JesseButton
+                      href={`/${currentLang}/proyectos/${project.slug}`}
+                      variant="text"
+                      size="default"
+                      showText={true}
+                    >
+                      <span slot="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4" aria-hidden="true">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                      </span>
+                      {t('common.moreDetails')}
+                    </JesseButton>
+                  )}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </article>
       ))}
     </div>
   </div>
 </section>
 
 <style>
-  .project-reveal {
-    opacity: 0;
-    transform: translateY(60px);
+  .story-block {
+    padding-left: 1rem;
+    border-left: 2px solid rgba(46, 139, 255, 0.15);
   }
 
-  .project-reveal .project-image-wrap {
-    transform: scale(0.92);
-    filter: blur(3px);
-    transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1), filter 1s cubic-bezier(0.22, 1, 0.36, 1);
+  .story-block--result {
+    border-left-color: rgba(46, 139, 255, 0.6);
   }
 
-  .project-reveal.is-visible .project-image-wrap {
-    transform: scale(1);
-    filter: blur(0px);
+  .story-label {
+    display: block;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #7C8DB0;
+    margin-bottom: 0.35rem;
+  }
+
+  .story-label--result {
+    color: #5BA8FF;
+  }
+
+  .project-image-wrap {
+    transition: transform 0.25s ease-out;
+    will-change: transform;
   }
 
   .project-image-wrap::after {
@@ -151,24 +163,20 @@ const t = useTranslations(currentLang);
 </style>
 
 <script>
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  // Tilt 3D sutil en las imágenes: rota hacia el cursor, vuelve al salir
+  const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  gsap.registerPlugin(ScrollTrigger);
-
-  if (typeof window !== "undefined") {
-    document.querySelectorAll(".project-reveal").forEach((el, i) => {
-      gsap.to(el, {
-        scrollTrigger: {
-          trigger: el,
-          start: "top 80%",
-          onEnter: () => el.classList.add("is-visible"),
-        },
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        delay: 0.1,
-        ease: "power3.out",
+  if (fine && !reduced) {
+    document.querySelectorAll<HTMLElement>(".project-image-wrap").forEach((wrap) => {
+      wrap.addEventListener("pointermove", (e) => {
+        const r = wrap.getBoundingClientRect();
+        const rx = ((e.clientY - r.top) / r.height - 0.5) * -5;
+        const ry = ((e.clientX - r.left) / r.width - 0.5) * 5;
+        wrap.style.transform = `perspective(900px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
+      });
+      wrap.addEventListener("pointerleave", () => {
+        wrap.style.transform = "";
       });
     });
   }

@@ -9,6 +9,13 @@ interface Props {
 const { title, description } = Astro.props;
 const { lang } = Astro.params;
 const t = useTranslations(lang as "en" | "es");
+
+const navItems = [
+	{ href: "#hero", label: t("nav.home") },
+	{ href: "#about", label: t("nav.about") },
+	{ href: "#skills", label: t("nav.skills") },
+	{ href: "#projects", label: t("nav.projects") },
+];
 ---
 
 <!doctype html>
@@ -17,36 +24,47 @@ const t = useTranslations(lang as "en" | "es");
 		<meta charset='UTF-8' />
 		<meta name='viewport' content='width=device-width, initial-scale=1.0' />
 		<meta name='description' content={description} />
+		<meta property='og:title' content={title} />
+		<meta property='og:description' content={description} />
+		<meta property='og:type' content='website' />
 		<link rel='icon' type='image/svg+xml' href='/favicon.svg' />
 		<link rel='alternate icon' type='image/svg+xml' href='/bjj-belt.svg' />
 		<link rel='preconnect' href='https://fonts.googleapis.com' />
 		<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
 		<link
-			href='https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap'
+			href='https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap'
 			rel='stylesheet'
 		/>
 		<title>{title}</title>
+		<script is:inline>
+			// Marca que hay JS: los reveals solo ocultan contenido si esta clase existe,
+			// así el sitio nunca queda en blanco si un script falla.
+			document.documentElement.classList.add("js");
+		</script>
 	</head>
 	<body class='bg-navy-950 text-text-primary min-h-screen font-sans'>
 		<div class='relative'>
-			<!-- Side Navigation -->
+			<!-- Mobile top nav -->
+			<nav class='mobile-nav lg:hidden' aria-label='Main'>
+				{navItems.map((item) => (
+					<a href={item.href} class='mobile-nav-link'>{item.label}</a>
+				))}
+			</nav>
+
+			<!-- Side Navigation (desktop) -->
 			<nav
 				class='fixed right-8 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col items-center'
+				aria-label='Main'
 			>
 				<div class='relative flex flex-col items-center gap-8'>
 					<div class='absolute top-0 bottom-0 w-px bg-navy-700'></div>
-					{[
-						{ href: "#hero", label: t("nav.home"), icon: "home" },
-						{ href: "#about", label: t("nav.about"), icon: "user" },
-						{ href: "#skills", label: t("nav.skills"), icon: "code" },
-						{ href: "#projects", label: t("nav.projects"), icon: "folder" },
-					].map((item) => (
+					{navItems.map((item) => (
 						<a
 							href={item.href}
 							class='nav-dot group relative z-10 flex items-center'
 							aria-label={item.label}
 						>
-							<span class='nav-label opacity-0 group-hover:opacity-100 absolute right-8 whitespace-nowrap text-sm font-medium text-text-secondary transition-all duration-300 translate-x-2 group-hover:translate-x-0'>
+							<span class='nav-label opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 absolute right-8 whitespace-nowrap text-sm font-medium text-text-secondary transition-all duration-300 translate-x-2 group-hover:translate-x-0'>
 								{item.label}
 							</span>
 							<span class='w-3 h-3 rounded-full border-2 border-navy-600 bg-navy-950 transition-all duration-300 group-hover:border-accent group-hover:bg-accent/20'>
@@ -63,9 +81,12 @@ const t = useTranslations(lang as "en" | "es");
 
 			<!-- Footer -->
 			<footer class='border-t border-navy-700/50 py-8 mt-section'>
-				<div class='max-w-content mx-auto px-4 text-center'>
+				<div class='max-w-content mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-3'>
 					<p class='text-text-muted text-sm'>
-						&copy; {new Date().getFullYear()} ZeikoDev
+						&copy; {new Date().getFullYear()} Camilo González — ZeikoDev
+					</p>
+					<p class='text-text-muted text-xs font-mono'>
+						{`// ${t("hero.motto")}`}
 					</p>
 				</div>
 			</footer>
@@ -76,6 +97,8 @@ const t = useTranslations(lang as "en" | "es");
 <style is:global>
 	:root {
 		scroll-behavior: smooth;
+		/* Los anchors no quedan tapados por la nav móvil fija */
+		scroll-padding-top: 64px;
 	}
 
 	html,
@@ -86,6 +109,131 @@ const t = useTranslations(lang as "en" | "es");
 
 	html {
 		overflow-x: hidden;
+	}
+
+	/* Escala compartida para títulos de sección: mismo tamaño en todo el sitio */
+	.section-title {
+		font-size: clamp(1.875rem, 4vw, 3rem);
+		line-height: 1.15;
+		text-wrap: balance;
+	}
+
+	/* Sistema de reveals: reemplaza a GSAP.
+	   Solo oculta contenido cuando html.js existe (progressive enhancement). */
+	html.js [data-reveal] {
+		opacity: 0;
+		transform: translateY(28px);
+		transition:
+			opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+			transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+		transition-delay: var(--reveal-delay, 0s);
+	}
+
+	html.js [data-reveal].is-visible {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	/* Accesibilidad: sin movimiento para quien lo pidió en su sistema */
+	@media (prefers-reduced-motion: reduce) {
+		:root {
+			scroll-behavior: auto;
+		}
+		*,
+		*::before,
+		*::after {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
+		}
+		html.js [data-reveal] {
+			opacity: 1;
+			transform: none;
+		}
+	}
+
+	/* Mobile nav */
+	.mobile-nav {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 50;
+		display: flex;
+		justify-content: center;
+		gap: 1.5rem;
+		padding: 0.9rem 1rem;
+		background: rgba(6, 13, 24, 0.75);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		border-bottom: 1px solid rgba(46, 139, 255, 0.08);
+	}
+
+	/* Este display:flex le ganaría al lg:hidden de Tailwind por orden de cascada,
+	   así que el breakpoint se repite acá */
+	@media (min-width: 1024px) {
+		.mobile-nav {
+			display: none;
+		}
+	}
+
+	.mobile-nav-link {
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.75rem;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: #8B9AB8;
+		transition: color 0.2s ease;
+	}
+
+	.mobile-nav-link:hover,
+	.mobile-nav-link:focus-visible {
+		color: #2E8BFF;
+	}
+
+	a:focus-visible,
+	button:focus-visible {
+		outline: 2px solid #2E8BFF;
+		outline-offset: 3px;
+		border-radius: 2px;
+	}
+
+	/* Glow cards: el borde se ilumina donde está el cursor.
+	   --gx/--gy las setea un pointermove global (ver script abajo).
+	   El truco del borde: dos máscaras compuestas con exclude dejan
+	   visible solo el anillo de 1px entre padding-box y border-box. */
+	.glow-card {
+		position: relative;
+	}
+
+	.glow-card::after {
+		content: "";
+		position: absolute;
+		inset: -1px;
+		border-radius: inherit;
+		pointer-events: none;
+		padding: 1px;
+		background: radial-gradient(
+			200px circle at var(--gx, 50%) var(--gy, 50%),
+			rgba(91, 168, 255, 0.55),
+			transparent 70%
+		);
+		-webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+		-webkit-mask-composite: xor;
+		mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+		mask-composite: exclude;
+		opacity: 0;
+		transition: opacity 0.35s ease;
+	}
+
+	.glow-card:hover::after {
+		opacity: 1;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.glow-card::after {
+			display: none;
+		}
 	}
 
 	/* Scrollbar */
@@ -125,20 +273,36 @@ const t = useTranslations(lang as "en" | "es");
 </style>
 
 <script is:inline>
-	// Force scroll to top on page load
-	if ("scrollRestoration" in history) {
-		history.scrollRestoration = "manual";
+	// Solo forzar scroll-top cuando no hay anchor en la URL
+	if (!window.location.hash) {
+		if ("scrollRestoration" in history) {
+			history.scrollRestoration = "manual";
+		}
+		window.scrollTo(0, 0);
 	}
-	window.scrollTo(0, 0);
 
 	document.addEventListener("DOMContentLoaded", () => {
-		const sections = [
-			"hero",
-			"about",
-			"skills",
-			"projects",
-			"personal-projects",
-		];
+		// Reveals al hacer scroll (reemplazo de GSAP ScrollTrigger)
+		const revealEls = document.querySelectorAll("[data-reveal]");
+		if ("IntersectionObserver" in window) {
+			const io = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add("is-visible");
+							io.unobserve(entry.target);
+						}
+					});
+				},
+				{ threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
+			);
+			revealEls.forEach((el) => io.observe(el));
+		} else {
+			revealEls.forEach((el) => el.classList.add("is-visible"));
+		}
+
+		// Estado activo de la nav lateral
+		const sections = ["hero", "about", "skills", "projects", "personal-projects"];
 		const navDots = document.querySelectorAll(".nav-dot");
 
 		function onScroll() {
@@ -155,15 +319,24 @@ const t = useTranslations(lang as "en" | "es");
 			}
 			navDots.forEach((dot) => {
 				const href = dot.getAttribute("href");
-				if (href === `#${current}`) {
-					dot.classList.add("active");
-				} else {
-					dot.classList.remove("active");
-				}
+				dot.classList.toggle("active", href === `#${current}`);
 			});
 		}
 
-		window.addEventListener("scroll", onScroll);
+		window.addEventListener("scroll", onScroll, { passive: true });
 		onScroll();
+
+		// Glow cards: solo con mouse real y sin reduced-motion
+		const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+		const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+		if (fine && !reduced) {
+			document.querySelectorAll(".glow-card").forEach((card) => {
+				card.addEventListener("pointermove", (e) => {
+					const r = card.getBoundingClientRect();
+					card.style.setProperty("--gx", `${e.clientX - r.left}px`);
+					card.style.setProperty("--gy", `${e.clientY - r.top}px`);
+				});
+			});
+		}
 	});
 </script>

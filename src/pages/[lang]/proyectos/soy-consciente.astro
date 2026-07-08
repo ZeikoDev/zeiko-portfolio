@@ -1,0 +1,239 @@
+---
+import { projects } from "@/data/projects";
+import { useTranslations } from "@/i18n/utils";
+
+export async function getStaticPaths() {
+    return [{ params: { lang: "es" } }, { params: { lang: "en" } }];
+}
+
+const { lang } = Astro.params;
+const currentLang = (lang as "en" | "es") || "en";
+const t = useTranslations(currentLang);
+const project = projects.find((p) => p.slug === "soy-consciente");
+---
+
+<html lang={currentLang}>
+    <head>
+        <meta charset='UTF-8' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <link rel='preconnect' href='https://fonts.googleapis.com' />
+        <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+        <link href='https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap' rel='stylesheet' />
+        <title>
+            {
+                project
+                    ? `${project.name[currentLang]} | ${currentLang === "es" ? "Detalles del Proyecto" : "Project Details"}`
+                    : currentLang === "es"
+                      ? "Proyecto No Encontrado"
+                      : "Project Not Found"
+            }
+        </title>
+        <meta
+            name='description'
+            content={project
+                ? project.problem[currentLang]
+                : currentLang === "es"
+                  ? "Proyecto no encontrado"
+                  : "Project not found"}
+        />
+    </head>
+    <body class='bg-navy-950 text-text-primary min-h-screen font-sans'>
+        <section class='max-w-3xl mx-auto py-16 px-4'>
+            <a
+                href={currentLang === "es"
+                    ? "/es?section=projects#projects"
+                    : "/en?section=projects#projects"}
+                class='text-accent hover:underline mb-8 inline-block'
+                >&larr; {
+                    currentLang === "es"
+                        ? "Volver a Proyectos"
+                        : "Back to Projects"
+                }</a
+            >
+            {
+                project ? (
+                    <>
+                        <h1 class='text-4xl font-bold text-accent font-heading mb-6'>
+                            {currentLang === "es"
+                                ? "Soy Consciente — Migración y Estabilización Digital"
+                                : "Soy Consciente — Digital Migration & Stabilization"}
+                        </h1>
+                        <p class='mb-6 text-lg text-text-secondary'>
+                            {currentLang === "es"
+                                ? "Consultoría técnica independiente (~3 semanas) para la escuela espiritual de Angélica Andrade: una plataforma de cursos en línea heredada de un webmaster anterior, que necesitaba recuperar el control de su propia infraestructura."
+                                : "Independent technical consulting (~3 weeks) for Angélica Andrade's spiritual school: an online course platform inherited from a previous webmaster, that needed to regain control of its own infrastructure."}
+                        </p>
+
+                        <h2 class='text-2xl font-semibold mt-8 mb-2 text-text-primary font-heading'>
+                            {currentLang === "es"
+                                ? "El contexto"
+                                : "The context"}
+                        </h2>
+                        <p class='mb-6 text-text-secondary'>
+                            {currentLang === "es"
+                                ? "El proyecto partió de un diagnóstico de auditoría que reveló una situación delicada: el dominio principal estaba registrado a nombre de un tercero (sin control legal de la clienta), el sitio corría en un hosting compartido tipo reseller con múltiples cPanels sin consolidar, el SMTP no funcionaba —los correos de recuperación de contraseña y confirmación de compra no se entregaban— y el DNS acumulaba más de 20 registros obsoletos y conflictivos de proveedores anteriores."
+                                : "The project started from an audit that revealed a delicate situation: the main domain was registered under a third party's name (no legal control for the client), the site ran on a reseller-type shared hosting with multiple unconsolidated cPanels, SMTP was broken — password-recovery and purchase-confirmation emails were not being delivered — and the DNS had accumulated 20+ obsolete, conflicting records from previous providers."}
+                        </p>
+
+                        <h2 class='text-2xl font-semibold mt-8 mb-2 text-text-primary font-heading'>
+                            {currentLang === "es"
+                                ? "Recuperación de infraestructura"
+                                : "Infrastructure recovery"}
+                        </h2>
+                        <ul class='list-disc pl-6 mb-6 text-text-secondary'>
+                            <li>
+                                {currentLang === "es"
+                                    ? "Diagnóstico de la arquitectura de dominios: identificación del dominio secundario recuperable frente al principal, no transferible por estar a nombre de terceros."
+                                    : "Domain architecture diagnosis: identifying the recoverable secondary domain versus the main one, non-transferable because it was registered to a third party."}
+                            </li>
+                            <li>
+                                {currentLang === "es"
+                                    ? "Transferencia del dominio a Cloudflare bajo control total de la clienta."
+                                    : "Domain transfer to Cloudflare under the client's full control."}
+                            </li>
+                            <li>
+                                {currentLang === "es"
+                                    ? "Migración completa del WordPress (1.1GB, incluyendo LMS y e-commerce) desde el hosting reseller a Hostinger, extrayendo y reconstruyendo el backup manualmente ante las limitaciones de las herramientas de migración estándar."
+                                    : "Full WordPress migration (1.1GB, including LMS and e-commerce) from the reseller hosting to Hostinger, manually extracting and rebuilding the backup after standard migration tools fell short."}
+                            </li>
+                            <li>
+                                {currentLang === "es"
+                                    ? "Depuración del DNS: de 20 registros a 6, eliminando configuraciones huérfanas de proveedores anteriores."
+                                    : "DNS cleanup: from 20 records down to 6, removing orphaned configurations from previous providers."}
+                            </li>
+                        </ul>
+
+                        <h2 class='text-2xl font-semibold mt-8 mb-2 text-text-primary font-heading'>
+                            {currentLang === "es"
+                                ? "Correos transaccionales"
+                                : "Transactional email"}
+                        </h2>
+                        <ul class='list-disc pl-6 mb-6 text-text-secondary'>
+                            <li>
+                                {currentLang === "es"
+                                    ? "SMTP configurado vía Google Workspace (alias corporativo, sin costo de licencia adicional) para reemplazar un sistema de envío que no funcionaba."
+                                    : "SMTP configured via Google Workspace (corporate alias, no additional license cost) to replace a broken sending system."}
+                            </li>
+                            <li>
+                                {currentLang === "es"
+                                    ? "Autenticación de correo implementada y verificada (SPF, DKIM, DMARC) — score de entregabilidad de 8.9/10 en pruebas independientes."
+                                    : "Email authentication implemented and verified (SPF, DKIM, DMARC) — 8.9/10 deliverability score in independent tests."}
+                            </li>
+                            <li>
+                                {currentLang === "es"
+                                    ? "Validación end-to-end de los flujos críticos: recuperación de contraseña y confirmación de compra."
+                                    : "End-to-end validation of the critical flows: password recovery and purchase confirmation."}
+                            </li>
+                        </ul>
+
+                        <h2 class='text-2xl font-semibold mt-8 mb-2 text-text-primary font-heading'>
+                            {currentLang === "es"
+                                ? "Seguridad y gobernanza de accesos"
+                                : "Security and access governance"}
+                        </h2>
+                        <ul class='list-disc pl-6 mb-6 text-text-secondary'>
+                            <li>
+                                {currentLang === "es"
+                                    ? "Gestor de contraseñas (Bitwarden) de propiedad exclusiva de la clienta."
+                                    : "Password manager (Bitwarden) owned exclusively by the client."}
+                            </li>
+                            <li>
+                                {currentLang === "es"
+                                    ? "Documentación completa de la infraestructura digital (manual de servicios)."
+                                    : "Complete documentation of the digital infrastructure (services manual)."}
+                            </li>
+                            <li>
+                                {currentLang === "es"
+                                    ? "Desactivación segura y reversible de la infraestructura legada."
+                                    : "Safe, reversible decommissioning of the legacy infrastructure."}
+                            </li>
+                        </ul>
+
+                        <h2 class='text-2xl font-semibold mt-8 mb-2 text-text-primary font-heading'>
+                            {currentLang === "es"
+                                ? "Marketing técnico (Meta Ads)"
+                                : "Technical marketing (Meta Ads)"}
+                        </h2>
+                        <p class='mb-6 text-text-secondary'>
+                            {currentLang === "es"
+                                ? "Auditando el Meta Pixel (integración con WooCommerce) encontré que el evento de compra (Purchase) no se disparaba pese a que las transacciones se completaban: una redirección post-checkout evitaba la página de confirmación de pedido. Ese hallazgo explicó por qué las campañas activas no podían optimizar ni medir retorno. También verifiqué el dominio para Business Manager."
+                                : "While auditing the Meta Pixel (WooCommerce integration) I found the Purchase event was not firing even though transactions completed: a post-checkout redirect was skipping the order confirmation page. That finding explained why the active campaigns couldn't optimize or measure return. I also verified the domain for Business Manager."}
+                        </p>
+
+                        <h2 class='text-2xl font-semibold mt-8 mb-2 text-text-primary font-heading'>
+                            {currentLang === "es" ? "Resultados" : "Results"}
+                        </h2>
+                        <ul class='list-disc pl-6 mb-6 text-text-secondary'>
+                            <li>
+                                {currentLang === "es"
+                                    ? "La clienta recuperó el control total y legal sobre su infraestructura digital: dominio, hosting y correo."
+                                    : "The client regained full legal control over her digital infrastructure: domain, hosting and email."}
+                            </li>
+                            <li>
+                                {currentLang === "es"
+                                    ? "Comunicaciones transaccionales operativas al 100% tras estar rotas."
+                                    : "Transactional communications fully operational after being broken."}
+                            </li>
+                            <li>
+                                {currentLang === "es"
+                                    ? "Superficie de riesgo reducida: accesos consolidados, credenciales centralizadas y dependencias de terceros eliminadas."
+                                    : "Reduced risk surface: consolidated access, centralized credentials and third-party dependencies removed."}
+                            </li>
+                            <li>
+                                {currentLang === "es"
+                                    ? "Identificado el problema de tracking de conversión que estaba invalidando la medición de las campañas publicitarias activas."
+                                    : "Identified the conversion-tracking problem that was invalidating measurement of the active ad campaigns."}
+                            </li>
+                        </ul>
+
+                        <h2 class='text-2xl font-semibold mt-8 mb-2 text-text-primary font-heading'>
+                            {currentLang === "es"
+                                ? "Cómo se ejecutó"
+                                : "How it was executed"}
+                        </h2>
+                        <p class='mb-8 text-text-secondary'>
+                            {currentLang === "es"
+                                ? "Con verificaciones de seguridad en cada etapa: backups previos a los cambios estructurales, pruebas en horarios de bajo tráfico y plan de reversión documentado. Las decisiones técnicas se comunicaron a la clienta en lenguaje no técnico, priorizando la continuidad operativa del negocio sobre la velocidad de ejecución."
+                                : "With safety checks at every stage: backups before structural changes, tests during low-traffic hours and a documented rollback plan. Technical decisions were communicated to the client in non-technical language, prioritizing business continuity over speed of execution."}
+                        </p>
+
+                        <h2 class='text-2xl font-semibold mt-8 mb-2 text-text-primary font-heading'>
+                            {currentLang === "es"
+                                ? "Stack Tecnológico"
+                                : "Tech Stack"}
+                        </h2>
+                        <div class='flex flex-wrap gap-2 mb-8'>
+                            {project.technologies.map((tech) => (
+                                <span class='px-3 py-1 bg-navy-800 rounded-full text-xs text-text-secondary font-mono border border-accent/10'>
+                                    {tech}
+                                </span>
+                            ))}
+                        </div>
+
+                        <h2 class='text-2xl font-semibold mt-8 mb-2 text-text-primary font-heading'>
+                            {currentLang === "es"
+                                ? "La plataforma"
+                                : "The platform"}
+                        </h2>
+                        <img
+                            src='/assets/projects/soyconsciente.webp'
+                            alt={
+                                currentLang === "es"
+                                    ? "Sitio de la Escuela Espiritual de Angélica Andrade"
+                                    : "Angélica Andrade's Spiritual School website"
+                            }
+                            class='rounded-lg border border-accent/15 shadow-lg w-full h-auto mb-8'
+                            loading='lazy'
+                        />
+                    </>
+                ) : (
+                    <h1 class='text-3xl font-bold text-red-400 font-heading'>
+                        {currentLang === "es"
+                            ? "Proyecto no encontrado"
+                            : "Project not found"}
+                    </h1>
+                )
+            }
+        </section>
+    </body>
+</html>

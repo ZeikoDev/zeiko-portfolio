@@ -1,0 +1,103 @@
+---
+// Cinta infinita de tecnologías. Decorativa (aria-hidden): el stack real
+// está listado en la sección Skills. CSS puro: dos copias idénticas de la
+// lista y translateX(-50%) en loop — cuando termina la primera copia,
+// la segunda está exactamente donde empezó la primera.
+const techs = [
+    "React",
+    "TypeScript",
+    "Astro",
+    "Django",
+    "Python",
+    "Firebase",
+    "PostgreSQL",
+    "TailwindCSS",
+    "Node.js",
+    "AWS",
+    "MongoDB",
+    "WordPress",
+];
+---
+
+<div class='marquee py-10 border-y border-navy-700/30' aria-hidden='true'>
+    <div class='marquee-track'>
+        {
+            [0, 1].map(() => (
+                <div class='marquee-group'>
+                    {techs.map((tech) => (
+                        <span class='marquee-item'>
+                            {tech}
+                            <span class='marquee-dot'>·</span>
+                        </span>
+                    ))}
+                </div>
+            ))
+        }
+    </div>
+</div>
+
+<style>
+    .marquee {
+        overflow: hidden;
+        /* Desvanece los extremos para que la cinta "aparezca" y "desaparezca" */
+        mask-image: linear-gradient(
+            90deg,
+            transparent,
+            #000 12%,
+            #000 88%,
+            transparent
+        );
+        -webkit-mask-image: linear-gradient(
+            90deg,
+            transparent,
+            #000 12%,
+            #000 88%,
+            transparent
+        );
+    }
+
+    .marquee-track {
+        display: flex;
+        width: max-content;
+        animation: marquee-scroll 45s linear infinite;
+    }
+
+    .marquee:hover .marquee-track {
+        animation-play-state: paused;
+    }
+
+    .marquee-group {
+        display: flex;
+        flex-shrink: 0;
+    }
+
+    .marquee-item {
+        display: inline-flex;
+        align-items: center;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.85rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #7C8DB0;
+        white-space: nowrap;
+    }
+
+    .marquee-dot {
+        color: #2E8BFF;
+        margin: 0 1.75rem;
+    }
+
+    @keyframes marquee-scroll {
+        to {
+            transform: translateX(-50%);
+        }
+    }
+
+    /* Con reduced-motion la animación global queda anulada;
+       esto evita que quede una fila cortada sin contexto */
+    @media (prefers-reduced-motion: reduce) {
+        .marquee-track {
+            animation: none;
+        }
+    }
+</style>

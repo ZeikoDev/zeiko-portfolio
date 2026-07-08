@@ -31,7 +31,7 @@ const project = projects.find((p) => p.slug === "itm");
         <meta
             name='description'
             content={project
-                ? project.description[currentLang]
+                ? project.problem[currentLang]
                 : currentLang === "es"
                   ? "Proyecto no encontrado"
                   : "Project not found"}

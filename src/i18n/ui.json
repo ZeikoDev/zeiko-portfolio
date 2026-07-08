@@ -1,194 +1,156 @@
 {
     "en": {
         "nav": {
-            "home": "Dojo",
-            "about": "My Journey",
-            "skills": "Arsenal",
-            "projects": "Sparring",
-            "personal": "Side Projects"
+            "home": "Home",
+            "about": "About",
+            "skills": "Stack",
+            "projects": "Projects",
+            "personal": "Labs"
         },
         "hero": {
-            "subtitle": "Full Stack & Mobile Developer",
-            "description": "Technique beats force. Building scalable software with precision."
+            "subtitle": "Camilo González · Full Stack Developer",
+            "titleLine1": "I build course platforms",
+            "titleLine2": "and fast websites",
+            "titleAccent": "for academies and creators.",
+            "description": "Custom LMS work, migrations, performance and technical SEO — so your content sells from your own platform, not someone else's. Also full stack development with React, TypeScript, Astro and Django.",
+            "location": "Medellín, Colombia · Remote worldwide",
+            "ctaProjects": "View projects",
+            "ctaContact": "Get in touch",
+            "motto": "technique beats strength",
+            "availability": "Available for freelance projects"
         },
         "about": {
-            "title": "My Journey",
-            "description": "Software Engineering is my Gym. Just like in BJJ, I believe in 'Leverage'—applying the right amount of force in the right place. I don't just write code; I solve problems using efficiency, strategy, and continuous refinement.\nWhen I'm not coding, I'm analyzing systems to make them stronger, faster, and harder to break.",
+            "title": "About me",
+            "description": "I'm a Full Stack developer based in Medellín, Colombia. My main focus: building and maintaining course platforms for academies and content creators — from architecture and payments to secure video delivery and performance.\nI train Brazilian Jiu-Jitsu, and I take its first lesson seriously: technique beats strength. In software that means simple, well-leveraged solutions over unnecessary complexity — code others can read, sites that load fast, systems that are easy to maintain.\nI work freelance and remote (English B2), with React, TypeScript, Astro and Python/Django.",
             "stats": {
-                "years": "Years of experience",
-                "users": "15K+ Users",
-                "passion": "Discipline"
+                "years": "years of experience",
+                "users": "students using platforms I built",
+                "remote": "English B2 · Remote ready"
             }
         },
         "skills": {
-            "title": "Technical Arsenal",
-            "royalFlush": {
-                "react": "Frontend Mastery: Crafting reactive interfaces",
-                "node": "Backend Control: Scalable logic & APIs",
-                "typescript": "Type Safety: Defense against bugs",
-                "postgres": "Data Locking: Secure & efficient storage",
-                "reactNative": "Mobile Mobility: Cross-platform deployment"
+            "title": "Tech stack",
+            "core": {
+                "react": "My main frontend tool — interfaces, SPAs and dashboards",
+                "node": "APIs and backend services in JavaScript",
+                "typescript": "Strict typing across all my projects",
+                "postgres": "Data modeling and queries in production",
+                "reactNative": "Cross-platform mobile apps"
             },
             "categories": {
-                "frontend": "Guard Game (Frontend)",
-                "backend": "Submission Game (Backend)",
-                "database": "Positioning (Data)",
-                "cloud": "Atmosphere (Cloud)",
-                "tools": "Gear (Tools)",
-                "design": "Style (UI/UX)"
-            },
-            "other": {
                 "frontend": "Frontend",
                 "backend": "Backend",
-                "database": "Database"
+                "database": "Databases",
+                "cloud": "Cloud",
+                "tools": "Tools",
+                "design": "Design"
             }
         },
-        "pokerHands": {
-            "royalFlush": "Black Belt Stack",
-            "straightFlush": "Brown Belt Skills",
-            "fullHouse": "Foundations"
-        },
         "projects": {
-            "title": "Sparring (Projects)",
-            "description": "Real-world combat tested solutions",
-            "techStack": "Techniques Used",
-            "impact": "Result",
-            "complexity": "Difficulty Level"
+            "title": "Projects",
+            "description": "Real work for real clients — the problem, what I did, and the result.",
+            "problem": "The problem",
+            "solution": "What I did",
+            "result": "The result"
         },
         "personal": {
-            "title": "Drills & Labs",
-            "description": "Experimental projects and personal training exercises",
+            "title": "Labs",
+            "description": "Personal projects where I test ideas and new tech",
             "modal": {
-                "highlights": "Key Moves",
-                "screenshots": "Replay",
-                "screenshotAlt": "System View"
+                "highlights": "Highlights",
+                "screenshots": "Screenshots",
+                "screenshotAlt": "Project screenshot"
             }
         },
         "common": {
-            "loading": "Warming up...",
-            "error": "Tap out (Error)",
-            "success": "Submission!",
-            "viewProject": "Analyze Fight",
-            "viewCode": "View Technique",
-            "close": "Bow out",
-            "contact": "Challenge Me",
-            "moreDetails": "Deep Dive",
-            "emailModalTitle": "Contact Info",
-            "emailModalDescription": "Let's roll (Copy email):",
+            "loading": "Loading...",
+            "error": "Something went wrong",
+            "success": "Done!",
+            "viewProject": "View project",
+            "viewCode": "View code",
+            "close": "Close",
+            "contact": "Get in touch",
+            "moreDetails": "More details",
+            "emailModalTitle": "Contact info",
+            "emailModalDescription": "Copy my email:",
             "switchLanguage": "Switch language"
-        },
-        "impact": {
-            "users": "Users Impacted"
-        },
-        "complexity": {
-            "high": "Heavyweight",
-            "medium": "Middleweight",
-            "low": "Lightweight"
-        },
-        "numbers": {
-            "2plus": "2+",
-            "1kplus": "1000+",
-            "15kplus": "15000+",
-            "100plus": "100+"
-        },
-        "chip": {
-            "15kplus": "Total Reps"
         }
     },
     "es": {
         "nav": {
-            "home": "Dojo",
-            "about": "Mi Camino",
-            "skills": "Arsenal",
-            "projects": "Combate",
-            "personal": "Proyectos Personales"
+            "home": "Inicio",
+            "about": "Sobre mí",
+            "skills": "Stack",
+            "projects": "Proyectos",
+            "personal": "Labs"
         },
         "hero": {
-            "subtitle": "Full Stack & Mobile Developer",
-            "description": "La técnica vence a la fuerza. Construyendo software escalable con precisión."
+            "subtitle": "Camilo González · Desarrollador Full Stack",
+            "titleLine1": "Construyo plataformas de cursos",
+            "titleLine2": "y sitios web rápidos",
+            "titleAccent": "para academias y creadores.",
+            "description": "LMS a medida, migraciones, rendimiento y SEO técnico — para que tu contenido se venda desde tu propia plataforma, no la de otro. También desarrollo full stack con React, TypeScript, Astro y Django.",
+            "location": "Medellín, Colombia · Remoto para todo el mundo",
+            "ctaProjects": "Ver proyectos",
+            "ctaContact": "Contáctame",
+            "motto": "la técnica vence a la fuerza",
+            "availability": "Disponible para proyectos freelance"
         },
         "about": {
-            "title": "Mi Camino",
-            "description": "La Ingeniería de Software es mi dojo. Al igual que en el BJJ, creo en la técnica para aplicar la fuerza justa en el lugar correcto. No solo escribo código; resuelvo problemas usando eficiencia, estrategia y refinamiento continuo.\nCuando no estoy programando, estoy analizando sistemas para hacerlos más fuertes, rápidos y difíciles de romper.",
+            "title": "Sobre mí",
+            "description": "Soy desarrollador Full Stack con base en Medellín, Colombia. Mi foco principal: construir y mantener plataformas de cursos para academias y creadores de contenido — desde la arquitectura y los pagos hasta el video seguro y el rendimiento.\nEntreno Brazilian Jiu-Jitsu y me tomo en serio su primera lección: la técnica vence a la fuerza. En software eso significa soluciones simples y bien apalancadas en lugar de complejidad innecesaria — código que otros puedan leer, sitios que cargan rápido y sistemas fáciles de mantener.\nTrabajo freelance y en remoto (inglés B2), con React, TypeScript, Astro y Python/Django.",
             "stats": {
-                "years": "Años de experiencia",
-                "users": "+15K usuarios",
-                "passion": "Disciplina"
+                "years": "años de experiencia",
+                "users": "estudiantes usan plataformas que construí",
+                "remote": "Inglés B2 · Listo para remoto"
             }
         },
         "skills": {
-            "title": "Arsenal Técnico",
-            "royalFlush": {
-                "react": "Maestría Frontend: Interfaces reactivas",
-                "node": "Control Backend: Lógica escalable",
-                "typescript": "Seguridad de Tipos: Defensa contra bugs",
-                "postgres": "Seguridad de Datos: Almacenamiento seguro",
-                "reactNative": "Movilidad: Despliegue multiplataforma"
+            "title": "Stack técnico",
+            "core": {
+                "react": "Mi herramienta principal de frontend — interfaces, SPAs y dashboards",
+                "node": "APIs y servicios backend en JavaScript",
+                "typescript": "Tipado estricto en todos mis proyectos",
+                "postgres": "Modelado de datos y consultas en producción",
+                "reactNative": "Apps móviles multiplataforma"
             },
             "categories": {
-                "frontend": "Juego de Guardia (Frontend)",
-                "backend": "Juego de Sumisión (Backend)",
-                "database": "Posicionamiento (Data)",
-                "cloud": "Atmósfera (Cloud)",
-                "tools": "Equipo (Tools)",
-                "design": "Estilo (UI/UX)"
-            },
-            "other": {
                 "frontend": "Frontend",
                 "backend": "Backend",
-                "database": "Base de Datos"
+                "database": "Bases de datos",
+                "cloud": "Cloud",
+                "tools": "Herramientas",
+                "design": "Diseño"
             }
         },
-        "pokerHands": {
-            "royalFlush": "Cinturón Negro (Stack Principal)",
-            "straightFlush": "Habilidades Avanzadas",
-            "fullHouse": "Fundamentos Sólidos"
-        },
         "projects": {
-            "title": "Sparring (Proyectos)",
-            "description": "Soluciones probadas en combate real",
-            "techStack": "Técnicas Usadas",
-            "impact": "Resultado",
-            "complexity": "Nivel de Dificultad"
+            "title": "Proyectos",
+            "description": "Trabajo real para clientes reales — el problema, qué hice y el resultado.",
+            "problem": "El problema",
+            "solution": "Qué hice",
+            "result": "El resultado"
         },
         "personal": {
-            "title": "Drills y Laboratorio",
-            "description": "Proyectos experimentales y ejercicios de entrenamiento personal",
+            "title": "Labs",
+            "description": "Proyectos personales donde pruebo ideas y tecnologías nuevas",
             "modal": {
-                "highlights": "Movimientos Clave",
-                "screenshots": "Repetición",
-                "screenshotAlt": "Vista del Sistema"
+                "highlights": "Puntos clave",
+                "screenshots": "Capturas",
+                "screenshotAlt": "Captura del proyecto"
             }
         },
         "common": {
-            "loading": "Calentando...",
-            "error": "Tap out (Error)",
-            "success": "¡Sumisión!",
-            "viewProject": "Analizar Combate",
-            "viewCode": "Ver Técnica",
-            "close": "Saludo",
-            "contact": "Retar / Contactar",
+            "loading": "Cargando...",
+            "error": "Algo salió mal",
+            "success": "¡Listo!",
+            "viewProject": "Ver proyecto",
+            "viewCode": "Ver código",
+            "close": "Cerrar",
+            "contact": "Contáctame",
             "moreDetails": "Más detalles",
-            "emailModalTitle": "Información de Contacto",
-            "emailModalDescription": "Vamos (Copia el email):",
+            "emailModalTitle": "Información de contacto",
+            "emailModalDescription": "Copia mi email:",
             "switchLanguage": "Cambiar idioma"
-        },
-        "impact": {
-            "users": "Usuarios impactados"
-        },
-        "complexity": {
-            "high": "Peso Pesado",
-            "medium": "Peso Medio",
-            "low": "Peso Ligero"
-        },
-        "numbers": {
-            "2plus": "+2",
-            "1kplus": "+1000",
-            "15kplus": "+15000",
-            "100plus": "+100"
-        },
-        "chip": {
-            "15kplus": "Reps Totales"
         }
     }
 }

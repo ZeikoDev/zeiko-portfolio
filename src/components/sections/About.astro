@@ -1,5 +1,4 @@
 ---
-import JesseButton from "@/components/ui/buttons/JesseButton.astro";
 import EmailModal from "@/components/ui/EmailModal.astro";
 import { useTranslations } from "@/i18n/utils";
 import { SITE } from "@/data/site";
@@ -7,45 +6,42 @@ import { SITE } from "@/data/site";
 const { lang } = Astro.params;
 const currentLang = (lang as "en" | "es") || "en";
 const t = useTranslations(currentLang);
+
+const stats: { value: string; label: string; target?: number }[] = [
+    { value: "2+", target: 2, label: t("about.stats.years") },
+    { value: currentLang === "es" ? "1.000+" : "1,000+", target: 1000, label: t("about.stats.users") },
+    { value: "EN/ES", label: t("about.stats.remote") },
+];
 ---
 
 <section
     id='about'
-    class='py-section min-h-screen relative flex items-center'
+    class='py-section relative flex items-center'
 >
     <div class='max-w-content mx-auto px-6 md:px-12 w-full'>
-        <div class='grid lg:grid-cols-5 gap-16 items-start'>
+        <div class='grid lg:grid-cols-5 gap-12 lg:gap-16 items-start'>
             <!-- Left: Title + Stats -->
             <div class='lg:col-span-2 lg:sticky lg:top-32'>
                 <h2
-                    class='font-heading text-4xl md:text-5xl font-bold text-text-primary mb-8 about-reveal'
+                    class='section-title font-heading font-bold text-text-primary mb-8'
+                    data-reveal
                 >
                     {t("about.title")}<span class='text-accent'>.</span>
                 </h2>
 
-                <!-- BJJ Belt Stats -->
-                <div class='flex flex-col gap-4 about-reveal'>
-                    <div class='stat-pill'>
-                        <img src='/bjj-belt.svg' alt='' class='w-8 h-8' aria-hidden='true' />
-                        <div>
-                            <span class='text-xl font-bold text-text-primary font-heading'>{t("numbers.2plus")}</span>
-                            <span class='text-text-muted text-sm ml-2'>{t("about.stats.years")}</span>
+                <div class='flex flex-col gap-4' data-reveal style='--reveal-delay: 0.1s'>
+                    {stats.map((stat) => (
+                        <div class='stat-pill glow-card'>
+                            <img src='/bjj-belt.svg' alt='' width='32' height='32' class='w-8 h-8' aria-hidden='true' />
+                            <div>
+                                <span
+                                    class='text-xl font-bold text-text-primary font-heading'
+                                    data-countup={stat.target}
+                                >{stat.value}</span>
+                                <span class='text-text-muted text-sm ml-2'>{stat.label}</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class='stat-pill'>
-                        <img src='/bjj-belt.svg' alt='' class='w-8 h-8' aria-hidden='true' />
-                        <div>
-                            <span class='text-xl font-bold text-text-primary font-heading'>{t("chip.15kplus")}</span>
-                            <span class='text-text-muted text-sm ml-2'>{t("about.stats.users")}</span>
-                        </div>
-                    </div>
-                    <div class='stat-pill'>
-                        <img src='/bjj-belt.svg' alt='' class='w-8 h-8' aria-hidden='true' />
-                        <div>
-                            <span class='text-xl font-bold text-text-primary font-heading'>&infin;</span>
-                            <span class='text-text-muted text-sm ml-2'>{t("about.stats.passion")}</span>
-                        </div>
-                    </div>
+                    ))}
                 </div>
             </div>
 
@@ -54,25 +50,25 @@ const t = useTranslations(currentLang);
                 {
                     t("about.description")
                         .split("\n")
-                        .map((line) => (
-                            <p class='text-lg text-text-secondary leading-relaxed about-reveal'>
+                        .map((line, i) => (
+                            <p class='text-lg text-text-secondary leading-relaxed' data-reveal style={`--reveal-delay: ${0.1 + i * 0.1}s`}>
                                 {line}
                             </p>
                         ))
                 }
 
                 <!-- CTAs -->
-                <div class='flex flex-wrap gap-4 pt-4 about-reveal'>
+                <div class='flex flex-wrap gap-4 pt-4' data-reveal style='--reveal-delay: 0.4s'>
                     <a
                         href='https://github.com/zeikodev'
                         target='_blank'
                         rel='noopener noreferrer'
                         class='cta-link group'
                     >
-                        <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' class='w-5 h-5'>
+                        <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' class='w-5 h-5' aria-hidden='true'>
                             <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.184 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.091-.647.35-1.088.636-1.339-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.987 1.029-2.686-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.295 2.748-1.025 2.748-1.025.546 1.378.202 2.397.1 2.65.64.699 1.028 1.593 1.028 2.686 0 3.847-2.338 4.695-4.566 4.944.359.309.678.919.678 1.852 0 1.336-.012 2.417-.012 2.747 0 .268.18.579.688.481C19.138 20.203 22 16.447 22 12.021 22 6.484 17.523 2 12 2z' />
                         </svg>
-                        <span>{t("common.viewCode")}</span>
+                        <span>GitHub</span>
                         <span class='cta-underline'></span>
                     </a>
                     <a
@@ -81,7 +77,7 @@ const t = useTranslations(currentLang);
                         rel='noopener noreferrer'
                         class='cta-link group'
                     >
-                        <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' class='w-5 h-5'>
+                        <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' class='w-5 h-5' aria-hidden='true'>
                             <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M16 8a6 6 0 016 6v5a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4a2 2 0 00-4 0v4a1 1 0 01-1 1H7a1 1 0 01-1-1v-9a1 1 0 011-1h4a1 1 0 011 1v1.25M6 19a2 2 0 100-4 2 2 0 000 4z' />
                         </svg>
                         <span>LinkedIn</span>
@@ -93,7 +89,7 @@ const t = useTranslations(currentLang);
                         data-email={SITE.email}
                         class='cta-link group'
                     >
-                        <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' class='w-5 h-5'>
+                        <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' class='w-5 h-5' aria-hidden='true'>
                             <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 8.25V17a2 2 0 01-2 2H5a2 2 0 01-2-2V8.25m18 0A2 2 0 0019 6H5a2 2 0 00-2 2.25m18 0v.1a2 2 0 01-.553 1.39l-7.197 7.197a2 2 0 01-2.828 0L3.553 9.74A2 2 0 013 8.35v-.1' />
                         </svg>
                         <span>{t("common.contact")}</span>
@@ -121,7 +117,7 @@ const t = useTranslations(currentLang);
         background: rgba(15, 31, 54, 0.6);
         border: 1px solid rgba(46, 139, 255, 0.1);
         border-radius: 0.75rem;
-        transition: all 0.3s ease;
+        transition: border-color 0.3s ease, background 0.3s ease;
     }
 
     .stat-pill:hover {
@@ -155,40 +151,13 @@ const t = useTranslations(currentLang);
         transition: width 0.3s ease;
     }
 
-    .cta-link:hover .cta-underline {
+    .cta-link:hover .cta-underline,
+    .cta-link:focus-visible .cta-underline {
         width: 100%;
-    }
-
-    .about-reveal {
-        opacity: 0;
-        transform: translateY(50px) scale(0.97);
-        filter: blur(4px);
     }
 </style>
 
 <script>
-    import { gsap } from "gsap";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    document.addEventListener("DOMContentLoaded", () => {
-        gsap.to(".about-reveal", {
-            scrollTrigger: {
-                trigger: "#about",
-                start: "top 75%",
-            },
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            filter: "blur(0px)",
-            duration: 0.9,
-            stagger: 0.12,
-            ease: "power3.out",
-        });
-    });
-
-    // Email button logic
     declare global {
         interface Window {
             showEmailModal: (email: string) => void;
@@ -197,6 +166,42 @@ const t = useTranslations(currentLang);
 
     if (typeof window !== "undefined") {
         document.addEventListener("DOMContentLoaded", () => {
+            // Count-up de stats: el HTML ya trae el valor final (SEO/no-JS);
+            // acá solo se anima desde 0 cuando la sección entra en pantalla.
+            const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            const counters = document.querySelectorAll<HTMLElement>("[data-countup]");
+            if (counters.length && !reduced && "IntersectionObserver" in window) {
+                const fmt = new Intl.NumberFormat(document.documentElement.lang || "en");
+                const io = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (!entry.isIntersecting) return;
+                            const el = entry.target as HTMLElement;
+                            io.unobserve(el);
+                            const target = Number(el.dataset.countup);
+                            if (!target) return;
+                            // El HTML trae el string final ya formateado ("1.000+");
+                            // se restaura al terminar para no depender del formateo JS
+                            const finalText = el.textContent;
+                            const dur = 1200;
+                            const start = performance.now();
+                            const step = (now: number) => {
+                                const p = Math.min((now - start) / dur, 1);
+                                const eased = 1 - Math.pow(1 - p, 3);
+                                el.textContent =
+                                    p < 1
+                                        ? `${fmt.format(Math.round(target * eased))}+`
+                                        : finalText;
+                                if (p < 1) requestAnimationFrame(step);
+                            };
+                            requestAnimationFrame(step);
+                        });
+                    },
+                    { threshold: 0.5 },
+                );
+                counters.forEach((el) => io.observe(el));
+            }
+
             const emailButton = document.querySelector(
                 "#email-link",
             ) as HTMLAnchorElement;

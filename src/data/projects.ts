@@ -1,13 +1,20 @@
+interface Localized {
+  en: string;
+  es: string;
+}
+
 export interface Project {
-  name: { en: string; es: string };
-  hand: 'royalFlush' | 'straightFlush' | 'fullHouse';
-  description: { en: string; es: string };
+  name: Localized;
+  /** Etiqueta corta sobre la imagen: tipo de trabajo y estado, sin autoevaluaciones */
+  tag: Localized;
+  problem: Localized;
+  solution: Localized;
+  result: Localized;
   technologies: string[];
-  impactCount: '1kplus' | '15kplus' | '100plus';
-  impactType: 'users';
-  complexity: 'high' | 'medium' | 'low';
   image: string;
   externalLink?: string;
+  /** Muestra el botón "Más detalles" además del link externo */
+  hasDetailPage?: boolean;
   slug: string;
 }
 
@@ -15,27 +22,35 @@ export const projects: Project[] = [
   {
     name: {
       en: "Premium Academy",
-      es: "Premium Academy"
+      es: "Premium Academy",
     },
-    hand: "royalFlush",
-    description: {
-      en: "Premium Academy is a personal development e-learning platform built with React and Firebase. It includes secure video delivery via VdoCipher, AI-powered course recommendations, subscription management with Trelli, and payment integration with Epayco. I also developed a custom Python bot that syncs user roles with Discord via webhooks.",
-      es: "Premium Academy es una plataforma de e-learning para desarrollo personal construida con React y Firebase. Incluye entrega segura de videos vía VdoCipher, recomendaciones de cursos con IA, gestión de suscripciones con Trelli e integración de pagos con Epayco. También desarrollé un bot personalizado en Python que sincroniza roles de usuario con Discord vía webhooks."
+    tag: {
+      en: "LMS · In production",
+      es: "LMS · En producción",
+    },
+    problem: {
+      en: "A personal development academy needed to sell its courses from its own platform: download-protected video, recurring subscriptions and local payment methods — without depending on marketplaces that keep the commission and the student data.",
+      es: "Una academia de desarrollo personal necesitaba vender sus cursos desde una plataforma propia: video protegido contra descargas, suscripciones recurrentes y medios de pago locales — sin depender de marketplaces que se quedan con la comisión y los datos de los alumnos.",
+    },
+    solution: {
+      en: "I built the full platform with React and Firebase: secure video streaming with VdoCipher, payments with ePayco, subscription management with Trelli and AI-powered course recommendations. I also wrote a Python bot that syncs student roles with their Discord community.",
+      es: "Construí la plataforma completa con React y Firebase: streaming seguro de video con VdoCipher, pagos con ePayco, gestión de suscripciones con Trelli y recomendaciones de cursos con IA. También desarrollé un bot en Python que sincroniza los roles de los alumnos con su comunidad de Discord.",
+    },
+    result: {
+      en: "The platform runs in production with over 1,000 registered users. The academy manages sales, content and community from its own infrastructure, and I remain in charge of maintenance and new features.",
+      es: "La plataforma opera en producción con más de 1.000 usuarios registrados. La academia gestiona ventas, contenido y comunidad desde su propia infraestructura, y sigo a cargo del mantenimiento y las nuevas funcionalidades.",
     },
     technologies: [
       "React",
-      "JavaScript",
       "Firebase",
       "TailwindCSS",
       "VdoCipher",
       "ePayco",
       "Trelli",
+      "Python",
       "Discord API",
       "Vercel",
     ],
-    impactCount: "1kplus",
-    impactType: "users",
-    complexity: "high",
     image: "/assets/projects/premiumacademy.png",
     externalLink: "https://premiumacademy.pro",
     slug: "premium-academy",
@@ -43,35 +58,86 @@ export const projects: Project[] = [
   {
     name: {
       en: "Arcopedicousa",
-      es: "Arcopedicousa"
+      es: "Arcopedicousa",
     },
-    hand: "straightFlush",
-    description: {
-      en: "An e-commerce platform specializing in orthopedic footwear, receiving over 15,000 visits per month. Originally built on WordPress, the client requested a migration to AWS for improved scalability and performance. We successfully migrated the infrastructure, deploying the site on an EC2 instance and ensuring greater stability and load capacity.",
-      es: "Una plataforma de e-commerce especializada en calzado ortopédico, que recibe más de 15,000 visitas mensuales. Originalmente construida en WordPress, el cliente solicitó una migración a AWS para mejorar la escalabilidad y rendimiento. Migramos exitosamente la infraestructura, desplegando el sitio en una instancia EC2 y asegurando mayor estabilidad y capacidad de carga."
+    tag: {
+      en: "Migration · E-commerce",
+      es: "Migración · E-commerce",
+    },
+    problem: {
+      en: "An orthopedic footwear e-commerce with over 15,000 monthly visits had outgrown its original WordPress hosting: the client needed better scalability and performance without rebuilding the store.",
+      es: "Un e-commerce de calzado ortopédico con más de 15.000 visitas mensuales se había quedado corto con su hosting WordPress original: el cliente necesitaba más escalabilidad y rendimiento sin reconstruir la tienda.",
+    },
+    solution: {
+      en: "I worked on migrating the site's infrastructure to AWS: deploying it on an EC2 instance, configuring the environment and making sure the store kept operating during the transition.",
+      es: "Trabajé en la migración de la infraestructura del sitio a AWS: despliegue en una instancia EC2, configuración del entorno y continuidad de la tienda durante la transición.",
+    },
+    result: {
+      en: "The store now runs on more stable infrastructure with higher load capacity, sustaining its monthly traffic without the bottlenecks of the previous hosting.",
+      es: "La tienda corre ahora sobre una infraestructura más estable y con mayor capacidad de carga, sosteniendo su tráfico mensual sin los cuellos de botella del hosting anterior.",
     },
     technologies: ["AWS", "EC2", "WordPress"],
-    impactCount: "15kplus",
-    impactType: "users",
-    complexity: "high",
     image: "/assets/projects/arcopedicousa.png",
     externalLink: "https://arcopedicousa.com",
     slug: "arcopedicousa",
   },
   {
     name: {
-      en: "Aprendizaje en Español - ITM (SidevSoft)",
-      es: "Aprendizaje en Español - ITM (SidevSoft)"
+      en: "Soy Consciente — Escuela Espiritual",
+      es: "Soy Consciente — Escuela Espiritual",
     },
-    hand: "fullHouse",
-    description: {
-      en: "An educational web platform to support people with hearing impairments in learning Spanish through interactive content and guidance from qualified teachers. As a freelance Frontend Developer, I was responsible for building the main views and developing mini-games using pure HTML, CSS, and JavaScript—without frameworks.",
-      es: "Una plataforma web educativa para apoyar a personas con discapacidad auditiva en el aprendizaje del español a través de contenido interactivo y orientación de profesores calificados. Como desarrollador Frontend freelance, fui responsable de construir las vistas principales y desarrollar mini-juegos usando HTML, CSS y JavaScript puros—sin frameworks."
+    tag: {
+      en: "Infrastructure · Consulting",
+      es: "Infraestructura · Consultoría",
+    },
+    problem: {
+      en: "An online course school inherited its platform from a previous webmaster: the main domain was registered under a third party's name, the site ran on an unconsolidated reseller hosting, transactional emails were not being delivered, and the DNS had 20+ obsolete and conflicting records.",
+      es: "Una escuela de cursos en línea heredó su plataforma de un webmaster anterior: el dominio principal estaba a nombre de un tercero, el sitio corría en un hosting reseller sin consolidar, los correos transaccionales no se entregaban y el DNS tenía más de 20 registros obsoletos y conflictivos.",
+    },
+    solution: {
+      en: "As an independent consultant I audited and recovered the infrastructure: I migrated the full WordPress site (LMS and e-commerce, 1.1GB) to Hostinger by manually rebuilding the backup, transferred the domain to Cloudflare under the client's control, cleaned the DNS from 20 records down to 6, and set up SMTP via Google Workspace with SPF, DKIM and DMARC. I also audited the Meta Pixel and found the Purchase event was never firing.",
+      es: "Como consultor independiente audité y recuperé la infraestructura: migré el WordPress completo (LMS y e-commerce, 1.1GB) a Hostinger reconstruyendo el backup manualmente, transferí el dominio a Cloudflare bajo control de la clienta, depuré el DNS de 20 a 6 registros y configuré SMTP vía Google Workspace con SPF, DKIM y DMARC. También audité el Meta Pixel y encontré que el evento de compra nunca se disparaba.",
+    },
+    result: {
+      en: "The client regained full legal control of her digital infrastructure, transactional emails went from broken to fully operational (8.9/10 deliverability score), and the tracking finding explained why her ad campaigns couldn't measure return. Everything was documented, with credentials centralized in a password manager she owns.",
+      es: "La clienta recuperó el control total y legal de su infraestructura digital, los correos transaccionales pasaron de estar rotos a operar al 100% (entregabilidad 8.9/10) y el hallazgo del tracking explicó por qué sus campañas no podían medir retorno. Todo quedó documentado, con credenciales centralizadas en un gestor de su propiedad.",
+    },
+    technologies: [
+      "WordPress",
+      "Tutor LMS",
+      "WooCommerce",
+      "Cloudflare",
+      "Hostinger",
+      "Google Workspace",
+      "Meta Business",
+    ],
+    image: "/assets/projects/soyconsciente.webp",
+    externalLink: "https://angelicalmente.net",
+    hasDetailPage: true,
+    slug: "soy-consciente",
+  },
+  {
+    name: {
+      en: "Aprendizaje en Español — ITM",
+      es: "Aprendizaje en Español — ITM",
+    },
+    tag: {
+      en: "EdTech · Freelance",
+      es: "EdTech · Freelance",
+    },
+    problem: {
+      en: "The ITM institute needed a web platform to help people with hearing impairments learn Spanish through interactive content and guidance from qualified teachers — lightweight and usable on any device.",
+      es: "El ITM necesitaba una plataforma web para que personas con discapacidad auditiva aprendieran español con contenido interactivo y acompañamiento de docentes calificados — liviana y usable en cualquier dispositivo.",
+    },
+    solution: {
+      en: "As a freelance frontend developer I built the main views and several educational mini-games with plain HTML, CSS and JavaScript — no frameworks, prioritizing accessibility and minimal page weight.",
+      es: "Como desarrollador frontend freelance construí las vistas principales y varios mini-juegos educativos con HTML, CSS y JavaScript puros — sin frameworks, priorizando accesibilidad y peso mínimo.",
+    },
+    result: {
+      en: "The project moved into a pilot with 100+ users that validated both its educational value and its technical foundation. It was my first freelance project with an educational institution.",
+      es: "El proyecto pasó a una prueba piloto con más de 100 usuarios que validó su valor educativo y su base técnica. Fue mi primer proyecto freelance con una institución educativa.",
     },
     technologies: ["HTML", "CSS", "JavaScript"],
-    impactCount: "100plus",
-    impactType: "users",
-    complexity: "medium",
     image: "/assets/projects/aprendizajenespanol.png",
     slug: "itm",
   },

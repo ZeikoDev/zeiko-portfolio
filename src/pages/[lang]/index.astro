@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/sections/Hero.astro";
+import TechMarquee from "@/components/sections/TechMarquee.astro";
 import About from "@/components/sections/About.astro";
 import PersonalProjects from "@/components/sections/PersonalProjects.astro";
 import Skills from "@/components/sections/Skills.astro";
@@ -17,30 +18,9 @@ const t = useTranslations(lang as "en" | "es");
 
 <Layout title={t("hero.subtitle")} description={t("hero.description")}>
     <Hero />
+    <TechMarquee />
     <About />
     <Skills />
     <Projects />
     <PersonalProjects />
 </Layout>
-
-<script>
-    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        (anchor as HTMLAnchorElement).addEventListener(
-            "click",
-            function (e: Event) {
-                e.preventDefault();
-                const target = document.querySelector(
-                    (e.currentTarget as HTMLAnchorElement)?.getAttribute(
-                        "href",
-                    ) || "",
-                );
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start",
-                    });
-                }
-            },
-        );
-    });
-</script>

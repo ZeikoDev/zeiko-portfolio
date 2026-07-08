@@ -76,7 +76,7 @@ export const personalProjects: PersonalProject[] = [
             "React Navigation",
             "expo-location",
         ],
-        image: "/assets/projects/discotek.png",
+        image: "/assets/projects/discotek.webp",
         externalUrl: "https://github.com/zeikodev/DK",
         details: {
             longDescription: {
@@ -100,8 +100,8 @@ export const personalProjects: PersonalProject[] = [
                 ]
             },
             screenshots: [
-                "/assets/projects/dk-1.png",
-                "/assets/projects/dk-2.png"
+                "/assets/projects/dk-1.webp",
+                "/assets/projects/dk-2.webp"
             ]
         }
     },
@@ -158,50 +158,52 @@ export const personalProjects: PersonalProject[] = [
         }
     },
     {
-        slug: "patient-management-system",
+        slug: "finances-dashboard",
         name: {
-            en: "Patient Management System",
-            es: "Sistema de Gestión de Pacientes"
+            en: "Personal Finance Dashboard",
+            es: "Dashboard de Finanzas Personales"
         },
         description: {
-            en: "A comprehensive desktop application for managing patient records, medical history, and diagnoses with an intuitive GUI interface.",
-            es: "Aplicación de escritorio para gestionar historiales médicos, pacientes y diagnósticos con una interfaz gráfica intuitiva."
+            en: "Bi-currency (COP/USD) dashboard for tracking transactions, debts, subscriptions and budgets, with the official exchange rate cached daily.",
+            es: "Dashboard bimonetario (COP/USD) para gestionar transacciones, deudas, suscripciones y presupuestos, con la TRM oficial cacheada a diario."
         },
-        technologies: ["Python", "Tkinter", "JSON", "datetime"],
-        image: "/assets/projects/patient-managment.png",
-        externalUrl: "https://github.com/ZeikoDev/Manejo-de-pacientes",
+        technologies: [
+            "Next.js",
+            "TypeScript",
+            "Supabase",
+            "PostgreSQL",
+            "shadcn/ui",
+            "TailwindCSS",
+        ],
+        image: "/assets/projects/finances-dashboard.webp",
         details: {
             longDescription: {
-                en: "A robust patient management system built with Python and Tkinter that enables healthcare providers to efficiently manage patient records. The application features a user-friendly interface for adding, editing, and searching patient information. It includes comprehensive medical history tracking, automated diagnosis based on symptoms, and secure local data storage using JSON format. The system is designed to streamline healthcare record management while maintaining data integrity and accessibility.",
-                es: "Un sistema robusto de gestión de pacientes construido con Python y Tkinter que permite a los profesionales de la salud gestionar eficientemente los registros médicos. La aplicación cuenta con una interfaz amigable para agregar, editar y buscar información de pacientes. Incluye seguimiento completo de historial médico, diagnóstico automatizado basado en síntomas y almacenamiento seguro de datos en formato JSON. El sistema está diseñado para optimizar la gestión de registros médicos manteniendo la integridad y accesibilidad de los datos."
+                en: "I built the app I use to manage my own finances: a Next.js (App Router) + Supabase dashboard where every transaction keeps its original currency (COP or USD) and the whole UI can be flipped between currencies instantly. Reads run in Server Components and return aggregates separated by original currency, so the COP/USD toggle converts on the client without refetching; writes go through Server Actions validated with zod. The exchange rate comes from Colombia's official TRM (datos.gov.co), cached daily in the database with fallbacks. A Sankey diagram shows where the money comes from and where it goes, and every table has row-level security enabled.",
+                es: "Construí la aplicación que uso para manejar mis propias finanzas: un dashboard en Next.js (App Router) + Supabase donde cada transacción guarda su moneda original (COP o USD) y toda la interfaz puede cambiarse de moneda al instante. Las lecturas corren en Server Components y devuelven los agregados separados por moneda original, así el toggle COP/USD convierte en el cliente sin refetch; las escrituras pasan por Server Actions validadas con zod. La tasa de cambio viene de la TRM oficial (datos.gov.co), cacheada a diario en la base de datos con fallbacks. Un diagrama de Sankey muestra de dónde viene y a dónde va el dinero, y todas las tablas tienen row-level security habilitado."
             },
             highlights: {
                 en: [
-                    "Complete patient information management (personal details, contact info, medical history)",
-                    "Automated diagnosis system based on symptom analysis",
-                    "Comprehensive medical history tracking with date stamps",
-                    "Advanced search functionality with multiple criteria",
-                    "Secure local data storage with JSON format",
-                    "User-friendly GUI interface with intuitive navigation",
-                    "Real-time data validation and error handling",
-                    "Detailed patient view with complete medical history"
+                    "Bi-currency COP/USD system with instant conversion using the official daily exchange rate",
+                    "Money-flow Sankey diagram: income sources on one side, spending categories on the other",
+                    "Debt tracking with payment progress and subscriptions with monthly-equivalent cost",
+                    "50/30/20 budgets (configurable) calculated over the month's income",
+                    "Server Components for reads, zod-validated Server Actions for writes",
+                    "Row-level security on every table, single-user app with signups disabled"
                 ],
                 es: [
-                    "Gestión completa de información del paciente (datos personales, contacto, historial médico)",
-                    "Sistema de diagnóstico automatizado basado en análisis de síntomas",
-                    "Seguimiento completo de historial médico con fechas",
-                    "Búsqueda avanzada con múltiples criterios",
-                    "Almacenamiento seguro de datos en formato JSON",
-                    "Interfaz gráfica amigable e intuitiva",
-                    "Validación de datos en tiempo real y manejo de errores",
-                    "Vista detallada del paciente con historial médico completo"
+                    "Sistema bimonetario COP/USD con conversión instantánea usando la TRM oficial diaria",
+                    "Diagrama de Sankey del flujo de dinero: fuentes de ingreso a un lado, categorías de gasto al otro",
+                    "Deudas con progreso de pago y suscripciones con costo mensual equivalente",
+                    "Presupuestos 50/30/20 (configurables) calculados sobre el ingreso del mes",
+                    "Server Components para lecturas y Server Actions validadas con zod para escrituras",
+                    "Row-level security en todas las tablas, app de un solo usuario con registros deshabilitados"
                 ]
             },
             screenshots: [
-                "/assets/projects/patient-managment.png",
-                "/assets/projects/pm-1.png",
-                "/assets/projects/pm-2.png",
-                "/assets/projects/pm-3.png"
+                "/assets/projects/finances-dashboard.webp",
+                "/assets/projects/fd-1.webp",
+                "/assets/projects/fd-2.webp",
+                "/assets/projects/fd-3.webp"
             ]
         }
     }
