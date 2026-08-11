@@ -1,27 +1,30 @@
-<img width="1800" alt="Screenshot 2025-06-16 at 01 38 18" src="https://github.com/user-attachments/assets/0c733ac7-a4b3-448b-9cb8-486e26fead7d" />
+<img width="1800" alt="Zeiko Portfolio — hero" src="docs/preview.webp" />
 
 # Zeiko Portfolio
 
-A modern, BJJ-themed full-stack developer portfolio built with Astro.js. This portfolio showcases development skills through an engaging Brazilian Jiu-Jitsu inspired design, featuring smooth animations, interactive elements, and a responsive layout.
+The personal portfolio of Camilo González (ZeikoDev), a full-stack developer based in Medellín, Colombia — focused on course platforms (LMS), migrations, and performance/SEO work for academies and content creators.
+
+Built with Astro and shipped as a static site. Brazilian Jiu-Jitsu shows up as an accent — the belt mark, the "technique beats strength" motto — not as the theme of the interface.
 
 ## Features
 
 - 🌐 **Multilanguage support (i18n)**: English and Spanish, with easy extensibility for more languages
-- 🗂️ **Dynamic routing per language**: All main pages and project details are available under `/en/` and `/es/` paths
-- 🎮 BJJ-themed design elements and animations
+- 🗂️ **Dynamic routing per language**: All main pages and project details live under `/en/` and `/es/`
+- 📇 **Case studies**: Client work is written as problem → what I did → result, with detail pages for the longer ones
+- ⚡ **No runtime UI framework**: Every section is a static Astro component; the site is its own performance demo
+- 🎞️ **Animations without libraries**: CSS plus a single `IntersectionObserver` driving `data-reveal`, with `prefers-reduced-motion` respected
 - 📱 Fully responsive layout
-- ⚡ Built with Astro.js for optimal performance
 - 🎯 Smooth scroll navigation
-- 🎴 Interactive skill card components
-- 📊 Skills visualization with belt levels
-- 📝 Contact form with BJJ-themed elements
+- ✉️ Contact through an email modal, no backend required
 
 ## Tech Stack
 
-- [Astro.js](https://astro.build) - Static site generation
+- [Astro](https://astro.build) - Static site generation
 - [Tailwind CSS](https://tailwindcss.com) - Utility-first CSS
 - [TypeScript](https://www.typescriptlang.org) - Type safety
-- [View Transitions API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API) - Smooth page transitions
+- [sharp](https://sharp.pixelplumbing.com) - Image optimization for project screenshots (`.webp`)
+
+The `@astrojs/react` integration is still configured, but no React components remain in `src/` after the UI overhaul.
 
 ## Getting Started
 
@@ -35,7 +38,7 @@ A modern, BJJ-themed full-stack developer portfolio built with Astro.js. This po
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/zeiko-portfolio.git
+   git clone https://github.com/ZeikoDev/zeiko-portfolio.git
    cd zeiko-portfolio
    ```
 
@@ -71,36 +74,53 @@ The built files will be in the `dist` directory.
 
 ```
 zeiko-portfolio/
-├── public/                      # Static assets (images, SVGs, etc.)
-│   └── assets/projects/         # Project screenshots and images
+├── docs/                        # Repo-only assets (README preview)
+├── public/                      # Static assets served as-is
+│   ├── assets/icons/            # Tech icons used in the Skills section
+│   ├── assets/projects/         # Project screenshots (.webp)
+│   └── bjj-belt.svg             # Belt mark used as an accent
 ├── src/
-│   ├── components/              # UI and section components
-│   │   ├── layout/              # Layout components (Navbar, etc.)
-│   │   ├── sections/            # Main page sections (Hero, About, Projects, etc.)
-│   │   └── ui/buttons/          # Reusable button components
-│   ├── data/                    # Project and personal project data sources
-│   │   ├── projects.ts
-│   │   └── personalProjects.ts
-│   ├── i18n/                    # Internationalization (i18n) utilities and translations
+│   ├── components/
+│   │   ├── sections/            # Page sections
+│   │   │   ├── Hero.astro
+│   │   │   ├── TechMarquee.astro
+│   │   │   ├── About.astro
+│   │   │   ├── Skills.astro
+│   │   │   ├── Projects.astro          # Client work
+│   │   │   └── PersonalProjects.astro  # Side projects
+│   │   └── ui/
+│   │       ├── EmailModal.astro
+│   │       └── buttons/JesseButton.astro
+│   ├── data/
+│   │   ├── projects.ts          # Client work (bilingual, problem/solution/result)
+│   │   ├── personalProjects.ts  # Side projects
+│   │   └── site.ts              # Contact email
+│   ├── i18n/
 │   │   ├── ui.json              # UI text translations
 │   │   ├── utils.ts             # i18n helper functions
 │   │   └── types.ts             # Type definitions for i18n
-│   ├── layouts/                 # Page layout wrappers
-│   │   └── Layout.astro
-│   └── pages/                   # Page routes (multilanguage)
+│   ├── layouts/
+│   │   └── Layout.astro         # Shared head, styles and reveal-on-scroll script
+│   └── pages/
 │       ├── index.astro          # Root: client-side language redirect
-│       └── [lang]/              # Dynamic language folder (en, es, ...)
+│       └── [lang]/              # Dynamic language folder (en, es)
 │           ├── index.astro      # Home page per language
 │           └── proyectos/       # Project detail pages per language
+│               ├── fondas-mi-pueblo.astro
+│               ├── soy-consciente.astro
 │               ├── itm.astro
 │               ├── discotek.astro
 │               ├── easylife.astro
-│               ├── inventory-dashboard.astro
-│               └── patient-management-system.astro
-├── astro.config.mjs             # Astro configuration
+│               ├── finances-dashboard.astro
+│               └── inventory-dashboard.astro
+├── astro.config.mjs             # Astro configuration (i18n, aliases, minification)
 ├── tailwind.config.mjs          # Tailwind configuration
 └── package.json
 ```
+
+Projects are data-driven: add an entry to `src/data/projects.ts` and it renders in the
+Projects section. Set `hasDetailPage: true` and add a matching `.astro` file under
+`proyectos/` when the project deserves a full case study.
 
 ## Internationalization (i18n)
 
@@ -129,14 +149,14 @@ The color scheme can be customized in `tailwind.config.mjs`. The current theme u
 
 ### Content
 
-Update the content in the respective component files:
+Most copy lives in `src/i18n/ui.json`, so both languages stay in sync. Everything else:
 
-- `Hero.astro` - Main headline and tagline
-- `About.astro` - Personal information and skills
-- `Skills.astro` - Technical skills and expertise
-- `Projects.astro` - Portfolio projects
-- `PersonalProjects.astro` - Personal projects
-- `Contact.astro` - Contact information and form
+- `src/data/projects.ts` - Client work (name, tag, problem, solution, result, tech, image)
+- `src/data/personalProjects.ts` - Side projects
+- `src/data/site.ts` - Contact email
+- `Hero.astro` / `About.astro` / `Skills.astro` - Section-specific markup and structure
+
+Project screenshots go in `public/assets/projects/` as `.webp`, around 1600px wide.
 
 ## Development
 
@@ -148,6 +168,8 @@ Update the content in the respective component files:
 | `npm run dev`             | Starts local dev server at `localhost:4321`      |
 | `npm run build`           | Build your production site to `./dist/`          |
 | `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run lint`            | Lint `.js`, `.jsx`, `.ts`, `.tsx` and `.astro`   |
+| `npm run format`          | Format the project with Prettier                 |
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 
 ## License

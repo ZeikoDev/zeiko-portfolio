@@ -57,6 +57,40 @@ export const projects: Project[] = [
   },
   {
     name: {
+      en: "Fondas de mi Pueblo Antioqueño",
+      es: "Fondas de mi Pueblo Antioqueño",
+    },
+    tag: {
+      en: "3D Map · Feria de las Flores",
+      es: "Mapa 3D · Feria de las Flores",
+    },
+    problem: {
+      en: "The event was reaching its 5th edition inside Medellín's Feria de las Flores, with a fixed four-day window. Its appeal is the towns it brings together, but that information lived as flat text. The site was also coming off WordPress and had to end up on the client's own hosting.",
+      es: "El evento llegaba a su 5.ª edición dentro de la Feria de las Flores de Medellín, con una ventana fija de cuatro días. Su atractivo son los pueblos que reúne, pero esa información vivía como texto plano. El sitio además venía de un WordPress y debía quedar en el hosting propio del cliente.",
+    },
+    solution: {
+      en: "I built the interactive 3D map for the municipalities section: all of Antioquia, municipality by municipality, colored by its nine subregions, with the participating towns highlighted and a card for each one showing population, climate and local trivia. I worked with Three.js on React Three Fiber, took part in the section's design decisions, and handled the SEO optimizations and the cPanel deployment.",
+      es: "Construí el mapa interactivo 3D de la sección de municipios: Antioquia completa, municipio a municipio, coloreada por sus nueve subregiones, con los pueblos participantes destacados y una ficha por cada uno con población, clima y datos curiosos. Trabajé con Three.js sobre React Three Fiber, participé en las decisiones de diseño de la sección, y me encargué de las optimizaciones de SEO y del despliegue en cPanel.",
+    },
+    result: {
+      en: "The site was live at least a month before the event, not the day before: margin to test and for the new pages to get indexed ahead of the traffic peak. The municipalities went from a list to a territory visitors rotate and explore, and the site was left running on the organizer's hosting, off WordPress.",
+      es: "El sitio quedó publicado al menos un mes antes del evento, no la víspera: margen para probar y para que las páginas nuevas se indexaran antes del pico de tráfico. Los municipios pasaron de un listado a un territorio que el visitante gira y explora, y el sitio quedó corriendo en el hosting del organizador, fuera de WordPress.",
+    },
+    technologies: [
+      "React",
+      "Three.js",
+      "React Three Fiber",
+      "WebGL",
+      "SEO",
+      "cPanel",
+    ],
+    image: "/assets/projects/fondas.webp",
+    externalLink: "https://fondasdemipuebloantioqueno.com.co",
+    hasDetailPage: true,
+    slug: "fondas-mi-pueblo",
+  },
+  {
+    name: {
       en: "Arcopedicousa",
       es: "Arcopedicousa",
     },

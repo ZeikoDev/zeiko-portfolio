@@ -1,0 +1,222 @@
+---
+import { projects } from "@/data/projects";
+
+export async function getStaticPaths() {
+    return [{ params: { lang: "es" } }, { params: { lang: "en" } }];
+}
+
+const { lang } = Astro.params;
+const currentLang = (lang as "en" | "es") || "en";
+const project = projects.find((p) => p.slug === "fondas-mi-pueblo");
+---
+
+<html lang={currentLang}>
+    <head>
+        <meta charset='UTF-8' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <link rel='preconnect' href='https://fonts.googleapis.com' />
+        <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+        <link href='https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap' rel='stylesheet' />
+        <title>
+            {
+                project
+                    ? `${project.name[currentLang]} | ${currentLang === "es" ? "Detalles del Proyecto" : "Project Details"}`
+                    : currentLang === "es"
+                      ? "Proyecto No Encontrado"
+                      : "Project Not Found"
+            }
+        </title>
+        <meta
+            name='description'
+            content={project
+                ? project.problem[currentLang]
+                : currentLang === "es"
+                  ? "Proyecto no encontrado"
+                  : "Project not found"}
+        />
+    </head>
+    <body class='bg-navy-950 text-text-primary min-h-screen font-sans'>
+        <section class='max-w-3xl mx-auto py-16 px-4'>
+            <a
+                href={currentLang === "es"
+                    ? "/es?section=projects#projects"
+                    : "/en?section=projects#projects"}
+                class='text-accent hover:underline mb-8 inline-block'
+                >&larr; {
+                    currentLang === "es"
+                        ? "Volver a Proyectos"
+                        : "Back to Projects"
+                }</a
+            >
+            {
+                project ? (
+                    <>
+                        <h1 class='text-4xl font-bold text-accent font-heading mb-6'>
+                            {currentLang === "es"
+                                ? "Fondas de mi Pueblo Antioqueño — Mapa 3D de municipios"
+                                : "Fondas de mi Pueblo Antioqueño — 3D Municipality Map"}
+                        </h1>
+                        <p class='mb-8 text-lg text-text-secondary'>
+                            {currentLang === "es"
+                                ? "Trabajo freelance para la 5.ª edición de Fondas de mi Pueblo Antioqueño, uno de los eventos tradicionales de la Feria de las Flores de Medellín (6 al 9 de agosto de 2026). Hice el mapa interactivo 3D de los municipios participantes, participé en las decisiones de diseño de la sección, y me encargué del SEO y del despliegue."
+                                : "Freelance work for the 5th edition of Fondas de mi Pueblo Antioqueño, one of the traditional events of Medellín's Feria de las Flores (August 6–9, 2026). I built the interactive 3D map of the participating municipalities, took part in the section's design decisions, and handled SEO and deployment."}
+                        </p>
+
+                        <img
+                            src='/assets/projects/fondas-mapa.webp'
+                            alt={
+                                currentLang === "es"
+                                    ? "Mapa 3D de Antioquia con los municipios participantes marcados y la leyenda de subregiones"
+                                    : "3D map of Antioquia with participating municipalities marked and the subregion legend"
+                            }
+                            class='rounded-lg border border-accent/15 shadow-lg w-full h-auto mb-10'
+                            loading='lazy'
+                        />
+
+                        <h2 class='text-2xl font-semibold mt-8 mb-2 text-text-primary font-heading'>
+                            {currentLang === "es"
+                                ? "El contexto"
+                                : "The context"}
+                        </h2>
+                        <p class='mb-6 text-text-secondary'>
+                            {currentLang === "es"
+                                ? "El evento reúne cada año a municipios de Antioquia alrededor de la tradición de la Fonda Caminera. Ese contenido ya existía, pero como texto plano: una lista que se lee, no un lugar que se recorre. Y con fecha fija de cuatro días, lo que no estuviera listo el 6 de agosto no servía."
+                                : "Every year the event brings together municipalities from Antioquia around the tradition of the Fonda Caminera. That content already existed, but as flat text: a list you read, not a place you explore. And with a fixed four-day window, whatever wasn't ready by August 6 was no use."}
+                        </p>
+
+                        <h2 class='text-2xl font-semibold mt-8 mb-2 text-text-primary font-heading'>
+                            {currentLang === "es"
+                                ? "El mapa interactivo 3D"
+                                : "The interactive 3D map"}
+                        </h2>
+                        <ul class='list-disc pl-6 mb-6 text-text-secondary'>
+                            <li>
+                                {currentLang === "es"
+                                    ? "Antioquia completa modelada en 3D, municipio a municipio, coloreada por sus nueve subregiones."
+                                    : "All of Antioquia modeled in 3D, municipality by municipality, colored by its nine subregions."}
+                            </li>
+                            <li>
+                                {currentLang === "es"
+                                    ? "Los municipios participantes destacados con marcador y fotografía del lugar."
+                                    : "The participating municipalities highlighted with a marker and a photograph."}
+                            </li>
+                            <li>
+                                {currentLang === "es"
+                                    ? "Clic en un municipio para abrir su historia, con población, clima y datos curiosos."
+                                    : "Click a municipality to open its story, with population, climate and local trivia."}
+                            </li>
+                            <li>
+                                {currentLang === "es"
+                                    ? "Rotación arrastrando, más controles de zoom y de reinicio de vista."
+                                    : "Drag to rotate, plus zoom and reset-view controls."}
+                            </li>
+                            <li>
+                                {currentLang === "es"
+                                    ? "Renderizado en WebGL con Three.js sobre React Three Fiber."
+                                    : "Rendered in WebGL with Three.js on React Three Fiber."}
+                            </li>
+                        </ul>
+
+                        <h2 class='text-2xl font-semibold mt-8 mb-2 text-text-primary font-heading'>
+                            {currentLang === "es"
+                                ? "Decisiones de diseño"
+                                : "Design decisions"}
+                        </h2>
+                        <p class='mb-4 text-text-secondary'>
+                            {currentLang === "es"
+                                ? "Un mapa 3D corre el riesgo de impresionar sin comunicar. Las decisiones apuntaron a lo contrario:"
+                                : "A 3D map risks impressing without communicating. The decisions pushed the other way:"}
+                        </p>
+                        <ul class='list-disc pl-6 mb-6 text-text-secondary'>
+                            <li>
+                                {currentLang === "es"
+                                    ? "Mostrar el departamento completo, no solo los pueblos participantes: se entiende mejor un municipio cuando se ve dónde queda."
+                                    : "Show the whole department, not just the participating towns: a municipality reads better when you can see where it sits."}
+                            </li>
+                            <li>
+                                {currentLang === "es"
+                                    ? "Color por subregión con leyenda, para transmitir la geografía antes de tocar nada."
+                                    : "Color by subregion with a legend, conveying the geography before you touch anything."}
+                            </li>
+                            <li>
+                                {currentLang === "es"
+                                    ? "Jerarquía visual: lo relevante para esta edición salta a la vista sin perder el contexto."
+                                    : "Visual hierarchy: what matters for this edition pops without losing context."}
+                            </li>
+                            <li>
+                                {currentLang === "es"
+                                    ? "Instrucción visible en pantalla, porque una interfaz 3D no se explica sola."
+                                    : "An on-screen instruction, because a 3D interface doesn't explain itself."}
+                            </li>
+                        </ul>
+
+                        <h2 class='text-2xl font-semibold mt-8 mb-2 text-text-primary font-heading'>
+                            {currentLang === "es"
+                                ? "SEO y despliegue"
+                                : "SEO and deployment"}
+                        </h2>
+                        <p class='mb-6 text-text-secondary'>
+                            {currentLang === "es"
+                                ? "El sitio venía de una instalación de WordPress. Hice las optimizaciones de SEO y desplegué el sitio nuevo en el cPanel del cliente, dejándolo corriendo sobre su propio hosting. En un evento con fecha fija el tráfico se concentra en los días previos, así que publicar con un mes de anticipación le dio a las páginas nuevas tiempo de indexarse antes del pico."
+                                : "The site was coming off a WordPress install. I handled the SEO optimizations and deployed the new site to the client's cPanel, leaving it running on their own hosting. For an event with a fixed date traffic concentrates in the days beforehand, so publishing a month early gave the new pages time to get indexed before the peak."}
+                        </p>
+
+                        <h2 class='text-2xl font-semibold mt-8 mb-2 text-text-primary font-heading'>
+                            {currentLang === "es" ? "Resultados" : "Results"}
+                        </h2>
+                        <ul class='list-disc pl-6 mb-6 text-text-secondary'>
+                            <li>
+                                {currentLang === "es"
+                                    ? "El sitio quedó publicado al menos un mes antes del evento del 6 al 9 de agosto de 2026, con margen para probar y corregir en vez de llegar contra la fecha."
+                                    : "The site was live at least a month before the August 6–9, 2026 event, with margin to test and fix instead of racing the deadline."}
+                            </li>
+                            <li>
+                                {currentLang === "es"
+                                    ? "Los municipios pasaron de un listado de texto a un territorio que el visitante explora por su cuenta."
+                                    : "The municipalities went from a text list to a territory visitors explore on their own."}
+                            </li>
+                            <li>
+                                {currentLang === "es"
+                                    ? "El sitio quedó operando en el hosting propio del organizador, fuera de WordPress."
+                                    : "The site was left running on the organizer's own hosting, off WordPress."}
+                            </li>
+                        </ul>
+
+                        <h2 class='text-2xl font-semibold mt-8 mb-2 text-text-primary font-heading'>
+                            {currentLang === "es"
+                                ? "Stack Tecnológico"
+                                : "Tech Stack"}
+                        </h2>
+                        <div class='flex flex-wrap gap-2 mb-8'>
+                            {project.technologies.map((tech) => (
+                                <span class='px-3 py-1 bg-navy-800 rounded-full text-xs text-text-secondary font-mono border border-accent/10'>
+                                    {tech}
+                                </span>
+                            ))}
+                        </div>
+
+                        <h2 class='text-2xl font-semibold mt-8 mb-2 text-text-primary font-heading'>
+                            {currentLang === "es" ? "El sitio" : "The site"}
+                        </h2>
+                        <img
+                            src='/assets/projects/fondas.webp'
+                            alt={
+                                currentLang === "es"
+                                    ? "Portada del sitio de Fondas de mi Pueblo Antioqueño"
+                                    : "Fondas de mi Pueblo Antioqueño website homepage"
+                            }
+                            class='rounded-lg border border-accent/15 shadow-lg w-full h-auto mb-8'
+                            loading='lazy'
+                        />
+                    </>
+                ) : (
+                    <h1 class='text-3xl font-bold text-red-400 font-heading'>
+                        {currentLang === "es"
+                            ? "Proyecto no encontrado"
+                            : "Project not found"}
+                    </h1>
+                )
+            }
+        </section>
+    </body>
+</html>
