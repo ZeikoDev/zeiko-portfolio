@@ -1,4 +1,4 @@
-<img width="1800" alt="Screenshot 2025-06-16 at 01 38 18" src="https://github.com/user-attachments/assets/0c733ac7-a4b3-448b-9cb8-486e26fead7d" />
+<img width="1800" alt="Zeiko Portfolio — hero" src="docs/preview.webp" />
 
 # Zeiko Portfolio
 
