@@ -1,118 +1,73 @@
 ---
 import { personalProjects } from "@/data/personalProjects";
-import JesseButton from "@/components/ui/buttons/JesseButton.astro";
 import { useTranslations } from "@/i18n/utils";
 
 const { lang } = Astro.params;
-const currentLang = (lang as "en" | "es") || "en";
-const t = useTranslations(currentLang);
-
-const bentoSizes = ["lg:col-span-2", "lg:col-span-1", "lg:col-span-1", "lg:col-span-2"];
+const L = (lang as "en" | "es") || "en";
+const t = useTranslations(L);
 ---
 
-<section id='personal-projects' class='py-section'>
-    <div class='max-w-content mx-auto px-6 md:px-12'>
-        <h2
-            class='section-title font-heading font-bold text-text-primary text-center mb-4'
-            data-reveal
-        >
-            {t("personal.title")}<span class='text-accent'>.</span>
-        </h2>
-        <p
-            class='text-text-secondary text-center mb-16 max-w-xl mx-auto'
-            data-reveal
-        >
-            {t("personal.description")}
-        </p>
+<section id='labs' class='section'>
+    <div class='shell'>
+        <header class='section-head'>
+            <h2 class='t-h2'>{t("labs.title")}</h2>
+            <p class='t-lead text-fg-2'>{t("labs.intro")}</p>
+        </header>
 
-        <div class='grid grid-cols-1 lg:grid-cols-3 gap-5'>
-            {
-                personalProjects.map((project, idx) => (
-                    <div
-                        class={`bento-card glow-card group ${bentoSizes[idx] || 'lg:col-span-1'}`}
-                        data-reveal
-                        style={`--reveal-delay: ${idx * 0.08}s`}
-                    >
-                        <div class='bento-image-wrap'>
-                            <img
-                                src={project.image}
-                                alt={project.name[currentLang]}
-                                class='w-full h-full object-cover transition-transform duration-500 group-hover:scale-105'
-                                loading='lazy'
-                            />
-                        </div>
-                        <div class='p-5 flex flex-col flex-1'>
-                            <h3 class='text-lg font-bold text-text-primary font-heading mb-2'>
-                                {project.name[currentLang]}
-                            </h3>
-                            <p class='text-sm text-text-secondary mb-4 line-clamp-2 flex-1'>
-                                {project.description[currentLang]}
-                            </p>
-                            <div class='flex flex-wrap gap-1.5 mb-4'>
-                                {project.technologies.slice(0, 4).map((tech) => (
-                                    <span class='tech-tag'>
-                                        {tech}
-                                    </span>
-                                ))}
-                                {project.technologies.length > 4 && (
-                                    <span class='px-2 py-0.5 font-mono text-[0.7rem] text-text-muted'>
-                                        +{project.technologies.length - 4}
-                                    </span>
-                                )}
-                            </div>
-                            <JesseButton
-                                href={`/${currentLang}/proyectos/${project.slug}`}
-                                variant='text'
-                                showText={true}
-                                size='small'
-                            >
-                                <span slot='icon'>
-                                    <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' class='w-4 h-4' aria-hidden='true'>
-                                        <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M13 7l5 5m0 0l-5 5m5-5H6' />
-                                    </svg>
-                                </span>
-                                {t("common.moreDetails")}
-                            </JesseButton>
-                        </div>
+        <ul class='labs'>
+            {personalProjects.map((p) => (
+                <li class='lab'>
+                    <div class='lab-media'>
+                        <img src={p.image} alt='' loading='lazy' decoding='async' />
                     </div>
-                ))
-            }
-        </div>
+                    <h3 class='lab-title'>
+                        <a href={`/${L}/proyectos/${p.slug}`}>{p.name[L]}</a>
+                    </h3>
+                    <p class='lab-desc'>{p.description[L]}</p>
+                    <p class='lab-stack t-small'>{p.technologies.join(", ")}</p>
+                </li>
+            ))}
+        </ul>
     </div>
 </section>
 
 <style>
-    .bento-card {
-        background: rgba(10, 22, 40, 0.5);
-        border: 1px solid rgba(46, 139, 255, 0.06);
-        border-radius: 1rem;
-        overflow: hidden;
+    .labs {
+        display: grid;
+        border-top: 1px solid rgb(var(--fg));
+    }
+    @media (min-width: 640px) {
+        .labs { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; }
+    }
+    @media (min-width: 1024px) {
+        .labs { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+    .lab {
+        position: relative;
         display: flex;
         flex-direction: column;
-        transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        padding: 24px 0 32px;
+        border-bottom: 1px solid rgb(var(--rule));
     }
-
-    .bento-card:hover {
-        border-color: rgba(46, 139, 255, 0.2);
-        transform: translateY(-4px);
-        box-shadow: 0 16px 48px rgba(46, 139, 255, 0.08);
-    }
-
-    .bento-image-wrap {
-        width: 100%;
-        height: 180px;
+    .lab-media {
+        aspect-ratio: 4 / 3;
         overflow: hidden;
-        background: #0a1628;
+        border: 1px solid rgb(var(--rule));
+        background: rgb(var(--surface));
+        margin-bottom: 20px;
     }
-
-    .tech-tag {
-        padding: 0.125rem 0.5rem;
-        font-family: "JetBrains Mono", monospace;
-        font-size: 0.7rem;
-        color: rgba(46, 139, 255, 0.7);
-        background: rgba(46, 139, 255, 0.05);
-        border: 1px solid rgba(46, 139, 255, 0.12);
-        border-radius: 2rem;
+    .lab-media img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .lab-title {
+        font-weight: 700;
+        font-size: 1.15rem;
+        line-height: 1.25;
     }
-
+    /* Whole tile is the click target; the visible affordance is the title underline. */
+    .lab-title a::after { content: ""; position: absolute; inset: 0; }
+    .lab-title a { text-decoration: underline; text-decoration-color: rgb(var(--blue) / 0); text-underline-offset: 0.2em; }
+    .lab:hover .lab-title a { text-decoration-color: rgb(var(--blue)); }
+    .lab-title a:focus-visible { outline: none; }
+    .lab:has(a:focus-visible) { outline: 2px solid rgb(var(--blue)); outline-offset: 4px; }
+    .lab-desc { margin-top: 8px; color: rgb(var(--fg-2)); flex: 1; }
+    .lab-stack { margin-top: 16px; color: rgb(var(--fg-2)); }
 </style>

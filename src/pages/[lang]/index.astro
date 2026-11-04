@@ -1,26 +1,23 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/sections/Hero.astro";
-import TechMarquee from "@/components/sections/TechMarquee.astro";
-import About from "@/components/sections/About.astro";
-import PersonalProjects from "@/components/sections/PersonalProjects.astro";
-import Skills from "@/components/sections/Skills.astro";
+import Experience from "@/components/sections/Experience.astro";
 import Projects from "@/components/sections/Projects.astro";
-import { useTranslations, languages } from "@/i18n/utils";
+import Skills from "@/components/sections/Skills.astro";
+import PersonalProjects from "@/components/sections/PersonalProjects.astro";
+import Contact from "@/components/sections/Contact.astro";
+import { languages } from "@/i18n/utils";
 
 export async function getStaticPaths() {
     return Object.keys(languages).map((lang) => ({ params: { lang } }));
 }
-
-const { lang } = Astro.params;
-const t = useTranslations(lang as "en" | "es");
 ---
 
-<Layout title={t("hero.subtitle")} description={t("hero.description")}>
+<Layout>
     <Hero />
-    <TechMarquee />
-    <About />
-    <Skills />
+    <Experience />
     <Projects />
+    <Skills />
     <PersonalProjects />
+    <Contact />
 </Layout>
