@@ -1,0 +1,112 @@
+---
+import Button from "@/components/ui/Button.astro";
+import Icon from "@/components/ui/Icon.astro";
+import { useTranslations } from "@/i18n/utils";
+import { SITE } from "@/data/site";
+
+const { lang } = Astro.params;
+const t = useTranslations((lang as "en" | "es") || "en");
+---
+
+<section id='contact' class='contact on-blue'>
+    <div class='shell contact-grid'>
+        <div class='contact-copy'>
+            <h2 class='t-h2'>{t("contact.title")}</h2>
+            <p class='t-lead contact-body'>{t("contact.body")}</p>
+        </div>
+
+        <div class='contact-actions'>
+            <a href={`mailto:${SITE.email}`} class='contact-email'>{SITE.email}</a>
+            <div class='contact-buttons'>
+                <Button href={`mailto:${SITE.email}`} variant='on-blue'>
+                    <Icon name='mail' />
+                    {t("contact.email")}
+                </Button>
+                <Button
+                    variant='outline-on-blue'
+                    id='copy-email'
+                    data-email={SITE.email}
+                    data-label={t("contact.copy")}
+                    data-done={t("contact.copied")}
+                >
+                    <Icon name='copy' />
+                    <span>{t("contact.copy")}</span>
+                </Button>
+                <Button href={SITE.linkedin} variant='outline-on-blue' external>
+                    <Icon name='linkedin' />
+                    LinkedIn
+                </Button>
+                <Button href={SITE.github} variant='outline-on-blue' external>
+                    <Icon name='github' />
+                    GitHub
+                </Button>
+            </div>
+            <p class='sr-only' role='status' id='copy-status'></p>
+        </div>
+    </div>
+</section>
+
+<style>
+    .contact {
+        background: rgb(var(--blue-block));
+        color: #fff;
+        padding-block: 96px;
+    }
+    @media (min-width: 1024px) {
+        .contact { padding-block: 136px; }
+    }
+    .contact-grid {
+        display: grid;
+        gap: 48px;
+    }
+    @media (min-width: 1024px) {
+        .contact-grid {
+            grid-template-columns: repeat(12, minmax(0, 1fr));
+            column-gap: 32px;
+            align-items: end;
+        }
+        .contact-copy { grid-column: 1 / span 6; }
+        .contact-actions { grid-column: 7 / span 6; }
+    }
+    .contact-body {
+        margin-top: 24px;
+        max-width: 48ch;
+        color: rgb(255 255 255 / 0.86);
+    }
+    .contact-email {
+        display: inline-block;
+        font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+        font-weight: 700;
+        font-variation-settings: "wdth" 108;
+        letter-spacing: -0.01em;
+        border-bottom: 2px solid rgb(255 255 255 / 0.5);
+        padding-bottom: 4px;
+        overflow-wrap: anywhere;
+    }
+    .contact-email:hover { border-bottom-color: #fff; }
+    .contact-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 32px;
+    }
+</style>
+
+<script>
+    const btn = document.getElementById("copy-email") as HTMLButtonElement | null;
+    const status = document.getElementById("copy-status");
+    btn?.addEventListener("click", async () => {
+        const { email = "", label = "", done = "" } = btn.dataset;
+        const text = btn.querySelector("span");
+        try {
+            await navigator.clipboard.writeText(email);
+            if (text) text.textContent = done;
+            if (status) status.textContent = done;
+            setTimeout(() => {
+                if (text) text.textContent = label;
+            }, 2000);
+        } catch {
+            window.location.href = `mailto:${email}`;
+        }
+    });
+</script>

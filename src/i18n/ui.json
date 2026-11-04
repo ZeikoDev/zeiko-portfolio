@@ -1,156 +1,194 @@
 {
     "en": {
+        "meta": {
+            "title": "Camilo González — Full Stack Developer",
+            "description": "Full stack developer in Medellín, Colombia. React, TypeScript, Node.js and Django applications built, deployed and supported in production."
+        },
         "nav": {
-            "home": "Home",
-            "about": "About",
-            "skills": "Stack",
-            "projects": "Projects",
-            "personal": "Labs"
+            "label": "Main",
+            "home": "Camilo González, home",
+            "experience": "Experience",
+            "projects": "Work",
+            "skills": "Skills",
+            "labs": "Labs",
+            "contact": "Contact",
+            "skip": "Skip to content"
         },
         "hero": {
-            "subtitle": "Camilo González · Full Stack Developer",
-            "titleLine1": "I build course platforms",
-            "titleLine2": "and fast websites",
-            "titleAccent": "for academies and creators.",
-            "description": "Custom LMS work, migrations, performance and technical SEO — so your content sells from your own platform, not someone else's. Also full stack development with React, TypeScript, Astro and Django.",
-            "location": "Medellín, Colombia · Remote worldwide",
-            "ctaProjects": "View projects",
-            "ctaContact": "Get in touch",
-            "motto": "technique beats strength",
-            "availability": "Available for freelance projects"
-        },
-        "about": {
-            "title": "About me",
-            "description": "I'm a Full Stack developer based in Medellín, Colombia. My main focus: building and maintaining course platforms for academies and content creators — from architecture and payments to secure video delivery and performance.\nI train Brazilian Jiu-Jitsu, and I take its first lesson seriously: technique beats strength. In software that means simple, well-leveraged solutions over unnecessary complexity — code others can read, sites that load fast, systems that are easy to maintain.\nI work freelance and remote (English B2), with React, TypeScript, Astro and Python/Django.",
-            "stats": {
-                "years": "years of experience",
-                "users": "students using platforms I built",
-                "remote": "English B2 · Remote ready"
-            }
-        },
-        "skills": {
-            "title": "Tech stack",
-            "core": {
-                "react": "My main frontend tool — interfaces, SPAs and dashboards",
-                "node": "APIs and backend services in JavaScript",
-                "typescript": "Strict typing across all my projects",
-                "postgres": "Data modeling and queries in production",
-                "reactNative": "Cross-platform mobile apps"
+            "role": "Camilo González, Full Stack Developer",
+            "headline": "I build web products that hold up in production.",
+            "summary": "Two years shipping React and TypeScript applications for real clients, from a course platform with 1,000+ active users to a 3D map for a live event. I scope, build, deploy and support the work myself.",
+            "ctaContact": "Contact me",
+            "ctaWork": "See my work",
+            "availability": "Open to full-time and contract roles",
+            "facts": {
+                "location": "Based in",
+                "locationValue": "Medellín, Colombia. Remote-ready",
+                "experience": "Experience",
+                "experienceValue": "2+ years in production",
+                "users": "Largest platform",
+                "usersValue": "1,000+ active users",
+                "languages": "Languages",
+                "languagesValue": "Spanish native, English B2"
             },
-            "categories": {
-                "frontend": "Frontend",
-                "backend": "Backend",
-                "database": "Databases",
-                "cloud": "Cloud",
-                "tools": "Tools",
-                "design": "Design"
-            }
+            "photoAlt": "Portrait of Camilo González"
+        },
+        "experience": {
+            "title": "Experience",
+            "intro": "Independent consulting and in-house frontend work, most recent first.",
+            "education": "Education",
+            "certifications": "Certifications",
+            "languages": "Languages"
         },
         "projects": {
-            "title": "Projects",
-            "description": "Real work for real clients — the problem, what I did, and the result.",
-            "problem": "The problem",
+            "title": "Selected work",
+            "intro": "Client projects described the way I'd explain them in an interview: the problem, what I did, and what changed.",
+            "problem": "Problem",
             "solution": "What I did",
-            "result": "The result"
+            "result": "Result",
+            "stack": "Stack",
+            "viewSite": "Visit site",
+            "caseStudy": "Read case study"
         },
-        "personal": {
-            "title": "Labs",
-            "description": "Personal projects where I test ideas and new tech",
-            "modal": {
-                "highlights": "Highlights",
-                "screenshots": "Screenshots",
-                "screenshotAlt": "Project screenshot"
+        "skills": {
+            "title": "Skills",
+            "intro": "The tools I use in production, grouped by where they sit in the stack.",
+            "area": "Area",
+            "tools": "Technologies",
+            "categories": {
+                "frontend": "Frontend",
+                "mobile": "Mobile",
+                "backend": "Backend and APIs",
+                "data": "Data",
+                "cloud": "Cloud and infrastructure",
+                "ai": "AI",
+                "practice": "Practice"
             }
         },
+        "labs": {
+            "title": "Labs",
+            "intro": "Personal projects where I try new tools and rebuild things to learn them properly.",
+            "details": "View details"
+        },
+        "contact": {
+            "title": "Hiring a full stack developer?",
+            "body": "Tell me about the role and the team. Email is the fastest way to reach me; you can also find me on LinkedIn and GitHub.",
+            "email": "Email me",
+            "copy": "Copy email",
+            "copied": "Email copied",
+            "dialogTitle": "Email address",
+            "close": "Close"
+        },
         "common": {
-            "loading": "Loading...",
-            "error": "Something went wrong",
-            "success": "Done!",
-            "viewProject": "View project",
-            "viewCode": "View code",
-            "close": "Close",
-            "contact": "Get in touch",
-            "moreDetails": "More details",
-            "emailModalTitle": "Contact info",
-            "emailModalDescription": "Copy my email:",
-            "switchLanguage": "Switch language"
+            "switchLanguage": "Ver en español",
+            "switchLanguageShort": "ES",
+            "theme": "Switch color theme",
+            "backToWork": "Back to selected work",
+            "backToLabs": "Back to Labs",
+            "notFound": "This project doesn't exist.",
+            "overview": "Overview",
+            "highlights": "Highlights",
+            "technologies": "Technologies",
+            "screenshots": "Screenshots",
+            "screenshotAlt": "Project screenshot",
+            "viewCode": "View code on GitHub",
+            "rights": "Built with Astro."
         }
     },
     "es": {
+        "meta": {
+            "title": "Camilo González — Desarrollador Full Stack",
+            "description": "Desarrollador full stack en Medellín, Colombia. Aplicaciones con React, TypeScript, Node.js y Django construidas, desplegadas y mantenidas en producción."
+        },
         "nav": {
-            "home": "Inicio",
-            "about": "Sobre mí",
-            "skills": "Stack",
+            "label": "Principal",
+            "home": "Camilo González, inicio",
+            "experience": "Experiencia",
             "projects": "Proyectos",
-            "personal": "Labs"
+            "skills": "Habilidades",
+            "labs": "Labs",
+            "contact": "Contacto",
+            "skip": "Ir al contenido"
         },
         "hero": {
-            "subtitle": "Camilo González · Desarrollador Full Stack",
-            "titleLine1": "Construyo plataformas de cursos",
-            "titleLine2": "y sitios web rápidos",
-            "titleAccent": "para academias y creadores.",
-            "description": "LMS a medida, migraciones, rendimiento y SEO técnico — para que tu contenido se venda desde tu propia plataforma, no la de otro. También desarrollo full stack con React, TypeScript, Astro y Django.",
-            "location": "Medellín, Colombia · Remoto para todo el mundo",
-            "ctaProjects": "Ver proyectos",
+            "role": "Camilo González, Desarrollador Full Stack",
+            "headline": "Construyo productos web que funcionan en producción.",
+            "summary": "Dos años entregando aplicaciones con React y TypeScript para clientes reales, desde una plataforma de cursos con más de 1.000 usuarios activos hasta un mapa 3D para un evento en vivo. Defino el alcance, desarrollo, despliego y doy soporte.",
             "ctaContact": "Contáctame",
-            "motto": "la técnica vence a la fuerza",
-            "availability": "Disponible para proyectos freelance"
-        },
-        "about": {
-            "title": "Sobre mí",
-            "description": "Soy desarrollador Full Stack con base en Medellín, Colombia. Mi foco principal: construir y mantener plataformas de cursos para academias y creadores de contenido — desde la arquitectura y los pagos hasta el video seguro y el rendimiento.\nEntreno Brazilian Jiu-Jitsu y me tomo en serio su primera lección: la técnica vence a la fuerza. En software eso significa soluciones simples y bien apalancadas en lugar de complejidad innecesaria — código que otros puedan leer, sitios que cargan rápido y sistemas fáciles de mantener.\nTrabajo freelance y en remoto (inglés B2), con React, TypeScript, Astro y Python/Django.",
-            "stats": {
-                "years": "años de experiencia",
-                "users": "estudiantes usan plataformas que construí",
-                "remote": "Inglés B2 · Listo para remoto"
-            }
-        },
-        "skills": {
-            "title": "Stack técnico",
-            "core": {
-                "react": "Mi herramienta principal de frontend — interfaces, SPAs y dashboards",
-                "node": "APIs y servicios backend en JavaScript",
-                "typescript": "Tipado estricto en todos mis proyectos",
-                "postgres": "Modelado de datos y consultas en producción",
-                "reactNative": "Apps móviles multiplataforma"
+            "ctaWork": "Ver proyectos",
+            "availability": "Disponible para roles de tiempo completo y por contrato",
+            "facts": {
+                "location": "Ubicación",
+                "locationValue": "Medellín, Colombia. Trabajo remoto",
+                "experience": "Experiencia",
+                "experienceValue": "2+ años en producción",
+                "users": "Plataforma más grande",
+                "usersValue": "1.000+ usuarios activos",
+                "languages": "Idiomas",
+                "languagesValue": "Español nativo, inglés B2"
             },
-            "categories": {
-                "frontend": "Frontend",
-                "backend": "Backend",
-                "database": "Bases de datos",
-                "cloud": "Cloud",
-                "tools": "Herramientas",
-                "design": "Diseño"
-            }
+            "photoAlt": "Retrato de Camilo González"
+        },
+        "experience": {
+            "title": "Experiencia",
+            "intro": "Consultoría independiente y trabajo frontend en equipo, de lo más reciente a lo más antiguo.",
+            "education": "Formación",
+            "certifications": "Certificaciones",
+            "languages": "Idiomas"
         },
         "projects": {
-            "title": "Proyectos",
-            "description": "Trabajo real para clientes reales — el problema, qué hice y el resultado.",
-            "problem": "El problema",
+            "title": "Proyectos destacados",
+            "intro": "Proyectos con clientes, contados como los explicaría en una entrevista: el problema, lo que hice y lo que cambió.",
+            "problem": "Problema",
             "solution": "Qué hice",
-            "result": "El resultado"
+            "result": "Resultado",
+            "stack": "Stack",
+            "viewSite": "Visitar sitio",
+            "caseStudy": "Leer caso de estudio"
         },
-        "personal": {
-            "title": "Labs",
-            "description": "Proyectos personales donde pruebo ideas y tecnologías nuevas",
-            "modal": {
-                "highlights": "Puntos clave",
-                "screenshots": "Capturas",
-                "screenshotAlt": "Captura del proyecto"
+        "skills": {
+            "title": "Habilidades",
+            "intro": "Las herramientas que uso en producción, agrupadas según su lugar en el stack.",
+            "area": "Área",
+            "tools": "Tecnologías",
+            "categories": {
+                "frontend": "Frontend",
+                "mobile": "Móvil",
+                "backend": "Backend y APIs",
+                "data": "Datos",
+                "cloud": "Cloud e infraestructura",
+                "ai": "IA",
+                "practice": "Práctica"
             }
         },
+        "labs": {
+            "title": "Labs",
+            "intro": "Proyectos personales donde pruebo herramientas nuevas y reconstruyo cosas para aprenderlas a fondo.",
+            "details": "Ver detalles"
+        },
+        "contact": {
+            "title": "¿Buscas un desarrollador full stack?",
+            "body": "Cuéntame sobre el rol y el equipo. El correo es la forma más rápida de contactarme; también estoy en LinkedIn y GitHub.",
+            "email": "Escríbeme",
+            "copy": "Copiar correo",
+            "copied": "Correo copiado",
+            "dialogTitle": "Correo electrónico",
+            "close": "Cerrar"
+        },
         "common": {
-            "loading": "Cargando...",
-            "error": "Algo salió mal",
-            "success": "¡Listo!",
-            "viewProject": "Ver proyecto",
-            "viewCode": "Ver código",
-            "close": "Cerrar",
-            "contact": "Contáctame",
-            "moreDetails": "Más detalles",
-            "emailModalTitle": "Información de contacto",
-            "emailModalDescription": "Copia mi email:",
-            "switchLanguage": "Cambiar idioma"
+            "switchLanguage": "View in English",
+            "switchLanguageShort": "EN",
+            "theme": "Cambiar tema de color",
+            "backToWork": "Volver a proyectos",
+            "backToLabs": "Volver a Labs",
+            "notFound": "Este proyecto no existe.",
+            "overview": "Resumen",
+            "highlights": "Puntos clave",
+            "technologies": "Tecnologías",
+            "screenshots": "Capturas",
+            "screenshotAlt": "Captura del proyecto",
+            "viewCode": "Ver código en GitHub",
+            "rights": "Hecho con Astro."
         }
     }
 }

@@ -1,0 +1,65 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Button from "@/components/ui/Button.astro";
+import Icon from "@/components/ui/Icon.astro";
+import { personalProjects } from "@/data/personalProjects";
+import { useTranslations } from "@/i18n/utils";
+
+interface Props {
+    slug: string;
+}
+
+const { slug } = Astro.props;
+const { lang } = Astro.params;
+const L = (lang as "en" | "es") || "en";
+const t = useTranslations(L);
+const project = personalProjects.find((p) => p.slug === slug);
+---
+
+<Layout
+    title={project ? `${project.name[L]} — Camilo González` : t("common.notFound")}
+    description={project?.description[L]}
+>
+    <div class='shell'>
+        <article class='doc'>
+            <a href={`/${L}#labs`} class='doc-back'><Icon name='arrow-left' />{t("common.backToLabs")}</a>
+            {project ? (
+                <>
+                    <h1>{project.name[L]}</h1>
+                    <p>{project.description[L]}</p>
+
+                    <h2>{t("common.overview")}</h2>
+                    <p>{project.details.longDescription[L]}</p>
+
+                    <h2>{t("common.highlights")}</h2>
+                    <ul>
+                        {project.details.highlights[L].map((h) => <li>{h}</li>)}
+                    </ul>
+
+                    <h2>{t("common.technologies")}</h2>
+                    <div class='tags'>
+                        {project.technologies.map((tech) => <span>{tech}</span>)}
+                    </div>
+
+                    {project.externalUrl && (
+                        <p style='margin-top:32px'>
+                            <Button href={project.externalUrl} variant='secondary' external>
+                                <Icon name='github' />
+                                {t("common.viewCode")}
+                            </Button>
+                        </p>
+                    )}
+
+                    <h2>{t("common.screenshots")}</h2>
+                    <div class='shots'>
+                        {project.details.screenshots.map((src) => (
+                            <img src={src} alt={t("common.screenshotAlt")} loading='lazy' decoding='async' />
+                        ))}
+                    </div>
+                </>
+            ) : (
+                <h1>{t("common.notFound")}</h1>
+            )}
+        </article>
+    </div>
+</Layout>

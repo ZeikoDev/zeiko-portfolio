@@ -1,25 +1,34 @@
 ---
+import "@/styles/tokens.css";
+import Icon from "@/components/ui/Icon.astro";
 import { useTranslations } from "@/i18n/utils";
+import { SITE } from "@/data/site";
 
 interface Props {
-	title: string;
-	description: string;
+	title?: string;
+	description?: string;
 }
 
-const { title, description } = Astro.props;
 const { lang } = Astro.params;
-const t = useTranslations(lang as "en" | "es");
+const currentLang = (lang as "en" | "es") || "en";
+const t = useTranslations(currentLang);
+const { title = t("meta.title"), description = t("meta.description") } = Astro.props;
+
+const otherLang = currentLang === "en" ? "es" : "en";
+const altPath = Astro.url.pathname.replace(/^\/(en|es)(?=\/|$)/, `/${otherLang}`);
+const home = `/${currentLang}`;
 
 const navItems = [
-	{ href: "#hero", label: t("nav.home") },
-	{ href: "#about", label: t("nav.about") },
-	{ href: "#skills", label: t("nav.skills") },
-	{ href: "#projects", label: t("nav.projects") },
+	{ href: `${home}#experience`, label: t("nav.experience") },
+	{ href: `${home}#work`, label: t("nav.projects") },
+	{ href: `${home}#skills`, label: t("nav.skills") },
+	{ href: `${home}#labs`, label: t("nav.labs") },
+	{ href: `${home}#contact`, label: t("nav.contact") },
 ];
 ---
 
 <!doctype html>
-<html lang={lang} class='dark'>
+<html lang={currentLang} class='dark'>
 	<head>
 		<meta charset='UTF-8' />
 		<meta name='viewport' content='width=device-width, initial-scale=1.0' />
@@ -27,316 +36,222 @@ const navItems = [
 		<meta property='og:title' content={title} />
 		<meta property='og:description' content={description} />
 		<meta property='og:type' content='website' />
+		<meta name='theme-color' content='#161616' />
 		<link rel='icon' type='image/svg+xml' href='/favicon.svg' />
-		<link rel='alternate icon' type='image/svg+xml' href='/bjj-belt.svg' />
+		<link rel='alternate' hreflang={otherLang} href={altPath} />
 		<link rel='preconnect' href='https://fonts.googleapis.com' />
 		<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
 		<link
-			href='https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap'
+			href='https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap'
 			rel='stylesheet'
 		/>
 		<title>{title}</title>
 		<script is:inline>
-			// Marca que hay JS: los reveals solo ocultan contenido si esta clase existe,
-			// así el sitio nunca queda en blanco si un script falla.
-			document.documentElement.classList.add("js");
+			// Dark is the default; a saved choice wins. Runs before paint.
+			(function () {
+				var theme = "dark";
+				try {
+					theme = localStorage.getItem("theme") || "dark";
+				} catch (e) {}
+				document.documentElement.classList.toggle("dark", theme === "dark");
+			})();
 		</script>
 	</head>
-	<body class='bg-navy-950 text-text-primary min-h-screen font-sans'>
-		<div class='relative'>
-			<!-- Mobile top nav -->
-			<nav class='mobile-nav lg:hidden' aria-label='Main'>
-				{navItems.map((item) => (
-					<a href={item.href} class='mobile-nav-link'>{item.label}</a>
-				))}
-			</nav>
+	<body class='min-h-screen'>
+		<a href='#main' class='skip-link'>{t("nav.skip")}</a>
 
-			<!-- Side Navigation (desktop) -->
-			<nav
-				class='fixed right-8 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col items-center'
-				aria-label='Main'
-			>
-				<div class='relative flex flex-col items-center gap-8'>
-					<div class='absolute top-0 bottom-0 w-px bg-navy-700'></div>
-					{navItems.map((item) => (
-						<a
-							href={item.href}
-							class='nav-dot group relative z-10 flex items-center'
-							aria-label={item.label}
-						>
-							<span class='nav-label opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 absolute right-8 whitespace-nowrap text-sm font-medium text-text-secondary transition-all duration-300 translate-x-2 group-hover:translate-x-0'>
-								{item.label}
-							</span>
-							<span class='w-3 h-3 rounded-full border-2 border-navy-600 bg-navy-950 transition-all duration-300 group-hover:border-accent group-hover:bg-accent/20'>
-							</span>
-						</a>
-					))}
+		<header class='site-header'>
+			<div class='shell header-row'>
+				<a href={home} class='brand'>{SITE.name}</a>
+
+				<nav aria-label={t("nav.label")} class='header-nav'>
+					<ul>
+						{navItems.map((item) => (
+							<li><a href={item.href}>{item.label}</a></li>
+						))}
+					</ul>
+				</nav>
+
+				<div class='header-tools'>
+					<a href={altPath} class='tool-btn' hreflang={otherLang} lang={otherLang} aria-label={t("common.switchLanguage")}>
+						{t("common.switchLanguageShort")}
+					</a>
+					<button type='button' class='tool-btn' id='theme-toggle' aria-label={t("common.theme")}>
+						<Icon name='sun' class='icon-sun w-[18px] h-[18px]' />
+						<Icon name='moon' class='icon-moon w-[18px] h-[18px]' />
+					</button>
 				</div>
-			</nav>
+			</div>
+		</header>
 
-			<!-- Main Content -->
-			<main>
-				<slot />
-			</main>
+		<main id='main'>
+			<slot />
+		</main>
 
-			<!-- Footer -->
-			<footer class='border-t border-navy-700/50 py-8 mt-section'>
-				<div class='max-w-content mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-3'>
-					<p class='text-text-muted text-sm'>
-						&copy; {new Date().getFullYear()} Camilo González — ZeikoDev
-					</p>
-					<p class='text-text-muted text-xs font-mono'>
-						{`// ${t("hero.motto")}`}
-					</p>
-				</div>
-			</footer>
-		</div>
+		<footer class='site-footer'>
+			<div class='shell footer-row t-small'>
+				<p>&copy; {new Date().getFullYear()} {SITE.fullName}</p>
+				<ul class='footer-links'>
+					<li><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+					<li><a href={SITE.linkedin} target='_blank' rel='noopener noreferrer'>LinkedIn</a></li>
+					<li><a href={SITE.github} target='_blank' rel='noopener noreferrer'>GitHub</a></li>
+				</ul>
+			</div>
+		</footer>
 	</body>
 </html>
 
 <style is:global>
-	:root {
-		scroll-behavior: smooth;
-		/* Los anchors no quedan tapados por la nav móvil fija */
-		scroll-padding-top: 64px;
-	}
-
-	html,
-	body {
-		overscroll-behavior: none;
-		-webkit-overflow-scrolling: touch;
-	}
-
-	html {
-		overflow-x: hidden;
-	}
-
-	/* Escala compartida para títulos de sección: mismo tamaño en todo el sitio */
-	.section-title {
-		font-size: clamp(1.875rem, 4vw, 3rem);
-		line-height: 1.15;
-		text-wrap: balance;
-	}
-
-	/* Sistema de reveals: reemplaza a GSAP.
-	   Solo oculta contenido cuando html.js existe (progressive enhancement). */
-	html.js [data-reveal] {
-		opacity: 0;
-		transform: translateY(28px);
-		transition:
-			opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-			transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-		transition-delay: var(--reveal-delay, 0s);
-	}
-
-	html.js [data-reveal].is-visible {
-		opacity: 1;
-		transform: translateY(0);
-	}
-
-	/* Accesibilidad: sin movimiento para quien lo pidió en su sistema */
-	@media (prefers-reduced-motion: reduce) {
-		:root {
-			scroll-behavior: auto;
-		}
-		*,
-		*::before,
-		*::after {
-			animation-duration: 0.01ms !important;
-			animation-iteration-count: 1 !important;
-			transition-duration: 0.01ms !important;
-		}
-		html.js [data-reveal] {
-			opacity: 1;
-			transform: none;
-		}
-	}
-
-	/* Mobile nav */
-	.mobile-nav {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		z-index: 50;
-		display: flex;
-		justify-content: center;
-		gap: 1.5rem;
-		padding: 0.9rem 1rem;
-		background: rgba(6, 13, 24, 0.75);
-		backdrop-filter: blur(12px);
-		-webkit-backdrop-filter: blur(12px);
-		border-bottom: 1px solid rgba(46, 139, 255, 0.08);
-	}
-
-	/* Este display:flex le ganaría al lg:hidden de Tailwind por orden de cascada,
-	   así que el breakpoint se repite acá */
-	@media (min-width: 1024px) {
-		.mobile-nav {
-			display: none;
-		}
-	}
-
-	.mobile-nav-link {
-		font-family: "JetBrains Mono", monospace;
-		font-size: 0.75rem;
-		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		color: #8B9AB8;
-		transition: color 0.2s ease;
-	}
-
-	.mobile-nav-link:hover,
-	.mobile-nav-link:focus-visible {
-		color: #2E8BFF;
-	}
-
-	a:focus-visible,
-	button:focus-visible {
-		outline: 2px solid #2E8BFF;
-		outline-offset: 3px;
-		border-radius: 2px;
-	}
-
-	/* Glow cards: el borde se ilumina donde está el cursor.
-	   --gx/--gy las setea un pointermove global (ver script abajo).
-	   El truco del borde: dos máscaras compuestas con exclude dejan
-	   visible solo el anillo de 1px entre padding-box y border-box. */
-	.glow-card {
-		position: relative;
-	}
-
-	.glow-card::after {
-		content: "";
+	.skip-link {
 		position: absolute;
-		inset: -1px;
-		border-radius: inherit;
-		pointer-events: none;
-		padding: 1px;
-		background: radial-gradient(
-			200px circle at var(--gx, 50%) var(--gy, 50%),
-			rgba(91, 168, 255, 0.55),
-			transparent 70%
-		);
-		-webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-		-webkit-mask-composite: xor;
-		mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-		mask-composite: exclude;
-		opacity: 0;
-		transition: opacity 0.35s ease;
+		left: var(--gutter);
+		top: -100px;
+		z-index: 100;
+		padding: 0.75rem 1rem;
+		background: rgb(var(--blue-block));
+		color: #fff;
+	}
+	.skip-link:focus { top: 8px; }
+
+	.site-header {
+		position: sticky;
+		top: 0;
+		z-index: 40;
+		background: rgb(var(--bg) / 0.92);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+		border-bottom: 1px solid rgb(var(--rule));
 	}
 
-	.glow-card:hover::after {
-		opacity: 1;
+	.header-row {
+		display: flex;
+		align-items: center;
+		gap: 24px;
+		height: 64px;
 	}
 
-	@media (prefers-reduced-motion: reduce) {
-		.glow-card::after {
-			display: none;
+	.brand {
+		font-weight: 700;
+		font-size: 1rem;
+		font-variation-settings: "wdth" 108;
+		letter-spacing: -0.01em;
+		white-space: nowrap;
+		flex: none;
+	}
+
+	.header-nav {
+		flex: 1;
+		overflow-x: auto;
+		scrollbar-width: none;
+	}
+	.header-nav::-webkit-scrollbar { display: none; }
+	.header-nav ul {
+		display: flex;
+		gap: 4px;
+	}
+	.header-nav a {
+		display: block;
+		padding: 0.5rem 0.75rem;
+		font-size: 0.95rem;
+		font-weight: 500;
+		color: rgb(var(--fg-2));
+		white-space: nowrap;
+		border-bottom: 2px solid transparent;
+	}
+	.header-nav a:hover { color: rgb(var(--fg)); }
+	.header-nav a[aria-current="true"] {
+		color: rgb(var(--fg));
+		border-bottom-color: rgb(var(--blue));
+	}
+
+	.header-tools {
+		display: flex;
+		gap: 8px;
+		flex: none;
+	}
+	.tool-btn {
+		display: grid;
+		place-items: center;
+		min-width: 40px;
+		height: 40px;
+		padding: 0 0.5rem;
+		border: 1px solid rgb(var(--rule));
+		font-size: 0.85rem;
+		font-weight: 600;
+		color: rgb(var(--fg));
+		background: transparent;
+		cursor: pointer;
+	}
+	.tool-btn:hover { border-color: rgb(var(--fg-2)); }
+	.icon-moon { display: none; }
+	:root:not(.dark) .icon-sun { display: none; }
+	:root:not(.dark) .icon-moon { display: block; }
+
+	@media (max-width: 767px) {
+		.header-row {
+			flex-wrap: wrap;
+			height: auto;
+			padding-block: 12px 0;
+			row-gap: 4px;
 		}
+		.header-tools { margin-left: auto; }
+		.header-nav {
+			order: 3;
+			flex-basis: 100%;
+			margin-inline: calc(var(--gutter) * -1);
+			padding-inline: calc(var(--gutter) - 0.75rem);
+		}
+		html { scroll-padding-top: 120px; }
 	}
 
-	/* Scrollbar */
-	::-webkit-scrollbar {
-		width: 6px;
+	.site-footer {
+		border-top: 1px solid rgb(var(--rule));
+		padding-block: 32px;
+		color: rgb(var(--fg-2));
 	}
-
-	::-webkit-scrollbar-track {
-		background: #060d18;
+	.footer-row {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 16px;
 	}
-
-	::-webkit-scrollbar-thumb {
-		background: #1c3254;
-		border-radius: 3px;
+	.footer-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 24px;
 	}
-
-	::-webkit-scrollbar-thumb:hover {
-		background: #2E8BFF;
-	}
-
-	::selection {
-		background: rgba(46, 139, 255, 0.3);
-		color: #E8EDF5;
-	}
-
-	/* Nav active state */
-	.nav-dot.active span:last-child {
-		border-color: #2E8BFF;
-		background: rgba(46, 139, 255, 0.3);
-		box-shadow: 0 0 12px rgba(46, 139, 255, 0.4);
-	}
-
-	.nav-dot.active .nav-label {
-		opacity: 1;
-		color: #2E8BFF;
-	}
+	.footer-links a:hover { color: rgb(var(--fg)); text-decoration: underline; }
 </style>
 
-<script is:inline>
-	// Solo forzar scroll-top cuando no hay anchor en la URL
-	if (!window.location.hash) {
-		if ("scrollRestoration" in history) {
-			history.scrollRestoration = "manual";
-		}
-		window.scrollTo(0, 0);
-	}
-
-	document.addEventListener("DOMContentLoaded", () => {
-		// Reveals al hacer scroll (reemplazo de GSAP ScrollTrigger)
-		const revealEls = document.querySelectorAll("[data-reveal]");
-		if ("IntersectionObserver" in window) {
-			const io = new IntersectionObserver(
-				(entries) => {
-					entries.forEach((entry) => {
-						if (entry.isIntersecting) {
-							entry.target.classList.add("is-visible");
-							io.unobserve(entry.target);
-						}
-					});
-				},
-				{ threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
-			);
-			revealEls.forEach((el) => io.observe(el));
-		} else {
-			revealEls.forEach((el) => el.classList.add("is-visible"));
-		}
-
-		// Estado activo de la nav lateral
-		const sections = ["hero", "about", "skills", "projects", "personal-projects"];
-		const navDots = document.querySelectorAll(".nav-dot");
-
-		function onScroll() {
-			let current = "";
-			for (const id of sections) {
-				const section = document.getElementById(id);
-				if (section) {
-					const rect = section.getBoundingClientRect();
-					if (rect.top <= 120 && rect.bottom > 120) {
-						current = id;
-						break;
-					}
-				}
-			}
-			navDots.forEach((dot) => {
-				const href = dot.getAttribute("href");
-				dot.classList.toggle("active", href === `#${current}`);
-			});
-		}
-
-		window.addEventListener("scroll", onScroll, { passive: true });
-		onScroll();
-
-		// Glow cards: solo con mouse real y sin reduced-motion
-		const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-		const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-		if (fine && !reduced) {
-			document.querySelectorAll(".glow-card").forEach((card) => {
-				card.addEventListener("pointermove", (e) => {
-					const r = card.getBoundingClientRect();
-					card.style.setProperty("--gx", `${e.clientX - r.left}px`);
-					card.style.setProperty("--gy", `${e.clientY - r.top}px`);
-				});
-			});
-		}
+<script>
+	const toggle = document.getElementById("theme-toggle");
+	toggle?.addEventListener("click", () => {
+		const dark = document.documentElement.classList.toggle("dark");
+		try {
+			localStorage.setItem("theme", dark ? "dark" : "light");
+		} catch {}
 	});
+
+	// Highlight the nav item for the section in view (home page only).
+	const links = Array.from(document.querySelectorAll<HTMLAnchorElement>(".header-nav a"));
+	const sections = links
+		.map((a) => document.getElementById(a.hash.slice(1)))
+		.filter((el): el is HTMLElement => !!el);
+	const top = document.getElementById("top");
+	if (top) sections.push(top);
+
+	if (sections.length && "IntersectionObserver" in window) {
+		const io = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					if (!entry.isIntersecting) continue;
+					links.forEach((a) =>
+						a.setAttribute("aria-current", String(a.hash === `#${entry.target.id}`)),
+					);
+				}
+			},
+			{ rootMargin: "-45% 0px -50% 0px" },
+		);
+		sections.forEach((s) => io.observe(s));
+	}
 </script>

@@ -2,9 +2,9 @@
 
 # Zeiko Portfolio
 
-The personal portfolio of Camilo González (ZeikoDev), a full-stack developer based in Medellín, Colombia — focused on course platforms (LMS), migrations, and performance/SEO work for academies and content creators.
+The personal portfolio of Camilo González (ZeikoDev), a full-stack developer based in Medellín, Colombia.
 
-Built with Astro and shipped as a static site. Brazilian Jiu-Jitsu shows up as an accent — the belt mark, the "technique beats strength" motto — not as the theme of the interface.
+Built with Astro and shipped as a static site. The design is a corporate, grid-based system: a single typeface (Archivo, variable width), blue as the only accent, dark theme by default with a light theme toggle, and a portrait in the hero.
 
 ## Features
 
@@ -12,10 +12,11 @@ Built with Astro and shipped as a static site. Brazilian Jiu-Jitsu shows up as a
 - 🗂️ **Dynamic routing per language**: All main pages and project details live under `/en/` and `/es/`
 - 📇 **Case studies**: Client work is written as problem → what I did → result, with detail pages for the longer ones
 - ⚡ **No runtime UI framework**: Every section is a static Astro component; the site is its own performance demo
-- 🎞️ **Animations without libraries**: CSS plus a single `IntersectionObserver` driving `data-reveal`, with `prefers-reduced-motion` respected
+- 🎨 **Design tokens**: CSS variables in `src/styles/tokens.css`, consumed by Tailwind; dark by default with a persisted light/dark toggle
+- 🎞️ **One orchestrated animation**: the hero entrance, disabled under `prefers-reduced-motion`
 - 📱 Fully responsive layout
-- 🎯 Smooth scroll navigation
-- ✉️ Contact through an email modal, no backend required
+- 🧭 Sticky header with section highlighting and a language switch that keeps the current page
+- ✉️ Contact block with mailto and copy-to-clipboard, no backend required
 
 ## Tech Stack
 
@@ -76,31 +77,31 @@ The built files will be in the `dist` directory.
 zeiko-portfolio/
 ├── docs/                        # Repo-only assets (README preview)
 ├── public/                      # Static assets served as-is
-│   ├── assets/icons/            # Tech icons used in the Skills section
-│   ├── assets/projects/         # Project screenshots (.webp)
-│   └── bjj-belt.svg             # Belt mark used as an accent
+│   ├── assets/projects/         # Project screenshots
+│   └── favicon.svg              # CG monogram
 ├── src/
 │   ├── components/
 │   │   ├── sections/            # Page sections
-│   │   │   ├── Hero.astro
-│   │   │   ├── TechMarquee.astro
-│   │   │   ├── About.astro
-│   │   │   ├── Skills.astro
-│   │   │   ├── Projects.astro          # Client work
-│   │   │   └── PersonalProjects.astro  # Side projects
-│   │   └── ui/
-│   │       ├── EmailModal.astro
-│   │       └── buttons/JesseButton.astro
+│   │   │   ├── Hero.astro              # Headline, portrait, facts
+│   │   │   ├── Experience.astro        # Roles, education, certifications
+│   │   │   ├── Projects.astro          # Client case studies
+│   │   │   ├── Skills.astro            # Skills matrix
+│   │   │   ├── PersonalProjects.astro  # Labs
+│   │   │   └── Contact.astro
+│   │   ├── LabDetail.astro      # Shared Labs detail page
+│   │   └── ui/                  # Button, Icon
 │   ├── data/
 │   │   ├── projects.ts          # Client work (bilingual, problem/solution/result)
 │   │   ├── personalProjects.ts  # Side projects
-│   │   └── site.ts              # Contact email
+│   │   ├── experience.ts        # Roles, education, certifications, languages
+│   │   └── site.ts              # Name, email, social links
 │   ├── i18n/
 │   │   ├── ui.json              # UI text translations
 │   │   ├── utils.ts             # i18n helper functions
-│   │   └── types.ts             # Type definitions for i18n
+│   │   └── types.ts             # TranslationKey, derived from ui.json
 │   ├── layouts/
-│   │   └── Layout.astro         # Shared head, styles and reveal-on-scroll script
+│   │   └── Layout.astro         # Head, header, theme toggle, footer
+│   ├── styles/tokens.css        # Design tokens and shared styles
 │   └── pages/
 │       ├── index.astro          # Root: client-side language redirect
 │       └── [lang]/              # Dynamic language folder (en, es)

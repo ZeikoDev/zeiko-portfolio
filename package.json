@@ -2,7 +2,7 @@
   "name": "zeiko-portfolio",
   "type": "module",
   "version": "1.0.0",
-  "description": "A modern, BJJ-themed full-stack developer portfolio",
+  "description": "Corporate portfolio of Camilo González, full stack developer",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

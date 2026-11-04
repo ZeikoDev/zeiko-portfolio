@@ -1,430 +1,163 @@
 ---
+import Button from "@/components/ui/Button.astro";
+import Icon from "@/components/ui/Icon.astro";
 import { useTranslations } from "@/i18n/utils";
 import { SITE } from "@/data/site";
 
 const { lang } = Astro.params;
-const currentLang = (lang as "en" | "es") || "en";
-const t = useTranslations(currentLang);
-const base = import.meta.env.BASE_URL;
+const t = useTranslations((lang as "en" | "es") || "en");
+
+const facts = [
+    { term: t("hero.facts.location"), value: t("hero.facts.locationValue") },
+    { term: t("hero.facts.experience"), value: t("hero.facts.experienceValue") },
+    { term: t("hero.facts.users"), value: t("hero.facts.usersValue") },
+    { term: t("hero.facts.languages"), value: t("hero.facts.languagesValue") },
+];
 ---
 
-<section
-    id='hero'
-    class='min-h-screen flex items-center relative overflow-hidden'
->
-    <!-- Language Switch -->
-    <!-- Debajo de la barra móvil fija; en lg vuelve arriba porque la barra desaparece -->
-    <div class='absolute top-16 right-4 lg:top-8 lg:right-8 z-20'>
-        <button
-            id='language-switch'
-            class='language-switch-btn'
-            aria-label={t("common.switchLanguage")}
-        >
-            <div class='switch-track'>
-                <div class='switch-thumb'>
-                    <span class='lang-text lang-en'>EN</span>
-                    <span class='lang-text lang-es'>ES</span>
+<section id='top' class='hero'>
+    <div class='shell'>
+        <div class='hero-grid'>
+            <div class='hero-copy'>
+                <p class='hero-role hero-in' style='--d:0s'>{t("hero.role")}</p>
+                <h1 class='t-display hero-in' style='--d:0.08s'>{t("hero.headline")}</h1>
+                <p class='t-lead hero-summary hero-in' style='--d:0.16s'>{t("hero.summary")}</p>
+
+                <div class='hero-ctas hero-in' style='--d:0.24s'>
+                    <Button href={`mailto:${SITE.email}`} variant='primary'>
+                        <Icon name='mail' />
+                        {t("hero.ctaContact")}
+                    </Button>
+                    <Button href={SITE.linkedin} variant='secondary' external>
+                        <Icon name='linkedin' />
+                        LinkedIn
+                    </Button>
+                    <Button href={SITE.github} variant='secondary' external>
+                        <Icon name='github' />
+                        GitHub
+                    </Button>
                 </div>
-            </div>
-        </button>
-    </div>
-
-    <!-- Background -->
-    <div class='absolute inset-0 bg-navy-950'>
-        <div class='dot-grid absolute inset-0 opacity-[0.04]'></div>
-        <div class='absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent'></div>
-        <div class='absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-navy-950 to-transparent'></div>
-        <!-- Spotlight que sigue al cursor (decorativo, solo desktop) -->
-        <div class='hero-spotlight' aria-hidden='true'></div>
-    </div>
-
-    <!-- Floating BJJ Belt (ADN, no protagonista) -->
-    <div class='absolute right-[8%] top-1/2 -translate-y-1/2 opacity-[0.06] pointer-events-none hidden lg:block'>
-        <img
-            src={`${base}bjj-belt.svg`}
-            alt=''
-            width='400'
-            height='400'
-            class='w-[400px] h-[400px] animate-float'
-            aria-hidden='true'
-        />
-    </div>
-
-    <!-- Content -->
-    <div class='relative z-10 max-w-content mx-auto px-6 md:px-12 w-full py-24'>
-        <div class='max-w-4xl'>
-            <!-- Availability badge -->
-            <div class='hero-in mb-6' style='--d: 0.1s'>
-                <span class='availability-badge'>
-                    <span class='pulse-dot' aria-hidden='true'></span>
-                    {t("hero.availability")}
-                </span>
+                <p class='hero-availability t-small hero-in' style='--d:0.3s'>{t("hero.availability")}</p>
             </div>
 
-            <!-- Eyebrow: quién soy -->
-            <p class='hero-in text-text-secondary font-mono text-sm tracking-widest uppercase mb-5' style='--d: 0.2s'>
-                {t("hero.subtitle")}
-            </p>
-
-            <!-- H1: propuesta de valor -->
-            <h1 class='hero-title font-heading font-extrabold tracking-tight mb-8'>
-                <span class='hero-in block' style='--d: 0.3s'>{t("hero.titleLine1")}</span>
-                <span class='hero-in block' style='--d: 0.42s'>{t("hero.titleLine2")}</span>
-                <span class='hero-in block text-gradient' style='--d: 0.54s'>{t("hero.titleAccent")}</span>
-            </h1>
-
-            <p class='hero-in text-lg md:text-xl text-text-secondary max-w-2xl leading-relaxed mb-4' style='--d: 0.7s'>
-                {t("hero.description")}
-            </p>
-
-            <p class='hero-in flex items-center gap-2 text-text-muted text-sm font-mono mb-10' style='--d: 0.8s'>
-                <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' class='w-4 h-4' aria-hidden='true'>
-                    <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z' />
-                    <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15 11a3 3 0 11-6 0 3 3 0 016 0z' />
-                </svg>
-                {t("hero.location")}
-            </p>
-
-            <!-- CTAs -->
-            <div class='hero-in flex flex-wrap items-center gap-4 mb-14' style='--d: 0.9s'>
-                <a href='#projects' class='btn-primary' data-magnetic>
-                    {t("hero.ctaProjects")}
-                    <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' class='w-4 h-4' aria-hidden='true'>
-                        <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 14l-7 7m0 0l-7-7m7 7V3' />
-                    </svg>
-                </a>
-                <a href={`mailto:${SITE.email}`} class='btn-secondary' data-magnetic>
-                    {t("hero.ctaContact")}
-                </a>
-            </div>
-
-            <!-- Motto: guiño BJJ -->
-            <div class='hero-in flex items-center gap-3' style='--d: 1.05s'>
-                <div class='w-px h-10 bg-accent/30 animate-glow-pulse'></div>
-                <span
-                    class='motto-text text-text-muted text-xs font-mono tracking-wider'
-                    data-motto={t("hero.motto")}
-                >
-                    {`// ${t("hero.motto")}`}
-                </span>
-            </div>
+            <figure class='hero-figure hero-in' style='--d:0.12s'>
+                <img
+                    src='/assets/camilo-gonzalez.webp'
+                    alt={t("hero.photoAlt")}
+                    width='880'
+                    height='1100'
+                    fetchpriority='high'
+                />
+            </figure>
         </div>
+    </div>
+
+    <div class='shell'>
+    <dl class='facts'>
+        {facts.map((f) => (
+            <div class='fact'>
+                <dt class='t-small'>{f.term}</dt>
+                <dd>{f.value}</dd>
+            </div>
+        ))}
+    </dl>
     </div>
 </section>
 
 <style>
-    .dot-grid {
-        background-image: radial-gradient(circle, #2E8BFF 1px, transparent 1px);
-        background-size: 32px 32px;
+    .hero {
+        padding-top: 64px;
+    }
+    @media (min-width: 1024px) {
+        .hero { padding-top: 104px; }
     }
 
-    /* Halo que sigue al cursor. Solo se pinta el gradiente en la posición
-       --sx/--sy que actualiza el script; en táctil queda fijo y casi invisible. */
-    .hero-spotlight {
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        background: radial-gradient(
-            550px circle at var(--sx, 75%) var(--sy, 35%),
-            rgba(46, 139, 255, 0.09),
-            transparent 65%
-        );
-        transition: opacity 0.4s ease;
+    .hero-grid {
+        display: grid;
+        gap: 56px;
+        padding-bottom: 64px;
     }
-
-    /* Caret del typewriter */
-    .motto-text::after {
-        content: "_";
-        display: inline-block;
-        margin-left: 2px;
-        color: #2E8BFF;
-        animation: caret-blink 1.1s steps(2, start) infinite;
-    }
-
-    @keyframes caret-blink {
-        50% {
-            opacity: 0;
+    @media (min-width: 1024px) {
+        .hero-grid {
+            grid-template-columns: repeat(12, minmax(0, 1fr));
+            column-gap: 32px;
+            align-items: end;
+            padding-bottom: 104px;
         }
+        .hero-copy { grid-column: 1 / span 7; }
+        .hero-figure { grid-column: 9 / span 4; }
     }
 
-    /* Tipografía fluida: escala con el viewport entre los dos extremos */
-    .hero-title {
-        font-size: clamp(2.25rem, 6.5vw, 4.75rem);
-        line-height: 1.05;
-        text-wrap: balance;
-    }
-
-    .text-gradient {
-        background: linear-gradient(100deg, #5BA8FF 0%, #2E8BFF 55%, #1E6FD9 100%);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-    }
-
-    /* Entrada escalonada: CSS puro, sin JS. El contenido nunca queda oculto
-       si un script falla, porque la animación no depende de ninguno. */
-    .hero-in {
-        opacity: 0;
-        animation: hero-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-        animation-delay: var(--d, 0s);
-    }
-
-    @keyframes hero-rise {
-        from {
-            opacity: 0;
-            transform: translateY(24px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .availability-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.4rem 0.9rem;
-        font-size: 0.8rem;
-        font-weight: 500;
-        color: #7EE2A8;
-        background: rgba(126, 226, 168, 0.06);
-        border: 1px solid rgba(126, 226, 168, 0.2);
-        border-radius: 2rem;
-    }
-
-    .pulse-dot {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: #7EE2A8;
-        animation: pulse-dot 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse-dot {
-        0%, 100% { box-shadow: 0 0 0 0 rgba(126, 226, 168, 0.5); }
-        50% { box-shadow: 0 0 0 5px rgba(126, 226, 168, 0); }
-    }
-
-    .btn-primary {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.75rem 1.75rem;
-        font-weight: 600;
-        font-size: 0.95rem;
-        color: #060d18;
-        background: #2E8BFF;
-        border-radius: 2rem;
-        transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease, background 0.25s ease;
-    }
-
-    .btn-primary:hover {
-        background: #5BA8FF;
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(46, 139, 255, 0.3);
-    }
-
-    .btn-primary:active {
-        transform: translateY(0);
-    }
-
-    .btn-secondary {
-        display: inline-flex;
-        align-items: center;
-        padding: 0.75rem 1.75rem;
-        font-weight: 600;
-        font-size: 0.95rem;
-        color: #E8EDF5;
-        border: 1px solid rgba(46, 139, 255, 0.3);
-        border-radius: 2rem;
-        transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .btn-secondary:hover {
-        border-color: #2E8BFF;
-        background: rgba(46, 139, 255, 0.08);
-        transform: translateY(-2px);
-    }
-
-    .btn-primary:focus-visible,
-    .btn-secondary:focus-visible {
-        outline: 2px solid #2E8BFF;
-        outline-offset: 3px;
-    }
-
-    /* Language Switch */
-    .language-switch-btn {
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 0;
-        transition: transform 0.2s ease;
-    }
-
-    .language-switch-btn:focus-visible {
-        outline: 2px solid #2E8BFF;
-        outline-offset: 3px;
-        border-radius: 18px;
-    }
-
-    .language-switch-btn:hover {
-        transform: scale(1.05);
-    }
-
-    .language-switch-btn:active {
-        transform: scale(0.95);
-    }
-
-    .switch-track {
-        position: relative;
-        width: 72px;
-        height: 36px;
-        background: rgba(15, 31, 54, 0.8);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(46, 139, 255, 0.15);
-        border-radius: 18px;
+    .hero-figure {
+        max-width: 420px;
+        aspect-ratio: 4 / 5;
         overflow: hidden;
-        transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        background: rgb(var(--surface));
+    }
+    @media (min-width: 1024px) {
+        .hero-figure { max-width: none; align-self: start; }
+    }
+    .hero-figure img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 
-    .switch-thumb {
-        position: absolute;
-        top: 2px;
-        left: 2px;
-        width: 32px;
-        height: 32px;
-        background: linear-gradient(135deg, #2E8BFF 0%, #1E6FD9 100%);
-        border-radius: 16px;
-        box-shadow: 0 2px 8px rgba(46, 139, 255, 0.3);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    .hero-role {
+        font-weight: 600;
+        color: rgb(var(--blue));
+        margin-bottom: 24px;
+    }
+    .hero-summary {
+        margin-top: 28px;
+        max-width: 56ch;
+        color: rgb(var(--fg-2));
+    }
+    .hero-ctas {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 40px;
+    }
+    .hero-availability {
+        margin-top: 20px;
+        color: rgb(var(--fg-2));
     }
 
-    .lang-text {
-        position: absolute;
-        font-size: 11px;
-        font-weight: 700;
-        font-family: "JetBrains Mono", monospace;
-        color: white;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        opacity: 0;
-        transform: scale(0.8);
+    .facts {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        border-top: 1px solid rgb(var(--rule));
     }
-
-    .lang-text.lang-en {
-        left: 50%;
-        transform: translateX(-50%) scale(0.8);
+    @media (min-width: 1024px) {
+        .facts { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     }
-
-    .lang-text.lang-es {
-        right: 50%;
-        transform: translateX(50%) scale(0.8);
+    .fact {
+        padding: 20px 16px 28px 0;
+        border-bottom: 1px solid rgb(var(--rule));
     }
-
-    .language-switch-btn[data-lang="en"] .switch-thumb {
-        left: 2px;
+    .fact + .fact {
+        padding-left: 16px;
+        border-left: 1px solid rgb(var(--rule));
     }
-
-    .language-switch-btn[data-lang="en"] .lang-text.lang-en {
-        opacity: 1;
-        transform: translateX(-50%) scale(1);
+    @media (max-width: 1023px) {
+        .fact + .fact:nth-child(3) { padding-left: 0; border-left: 0; }
     }
-
-    .language-switch-btn[data-lang="es"] .switch-thumb {
-        left: 38px;
+    @media (min-width: 1024px) {
+        .fact { border-bottom: 0; }
+        .fact + .fact { padding-left: 24px; }
     }
+    .fact dt { color: rgb(var(--fg-2)); margin-bottom: 6px; }
+    .fact dd { font-weight: 600; font-size: 1.05rem; line-height: 1.35; }
 
-    .language-switch-btn[data-lang="es"] .lang-text.lang-es {
-        opacity: 1;
-        transform: translateX(50%) scale(1);
+    @media (prefers-reduced-motion: no-preference) {
+        .hero-in {
+            animation: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+            animation-delay: var(--d);
+        }
     }
-
-    .language-switch-btn:hover .switch-track {
-        border-color: rgba(46, 139, 255, 0.3);
+    @keyframes rise {
+        from { opacity: 0; transform: translateY(16px); }
+        to { opacity: 1; transform: none; }
     }
 </style>
-
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-        const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-        // --- Spotlight: sigue al cursor dentro del hero (throttle con rAF) ---
-        const hero = document.getElementById("hero");
-        const spotlight = document.querySelector(".hero-spotlight") as HTMLElement;
-        if (hero && spotlight && fine && !reduced) {
-            let raf = 0;
-            hero.addEventListener("pointermove", (e) => {
-                if (raf) return;
-                raf = requestAnimationFrame(() => {
-                    const r = hero.getBoundingClientRect();
-                    spotlight.style.setProperty("--sx", `${e.clientX - r.left}px`);
-                    spotlight.style.setProperty("--sy", `${e.clientY - r.top}px`);
-                    raf = 0;
-                });
-            });
-        }
-
-        // --- Botones magnéticos: se desplazan sutilmente hacia el cursor ---
-        if (fine && !reduced) {
-            document.querySelectorAll<HTMLElement>("[data-magnetic]").forEach((btn) => {
-                const strength = 0.25;
-                const max = 8;
-                btn.addEventListener("pointermove", (e) => {
-                    const r = btn.getBoundingClientRect();
-                    const dx = (e.clientX - (r.left + r.width / 2)) * strength;
-                    const dy = (e.clientY - (r.top + r.height / 2)) * strength;
-                    const cx = Math.max(-max, Math.min(max, dx));
-                    const cy = Math.max(-max, Math.min(max, dy));
-                    btn.style.transform = `translate(${cx}px, ${cy}px)`;
-                });
-                btn.addEventListener("pointerleave", () => {
-                    btn.style.transform = "";
-                });
-            });
-        }
-
-        // --- Typewriter: el motto se escribe solo tras la entrada del hero ---
-        const motto = document.querySelector(".motto-text") as HTMLElement;
-        if (motto && !reduced) {
-            const text = motto.dataset.motto || "";
-            motto.textContent = "// ";
-            let i = 0;
-            setTimeout(() => {
-                const tick = setInterval(() => {
-                    motto.textContent = `// ${text.slice(0, ++i)}`;
-                    if (i >= text.length) clearInterval(tick);
-                }, 45);
-            }, 1400);
-        }
-
-        const languageSwitch = document.getElementById(
-            "language-switch",
-        ) as HTMLButtonElement;
-        if (!languageSwitch) return;
-
-        const currentLang = window.location.pathname.startsWith("/es")
-            ? "es"
-            : "en";
-
-        languageSwitch.setAttribute("data-lang", currentLang);
-
-        languageSwitch.addEventListener("click", () => {
-            const currentLang = languageSwitch.getAttribute("data-lang");
-            const newLang = currentLang === "en" ? "es" : "en";
-
-            languageSwitch.setAttribute("data-lang", newLang);
-
-            const currentPath = window.location.pathname;
-            const newPath = currentPath.replace(/^\/(en|es)/, `/${newLang}`);
-
-            setTimeout(() => {
-                window.location.href = newPath;
-            }, 150);
-        });
-    });
-</script>

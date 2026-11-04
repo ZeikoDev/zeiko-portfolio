@@ -1,0 +1,122 @@
+---
+import { useTranslations } from "@/i18n/utils";
+import { roles, education, certifications, languagesSpoken, formatPeriod } from "@/data/experience";
+
+const { lang } = Astro.params;
+const L = (lang as "en" | "es") || "en";
+const t = useTranslations(L);
+---
+
+<section id='experience' class='section'>
+    <div class='shell'>
+        <header class='section-head'>
+            <h2 class='t-h2'>{t("experience.title")}</h2>
+            <p class='t-lead text-fg-2'>{t("experience.intro")}</p>
+        </header>
+
+        <ol class='roles'>
+            {roles.map((r) => (
+                <li class='role'>
+                    <div class='role-meta'>
+                        <p class='role-period'>
+                            <time datetime={r.start}>{formatPeriod(L, r.start, r.end)}</time>
+                        </p>
+                        <p class='role-org'>
+                            {r.url ? <a href={r.url} target='_blank' rel='noopener noreferrer' class='link'>{r.org}</a> : r.org}
+                        </p>
+                    </div>
+                    <div class='role-body'>
+                        <h3 class='t-h3'>{r.title[L]}</h3>
+                        <ul class='role-points'>
+                            {r.points[L].map((p) => <li>{p}</li>)}
+                        </ul>
+                    </div>
+                    <p class='role-stack t-small'>{r.stack.join(", ")}</p>
+                </li>
+            ))}
+        </ol>
+
+        <div class='creds'>
+            <div>
+                <h3 class='creds-title'>{t("experience.education")}</h3>
+                <p class='font-semibold'>{education.title[L]}</p>
+                <p class='text-fg-2'>{education.org}, {education.start} – {L === "es" ? "presente" : "present"}</p>
+            </div>
+            <div>
+                <h3 class='creds-title'>{t("experience.certifications")}</h3>
+                <ul class='creds-list'>
+                    {certifications.map((c) => (
+                        <li><span class='font-semibold'>{c.name[L]}</span> <span class='text-fg-2'>({c.issuer})</span></li>
+                    ))}
+                </ul>
+            </div>
+            <div>
+                <h3 class='creds-title'>{t("experience.languages")}</h3>
+                <ul class='creds-list'>
+                    {languagesSpoken.map((l) => (
+                        <li><span class='font-semibold'>{l.name[L]}</span> <span class='text-fg-2'>{l.level[L]}</span></li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .roles { border-top: 1px solid rgb(var(--fg)); }
+    .role {
+        display: grid;
+        gap: 12px;
+        padding-block: 32px;
+        border-bottom: 1px solid rgb(var(--rule));
+    }
+    @media (min-width: 1024px) {
+        .role {
+            grid-template-columns: repeat(12, minmax(0, 1fr));
+            column-gap: 32px;
+            padding-block: 40px;
+        }
+        .role-meta { grid-column: 1 / span 3; }
+        .role-body { grid-column: 4 / span 6; }
+        .role-stack { grid-column: 10 / span 3; }
+    }
+    .role-period { font-weight: 600; font-variant-numeric: tabular-nums; }
+    .role-org { color: rgb(var(--fg-2)); }
+    .role-points {
+        margin-top: 14px;
+        display: grid;
+        gap: 8px;
+        max-width: 64ch;
+        color: rgb(var(--fg-2));
+    }
+    .role-points li {
+        padding-left: 18px;
+        position: relative;
+    }
+    .role-points li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.72em;
+        width: 8px;
+        height: 1px;
+        background: rgb(var(--blue));
+    }
+    .role-stack { color: rgb(var(--fg-2)); }
+
+    .creds {
+        display: grid;
+        gap: 40px;
+        margin-top: 64px;
+    }
+    @media (min-width: 768px) {
+        .creds { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+    }
+    .creds-title {
+        font-weight: 700;
+        padding-bottom: 12px;
+        margin-bottom: 16px;
+        border-bottom: 1px solid rgb(var(--rule));
+    }
+    .creds-list { display: grid; gap: 10px; }
+</style>
