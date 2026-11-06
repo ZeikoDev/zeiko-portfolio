@@ -1,10 +1,10 @@
-<img width="1800" alt="Zeiko Portfolio — hero" src="docs/preview.webp" />
+<img width="1800" alt="Portfolio hero: headline, portrait and key facts in the dark theme" src="docs/preview.webp" />
 
 # Zeiko Portfolio
 
 The personal portfolio of Camilo González (ZeikoDev), a full-stack developer based in Medellín, Colombia.
 
-Built with Astro and shipped as a static site. The design is a corporate, grid-based system: a single typeface (Archivo, variable width), blue as the only accent, dark theme by default with a light theme toggle, and a portrait in the hero.
+Built with Astro, shipped as a static site and deployed on Cloudflare Pages ([zeiko.dev](https://zeiko.dev)). The design is a corporate, grid-based system: a single typeface (Archivo, variable width), blue as the only accent, dark theme by default with a light theme toggle, and a portrait in the hero.
 
 ## Features
 
@@ -23,7 +23,8 @@ Built with Astro and shipped as a static site. The design is a corporate, grid-b
 - [Astro](https://astro.build) - Static site generation
 - [Tailwind CSS](https://tailwindcss.com) - Utility-first CSS
 - [TypeScript](https://www.typescriptlang.org) - Type safety
-- [sharp](https://sharp.pixelplumbing.com) - Image optimization for project screenshots (`.webp`)
+- [sharp](https://sharp.pixelplumbing.com) - Image optimization for screenshots and the portrait (`.webp`)
+- [Cloudflare Pages](https://pages.cloudflare.com) - Hosting, with a preview deployment for every branch
 
 The `@astrojs/react` integration is still configured, but no React components remain in `src/` after the UI overhaul.
 
@@ -78,7 +79,8 @@ zeiko-portfolio/
 ├── docs/                        # Repo-only assets (README preview)
 ├── public/                      # Static assets served as-is
 │   ├── assets/projects/         # Project screenshots
-│   └── favicon.svg              # CG monogram
+│   ├── assets/camilo-gonzalez.webp  # Hero portrait
+│   └── favicon.svg              # Blue square favicon
 ├── src/
 │   ├── components/
 │   │   ├── sections/            # Page sections
@@ -142,11 +144,11 @@ Projects section. Set `hasDetailPage: true` and add a matching `.astro` file und
 
 ### Colors
 
-The color scheme can be customized in `tailwind.config.mjs`. The current theme uses:
+Colors are design tokens defined as RGB triplets in `src/styles/tokens.css` and exposed to Tailwind in `tailwind.config.mjs` (`bg`, `surface`, `rule`, `fg`, `fg-2`, `blue`, `blue-block`).
 
-- Deep navy backgrounds
-- Electric blue accents
-- White/light gray text
+- Dark theme (default): neutral grays from `#161616`, text `#F4F4F4`, blue `#4D8FE8`
+- Light theme: white and `#F4F4F4` surfaces, text `#161616`, blue `#1A5FC7`
+- Solid blue blocks (buttons, contact): `#1A5FC7`
 
 ### Content
 
@@ -154,8 +156,9 @@ Most copy lives in `src/i18n/ui.json`, so both languages stay in sync. Everythin
 
 - `src/data/projects.ts` - Client work (name, tag, problem, solution, result, tech, image)
 - `src/data/personalProjects.ts` - Side projects
-- `src/data/site.ts` - Contact email
-- `Hero.astro` / `About.astro` / `Skills.astro` - Section-specific markup and structure
+- `src/data/experience.ts` - Roles, education, certifications and languages
+- `src/data/site.ts` - Name, email and social links
+- `Skills.astro` - The skills matrix rows
 
 Project screenshots go in `public/assets/projects/` as `.webp`, around 1600px wide.
 
@@ -173,11 +176,10 @@ Project screenshots go in `public/assets/projects/` as `.webp`, around 1600px wi
 | `npm run format`          | Format the project with Prettier                 |
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 
+## Deployment
+
+Cloudflare Pages builds the site from GitHub with `npm run build` and serves `dist/`. Every pushed branch gets its own preview URL, and merging to `main` deploys to production.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- Design elements inspired by modern web trends
-- Icons from various open-source icon sets
